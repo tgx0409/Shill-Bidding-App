@@ -1,0 +1,60 @@
+{
+  "features": [
+    "Bidder_Tendency",
+    "Bidding_Ratio",
+    "Successive_Outbidding",
+    "Last_Bidding",
+    "Auction_Bids",
+    "Starting_Price_Average",
+    "Early_Bidding",
+    "Winning_Ratio",
+    "Auction_Duration"
+  ],
+  "ranges": {
+    "Bidder_Tendency": {
+      "min": 0.0,
+      "max": 0.376126127,
+      "median": 0.0625
+    },
+    "Bidding_Ratio": {
+      "min": 0.011764706,
+      "max": 0.351449276,
+      "median": 0.083333333
+    },
+    "Successive_Outbidding": {
+      "min": 0.0,
+      "max": 1.0,
+      "median": 0.0
+    },
+    "Last_Bidding": {
+      "min": 0.0,
+      "max": 0.999900463,
+      "median": 0.4409375
+    },
+    "Auction_Bids": {
+      "min": 0.0,
+      "max": 0.788235294,
+      "median": 0.142857143
+    },
+    "Starting_Price_Average": {
+      "min": 0.0,
+      "max": 0.999935281,
+      "median": 0.0
+    },
+    "Early_Bidding": {
+      "min": 0.0,
+      "max": 0.999900463,
+      "median": 0.3601041667
+    },
+    "Winning_Ratio": {
+      "min": 0.0,
+      "max": 1.0,
+      "median": 0.0
+    },
+    "Auction_Duration": {
+      "min": 1.0,
+      "max": 10.0,
+      "median": 5.0
+    }
+  }
+}
