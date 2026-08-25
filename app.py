@@ -93,11 +93,11 @@ with st.sidebar:
     page = option_menu(
         menu_title=None,
         options=["Overview", "Explore the Data", "Risk Predictor", "Model Evaluation"],
-        icons=["", "", "", ""],
         menu_icon=None,
         default_index=0,
         styles={
             "container": {"padding": "0!important", "background-color": "transparent"},
+            "icon": {"display": "none"},
             "nav-link": {
                 "font-size": "16px",
                 "font-weight": "600",
