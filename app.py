@@ -115,13 +115,13 @@ with st.sidebar:
             },
         },
     )
+st.write("")
+st.write("")
+st.write("")
 st.sidebar.divider()
 st.sidebar.markdown(
-    "**Source:** UCI Shill Bidding Dataset — 6,321 bids across 807 online "
+    "**Source:** UCI Shill Bidding Dataset with 6,321 bids across 807 online "
     "auctions, 9 behavioural features per bid."
-)
-st.sidebar.markdown(
-    "⚠️ Educational project only — **not** a production fraud-detection system."
 )
 
 # ----------------------------------------------------------------------------
