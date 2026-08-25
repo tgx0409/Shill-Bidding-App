@@ -186,7 +186,7 @@ elif page == "Explore the Data":
             st.markdown("**Class distribution**")
             fig, ax = plt.subplots(figsize=(4, 4))
             df["Class"].value_counts().sort_index().plot(
-                kind="bar", ax=ax, color=["#0F6E6E", "#C44E52"]
+                kind="bar", ax=ax, color=["#FBDA0C", "#0057AD"]
             )
             ax.set_xticklabels(["Normal (0)", "Shill (1)"], rotation=0)
             ax.set_ylabel("Count")
@@ -211,11 +211,11 @@ elif page == "Explore the Data":
         st.caption(FEATURE_HELP.get(feature, ""))
         fig, axes = plt.subplots(1, 2, figsize=(11, 4))
         sns.histplot(data=df, x=feature, hue="Class", kde=True, ax=axes[0],
-                 palette=["#0F6E6E", "#C44E52"], multiple="layer", alpha=0.5)
+             palette=["#FBDA0C", "#0057AD"], multiple="layer", alpha=0.5)
         axes[0].set_title(f"{feature.replace('_', ' ')} distribution by class")
         axes[0].set_xlabel(feature.replace("_", " "))
         sns.boxplot(data=df, x="Class", y=feature, hue="Class", ax=axes[1],
-                 palette=["#0F6E6E", "#C44E52"], legend=False)
+             palette=["#FBDA0C", "#0057AD"], legend=False)
         axes[1].set_xticklabels(["Normal", "Shill"])
         axes[1].set_title(f"{feature.replace('_', ' ')} by class")
         axes[1].set_ylabel(feature.replace("_", " "))
@@ -294,7 +294,7 @@ elif page == "Risk Predictor":
         with r2:
             fig, ax = plt.subplots(figsize=(6, 1.2))
             ax.barh([0], [1], color="#EDF3F2")
-            ax.barh([0], [prob], color="#C44E52" if prob >= 0.5 else "#0F6E6E")
+            ax.barh([0], [prob], color="#0057AD" if prob >= 0.5 else "#FBDA0C")
             ax.set_xlim(0, 1)
             ax.set_yticks([])
             ax.set_xlabel("Predicted probability of shill bidding")
@@ -324,7 +324,7 @@ elif page == "Model Evaluation":
         ["Accuracy", "Precision", "Recall", "F1 Score", "ROC-AUC", "PR-AUC"],
     )
     fig, ax = plt.subplots(figsize=(8, 4))
-    results_precomputed[metric_choice].sort_values().plot(kind="barh", ax=ax, color="#0F6E6E")
+    results_precomputed[metric_choice].sort_values().plot(kind="barh", ax=ax, color="#FBDA0C")
     ax.set_xlabel(metric_choice)
     st.pyplot(fig)
 
@@ -369,7 +369,7 @@ elif page == "Model Evaluation":
     with fi_col2:
         gb_imp = pd.Series(MODELS["Gradient Boosting"].feature_importances_, index=FEATURES).sort_values()
         fig, ax = plt.subplots(figsize=(5, 4))
-        gb_imp.plot(kind="barh", ax=ax, color="#C44E52")
+        gb_imp.plot(kind="barh", ax=ax, color="#0057AD")
         ax.set_title("Gradient Boosting")
         st.pyplot(fig)
 
