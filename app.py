@@ -22,7 +22,7 @@ sns.set_style("whitegrid")
 
 st.set_page_config(
     page_title="Shill Bidding Risk Dashboard",
-    page_icon="🔨",
+    page_icon="🪙",
     layout="wide",
 )
 
@@ -108,14 +108,11 @@ st.sidebar.markdown(
 # PAGE: Overview
 # ----------------------------------------------------------------------------
 if page == "Overview":
-    st.title("Shill Bidding Risk — Project Overview")
+    st.title("Shill Bidding Risk: Project Overview")
     st.markdown(
         """
-        This dashboard accompanies a data science assignment that predicts whether
-        a bid in an online auction was placed by a **shill bidder** — someone
-        artificially inflating the price on the seller's behalf. It follows the
-        same pipeline as the accompanying Jupyter notebook: **Data Understanding
-        → Data Preparation → Modelling → Evaluation.**
+        A shill bidder is someone artificially inflating the price on the seller's behalf. 
+        Here, you can predict whether a bid in an online auction was placed by a **shill bidder**.
         """
     )
 
