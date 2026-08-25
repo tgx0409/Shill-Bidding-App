@@ -330,7 +330,7 @@ elif page == "Model Evaluation":
         st.pyplot(fig)
 
     with col2:
-        cm_model_name = st.selectbox("Confusion matrix — pick a model", list(MODELS.keys()), key="cm_model")
+        cm_model_name = st.selectbox("Confusion matrix", list(MODELS.keys()), key="cm_model")
         model = MODELS[cm_model_name]
         X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
         y_pred = model.predict(X_te)
@@ -368,11 +368,11 @@ elif page == "Model Evaluation":
           separable on this one feature, so the ensembles' large accuracy gains
           over the baseline are modest in absolute terms even though they look
           large in relative terms.
-        - **No external validation set** from a separate auction platform was
-          available — all evaluation is on a held-out split of the same source
+        - No external validation set from a separate auction platform was
+          available. All evaluation is on a held-out split of the same source
           dataset, so generalisation to a different platform's bidding patterns
           is untested.
-        - **Class imbalance (10.7% positive)** means small changes in the
+        - Class imbalance (10.7% positive) means small changes in the
           classification threshold noticeably shift precision/recall trade-offs;
           the notebook explores this via precision-recall threshold scanning.
         - This demo predicts one bid at a time; a production system would need
