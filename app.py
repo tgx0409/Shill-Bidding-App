@@ -337,18 +337,21 @@ elif page == "Model Evaluation":
         st.pyplot(fig)
 
     st.divider()
-    st.subheader("Confusion matrix — pick a model")
-    cm_model_name = st.selectbox("Model", list(MODELS.keys()), key="cm_model")
-    model = MODELS[cm_model_name]
-    X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
-    y_pred = model.predict(X_te)
-    cm = confusion_matrix(y_test, y_pred)
-    fig, ax = plt.subplots(figsize=(4.5, 4))
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=ax,
-                xticklabels=["Normal", "Shill"], yticklabels=["Normal", "Shill"])
-    ax.set_xlabel("Predicted")
-    ax.set_ylabel("Actual")
-    st.pyplot(fig)
+    st.subheader("Confusion matrix")
+    col1, col2 = st.columns(2)
+
+    with col1:
+        cm_model_name = st.selectbox("Model", list(MODELS.keys()), key="cm_model")
+        model = MODELS[cm_model_name]
+        X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
+        y_pred = model.predict(X_te)
+        cm = confusion_matrix(y_test, y_pred)
+        fig, ax = plt.subplots(figsize=(4, 3.5))
+        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=ax,
+                    xticklabels=["Normal", "Shill"], yticklabels=["Normal", "Shill"])
+        ax.set_xlabel("Predicted")
+        ax.set_ylabel("Actual")
+        st.pyplot(fig)
 
     st.divider()
     st.subheader("Feature importance (tree-based models)")
