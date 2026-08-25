@@ -313,7 +313,7 @@ elif page == "Model Evaluation":
     results_precomputed = load_results_table()
 
     st.subheader("Metrics on the held-out test set (1,265 bids)")
-    st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#CDE8E5"))
+    st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FBDA0C"))
 
     st.divider()
     st.subheader("Metric comparison & confusion matrix")
@@ -346,13 +346,19 @@ elif page == "Model Evaluation":
     st.subheader("Feature importance (tree-based models)")
     fi_col1, fi_col2 = st.columns(2)
     with fi_col1:
-        rf_imp = pd.Series(MODELS["Random Forest"].feature_importances_, index=FEATURES).sort_values()
+        rf_imp = pd.Series(
+            MODELS["Random Forest"].feature_importances_,
+            index=[f.replace("_", " ") for f in FEATURES]
+        ).sort_values()
         fig, ax = plt.subplots(figsize=(5, 4))
         rf_imp.plot(kind="barh", ax=ax, color="#55A868")
         ax.set_title("Random Forest")
         st.pyplot(fig)
     with fi_col2:
-        gb_imp = pd.Series(MODELS["Gradient Boosting"].feature_importances_, index=FEATURES).sort_values()
+        gb_imp = pd.Series(
+            MODELS["Gradient Boosting"].feature_importances_,
+            index=[f.replace("_", " ") for f in FEATURES]
+        ).sort_values()
         fig, ax = plt.subplots(figsize=(5, 4))
         gb_imp.plot(kind="barh", ax=ax, color="#0057AD")
         ax.set_title("Gradient Boosting")
