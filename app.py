@@ -196,7 +196,7 @@ elif page == "Explore the Data":
             )
 
     with tab2:
-        feature = st.selectbox("Choose a feature", FEATURES, help=FEATURE_HELP.get)
+        feature = st.selectbox("Choose a feature", FEATURES)
         st.caption(FEATURE_HELP.get(feature, ""))
         fig, axes = plt.subplots(1, 2, figsize=(11, 4))
         sns.histplot(data=df, x=feature, hue="Class", kde=True, ax=axes[0],
