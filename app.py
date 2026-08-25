@@ -106,6 +106,7 @@ with st.sidebar:
                 "padding": "12px 16px",
                 "border-radius": "4px",
                 "color": "#1f1f1f",
+                "transition": "background-color 0.25s ease, color 0.25s ease",
             },
             "nav-link-selected": {
                 "background-color": "#FFE066",
