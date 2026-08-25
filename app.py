@@ -308,29 +308,33 @@ elif page == "Model Evaluation":
     st.subheader("Metrics on the held-out test set (1,265 bids)")
     st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"))
 
-    metric_choice = st.selectbox(
-        "Compare models on a metric",
-        ["Accuracy", "Precision", "Recall", "F1 Score", "ROC-AUC", "PR-AUC"],
-    )
-    fig, ax = plt.subplots(figsize=(8, 4))
-    results_precomputed[metric_choice].sort_values().plot(kind="barh", ax=ax, color="#FBDA0C")
-    ax.set_xlabel(metric_choice)
-    st.pyplot(fig)
+        st.subheader("Model comparison & ROC curves")
+    col1, col2 = st.columns(2)
 
-    st.divider()
-    st.subheader("ROC curves")
-    fig, ax = plt.subplots(figsize=(7, 6))
-    for name, model in MODELS.items():
-        X_te = X_test_scaled if name in SCALED_MODELS else X_test
-        prob = model.predict_proba(X_te)[:, 1]
-        fpr, tpr, _ = roc_curve(y_test, prob)
-        auc_val = roc_auc_score(y_test, prob)
-        ax.plot(fpr, tpr, label=f"{name} (AUC={auc_val:.3f})")
-    ax.plot([0, 1], [0, 1], linestyle="--", color="gray", label="Random guess")
-    ax.set_xlabel("False Positive Rate")
-    ax.set_ylabel("True Positive Rate")
-    ax.legend(fontsize=8)
-    st.pyplot(fig)
+    with col1:
+        metric_choice = st.selectbox(
+            "Compare models on a metric",
+            ["Accuracy", "Precision", "Recall", "F1 Score", "ROC-AUC", "PR-AUC"],
+        )
+        fig, ax = plt.subplots(figsize=(6, 4.5))
+        results_precomputed[metric_choice].sort_values().plot(kind="barh", ax=ax, color="#FBDA0C")
+        ax.set_xlabel(metric_choice)
+        st.pyplot(fig)
+
+    with col2:
+        st.markdown("**ROC curves**")
+        fig, ax = plt.subplots(figsize=(6, 4.5))
+        for name, model in MODELS.items():
+            X_te = X_test_scaled if name in SCALED_MODELS else X_test
+            prob = model.predict_proba(X_te)[:, 1]
+            fpr, tpr, _ = roc_curve(y_test, prob)
+            auc_val = roc_auc_score(y_test, prob)
+            ax.plot(fpr, tpr, label=f"{name} (AUC={auc_val:.3f})")
+        ax.plot([0, 1], [0, 1], linestyle="--", color="gray", label="Random guess")
+        ax.set_xlabel("False Positive Rate")
+        ax.set_ylabel("True Positive Rate")
+        ax.legend(fontsize=7)
+        st.pyplot(fig)
 
     st.divider()
     st.subheader("Confusion matrix — pick a model")
