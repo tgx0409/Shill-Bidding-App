@@ -93,6 +93,7 @@ with st.sidebar:
     page = option_menu(
         menu_title=None,
         options=["Overview", "Explore the Data", "Risk Predictor", "Model Evaluation"],
+        icons=["", "", "", ""],
         menu_icon=None,
         default_index=0,
         styles={
