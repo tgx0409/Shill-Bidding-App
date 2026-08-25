@@ -308,32 +308,43 @@ elif page == "Model Evaluation":
     st.subheader("Metrics on the held-out test set (1,265 bids)")
     st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"))
 
+    metric_choice = st.selectbox(
+        "Compare models on a metric",
+        ["Accuracy", "Precision", "Recall", "F1 Score", "ROC-AUC", "PR-AUC"],
+    )
+    fig, ax = plt.subplots(figsize=(8, 4))
+    results_precomputed[metric_choice].sort_values().plot(kind="barh", ax=ax, color="#FBDA0C")
+    ax.set_xlabel(metric_choice)
+    st.pyplot(fig)
+
     st.divider()
-    st.subheader("Metric comparison & confusion matrix")
-    col1, col2 = st.columns(2)
+    st.subheader("ROC curves")
+    fig, ax = plt.subplots(figsize=(7, 6))
+    for name, model in MODELS.items():
+        X_te = X_test_scaled if name in SCALED_MODELS else X_test
+        prob = model.predict_proba(X_te)[:, 1]
+        fpr, tpr, _ = roc_curve(y_test, prob)
+        auc_val = roc_auc_score(y_test, prob)
+        ax.plot(fpr, tpr, label=f"{name} (AUC={auc_val:.3f})")
+    ax.plot([0, 1], [0, 1], linestyle="--", color="gray", label="Random guess")
+    ax.set_xlabel("False Positive Rate")
+    ax.set_ylabel("True Positive Rate")
+    ax.legend(fontsize=8)
+    st.pyplot(fig)
 
-    with col1:
-        metric_choice = st.selectbox(
-            "Compare models on a metric",
-            ["Accuracy", "Precision", "Recall", "F1 Score", "ROC-AUC", "PR-AUC"],
-        )
-        fig, ax = plt.subplots(figsize=(6, 4))
-        results_precomputed[metric_choice].sort_values().plot(kind="barh", ax=ax, color="#FBDA0C")
-        ax.set_xlabel(metric_choice)
-        st.pyplot(fig)
-
-    with col2:
-        cm_model_name = st.selectbox("Confusion matrix", list(MODELS.keys()), key="cm_model")
-        model = MODELS[cm_model_name]
-        X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
-        y_pred = model.predict(X_te)
-        cm = confusion_matrix(y_test, y_pred)
-        fig, ax = plt.subplots(figsize=(4.5, 4))
-        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=ax,
-                    xticklabels=["Normal", "Shill"], yticklabels=["Normal", "Shill"])
-        ax.set_xlabel("Predicted")
-        ax.set_ylabel("Actual")
-        st.pyplot(fig)
+    st.divider()
+    st.subheader("Confusion matrix — pick a model")
+    cm_model_name = st.selectbox("Model", list(MODELS.keys()), key="cm_model")
+    model = MODELS[cm_model_name]
+    X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
+    y_pred = model.predict(X_te)
+    cm = confusion_matrix(y_test, y_pred)
+    fig, ax = plt.subplots(figsize=(4.5, 4))
+    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=ax,
+                xticklabels=["Normal", "Shill"], yticklabels=["Normal", "Shill"])
+    ax.set_xlabel("Predicted")
+    ax.set_ylabel("Actual")
+    st.pyplot(fig)
 
     st.divider()
     st.subheader("Feature importance (tree-based models)")
