@@ -235,7 +235,7 @@ elif page == "Explore the Data":
         st.pyplot(fig)
         st.caption(
             "`Successive_Outbidding` shows the strongest correlation with `Class` "
-            "by a wide margin — this is confirmed by every model's feature "
+            "by a wide margin. This is confirmed by every model's feature "
             "importance ranking on the Model Evaluation page."
         )
 
@@ -244,10 +244,6 @@ elif page == "Explore the Data":
 # ----------------------------------------------------------------------------
 elif page == "Risk Predictor":
     st.title("Live Shill Bidding Risk Predictor")
-    st.markdown(
-        "Enter a bid's behavioural features, choose a model, and get a "
-        "predicted shill-bidding risk. **This is an educational demo.**"
-    )
 
     model_name = st.selectbox("Model to use", list(MODELS.keys()))
 
@@ -262,17 +258,17 @@ elif page == "Risk Predictor":
                 r = RANGES[feat]
                 if feat == "Auction_Duration":
                     values[feat] = st.slider(
-                        feat, int(r["min"]), int(r["max"]), int(round(r["median"])),
+                        feat.replace("_", " "), int(r["min"]), int(r["max"]), int(round(r["median"])),
                         help=FEATURE_HELP.get(feat),
                     )
                 elif feat == "Successive_Outbidding":
                     values[feat] = st.select_slider(
-                        feat, options=[0.0, 0.5, 1.0], value=0.0,
+                        feat.replace("_", " "), options=[0.0, 0.5, 1.0], value=0.0,
                         help=FEATURE_HELP.get(feat),
                     )
                 else:
                     values[feat] = st.slider(
-                        feat, float(r["min"]), float(r["max"]), float(r["median"]),
+                        feat.replace("_", " "), float(r["min"]), float(r["max"]), float(r["median"]),
                         help=FEATURE_HELP.get(feat),
                     )
 
@@ -303,7 +299,7 @@ elif page == "Risk Predictor":
         st.info(
             "This estimate reflects patterns learned from historical auction data "
             "and the chosen model's assumptions. It is a screening signal, not "
-            "proof of wrongdoing — flagged bids should be reviewed by a human "
+            "proof of wrongdoing. Flagged bids should be reviewed by a human "
             "before any action is taken."
         )
 
