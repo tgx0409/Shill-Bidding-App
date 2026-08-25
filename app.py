@@ -12,6 +12,7 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
+from streamlit_option_menu import option_menu
 
 from sklearn.metrics import (
     accuracy_score, precision_score, recall_score, f1_score,
@@ -88,13 +89,30 @@ FEATURE_HELP = {
 # ----------------------------------------------------------------------------
 # Sidebar navigation
 # ----------------------------------------------------------------------------
-st.sidebar.title("🔨 Shill Bidding Risk")
-st.sidebar.caption("BMDS2003 Data Science Assignment Dashboard")
-page = st.sidebar.radio(
-    "Navigate",
-    ["Overview", "Explore the Data", "Risk Predictor", "Model Evaluation"],
-    label_visibility="collapsed",
-)
+with st.sidebar:
+    page = option_menu(
+        menu_title=None,
+        options=["Overview", "Explore the Data", "Risk Predictor", "Model Evaluation"],
+        menu_icon=None,
+        default_index=0,
+        styles={
+            "container": {"padding": "0!important", "background-color": "transparent"},
+            "nav-link": {
+                "font-size": "16px",
+                "font-weight": "600",
+                "text-align": "left",
+                "margin": "2px 0px",
+                "padding": "12px 16px",
+                "border-radius": "4px",
+                "color": "#1f1f1f",
+            },
+            "nav-link-selected": {
+                "background-color": "#FFE066",
+                "color": "#1f1f1f",
+                "font-weight": "700",
+            },
+        },
+    )
 st.sidebar.divider()
 st.sidebar.markdown(
     "**Source:** UCI Shill Bidding Dataset — 6,321 bids across 807 online "
