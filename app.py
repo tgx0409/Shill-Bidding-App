@@ -195,12 +195,11 @@ elif page == "Explore the Data":
             st.markdown("**Why this matters**")
             st.markdown(
                 """
-                Only 10.7% of bids are shill bids. This imbalance is why every
-                model below was trained with `class_weight="balanced"` (or
-                equivalent sample weighting for Gradient Boosting), and why
-                **PR-AUC**, not plain accuracy, was used to select hyperparameters —
-                on an imbalanced target, accuracy can look high even for a model
-                that rarely catches the minority class.
+                Only 10.7% of bids are shill bids, which means that accuracy alone can be misleading,
+                for a model that rarely catches the minority class can still score high.
+                That's why every model below was trained with `class_weight="balanced"`
+                (or equivalent sample weighting for Gradient Boosting), and why
+                **PR-AUC**, not plain accuracy, was used to select hyperparameters.
                 """
             )
 
