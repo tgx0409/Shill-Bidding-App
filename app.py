@@ -225,8 +225,12 @@ elif page == "Explore the Data":
     with tab3:
         st.markdown("**Correlation matrix (all features + target)**")
         corr = df.corr()
+        corr_display = corr.rename(
+            index=lambda x: x.replace("_", " "),
+            columns=lambda x: x.replace("_", " "),
+        )
         fig, ax = plt.subplots(figsize=(9, 7))
-        sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm", center=0,
+        sns.heatmap(corr_display, annot=True, fmt=".2f", cmap="coolwarm", center=0,
                     annot_kws={"size": 8}, ax=ax)
         st.pyplot(fig)
         st.caption(
