@@ -308,7 +308,7 @@ elif page == "Model Evaluation":
     st.subheader("Metrics on the held-out test set (1,265 bids)")
     st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"))
 
-        st.subheader("Model comparison & ROC curves")
+    st.subheader("Model comparison & ROC curves")
     col1, col2 = st.columns(2)
 
     with col1:
