@@ -313,7 +313,7 @@ elif page == "Model Evaluation":
     results_precomputed = load_results_table()
 
     st.subheader("Metrics on the held-out test set (1,265 bids)")
-    st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FBDA0C"))
+    st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"))
 
     st.divider()
     st.subheader("Metric comparison & confusion matrix")
