@@ -172,7 +172,7 @@ if page == "Overview":
         )
 
 # ----------------------------------------------------------------------------
-# PAGE: Explore the Data (EDA)
+# PAGE: Explore the Data
 # ----------------------------------------------------------------------------
 elif page == "Explore the Data":
     st.title("Explore the Data")
@@ -205,16 +205,21 @@ elif page == "Explore the Data":
             )
 
     with tab2:
-        feature = st.selectbox("Choose a feature", FEATURES)
+        feature = st.selectbox(
+            "Choose a feature", FEATURES,
+            format_func=lambda x: x.replace("_", " ")
+        )
         st.caption(FEATURE_HELP.get(feature, ""))
         fig, axes = plt.subplots(1, 2, figsize=(11, 4))
         sns.histplot(data=df, x=feature, hue="Class", kde=True, ax=axes[0],
                      palette=["#0F6E6E", "#C44E52"], multiple="layer", alpha=0.5)
-        axes[0].set_title(f"{feature} distribution by class")
+        axes[0].set_title(f"{feature.replace('_', ' ')} distribution by class")
+        axes[0].set_xlabel(feature.replace("_", " "))
         sns.boxplot(data=df, x="Class", y=feature, hue="Class", ax=axes[1],
                      palette=["#0F6E6E", "#C44E52"], legend=False)
         axes[1].set_xticklabels(["Normal", "Shill"])
-        axes[1].set_title(f"{feature} by class")
+        axes[1].set_title(f"{feature.replace('_', ' ')} by class")
+        axes[1].set_ylabel(feature.replace("_", " "))
         plt.tight_layout()
         st.pyplot(fig)
 
