@@ -129,12 +129,6 @@ st.sidebar.markdown(
 # ----------------------------------------------------------------------------
 if page == "Overview":
     st.title("Shill Bidding Risk: Project Overview")
-    st.markdown(
-        """
-        A shill bidder is someone artificially inflating the price on the seller's behalf. 
-        Here, you can predict whether a bid in an online auction was placed by a **shill bidder**.
-        """
-    )
 
     df = load_clean_data()
     c1, c2, c3, c4 = st.columns(4)
@@ -149,13 +143,14 @@ if page == "Overview":
         st.subheader("Business problem")
         st.markdown(
             """
+            A shill bidder is someone artificially inflating the price on the seller's behalf. 
             Shill bidding erodes trust in online auction platforms by artificially
             raising prices for genuine bidders. Flagging suspicious bids lets a
             platform investigate or intervene before an auction closes.
 
-            The dataset's 9 features capture bidding **behaviour** rather than bid
-            content — timing, repetition, ratios of bids to auction activity, and
-            historical win rate — since a shill bidder's *pattern* is more
+            The dataset's 9 features capture bidding **behaviour** such as
+            timing, repetition, ratios of bids to auction activity, and
+            historical win rate, for a shill bidder's *pattern* is more
             detectable than any single bid.
             """
         )
@@ -172,10 +167,7 @@ if page == "Overview":
 
             Random Forest and Gradient Boosting were hyperparameter-tuned with
             `RandomizedSearchCV` (25 candidates, 5-fold stratified CV, scored on
-            PR-AUC because the target is imbalanced — 10.7% shill bids).
-
-            Use the sidebar to explore the data, try the live predictor, or
-            inspect full evaluation metrics for every model.
+            PR-AUC because the target is imbalanced with only 10.7% shill bids).
             """
         )
 
