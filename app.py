@@ -296,13 +296,6 @@ elif page == "Risk Predictor":
             ax.set_xlabel("Predicted probability of shill bidding")
             st.pyplot(fig)
 
-        st.info(
-            "This estimate reflects patterns learned from historical auction data "
-            "and the chosen model's assumptions. It is a screening signal, not "
-            "proof of wrongdoing. Flagged bids should be reviewed by a human "
-            "before any action is taken."
-        )
-
 # ----------------------------------------------------------------------------
 # PAGE: Model Evaluation
 # ----------------------------------------------------------------------------
@@ -381,8 +374,5 @@ elif page == "Model Evaluation":
         - Class imbalance (10.7% positive) means small changes in the
           classification threshold noticeably shift precision/recall trade-offs;
           the notebook explores this via precision-recall threshold scanning.
-        - This demo predicts one bid at a time; a production system would need
-          batch scoring and a monitoring pipeline for concept drift as bidding
-          behaviour evolves.
         """
     )
