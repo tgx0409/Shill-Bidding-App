@@ -48,6 +48,9 @@ ACCENT_RED = "#E8495C"
 st.markdown(
     f"""
     <style>
+    body, [data-testid="stAppViewContainer"] {{
+        background-color: red !important;
+    }}
     [data-testid="stAppViewContainer"] {{
         background-color: {PAGE_BG};
     }}
