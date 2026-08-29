@@ -97,14 +97,17 @@ st.markdown(
         border-radius: 22px;
         padding: 1.1rem 1rem;
         text-align: center;
-        margin-bottom: 0.6rem;
-        height: 10px;
+        margin-bottom: 1.2rem;
+        min-height: 148px;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }}
-    div[class*="st-key-stats_wrap"] [data-testid="stHorizontalBlock"] {{
+    div[class*="st-key-stat_grid"] [data-testid="stHorizontalBlock"] {{
         gap: 0.6rem;
+    }}
+    div[class*="st-key-stat_"] {{
+        margin-bottom: 0.6rem;
     }}
     .stat-number {{
         font-size: 2.1rem;
@@ -330,7 +333,7 @@ if page == "Overview":
     left, mid, right = st.columns([1.1, 1.6, 1.6])
 
     with left:
-        with card("stats_wrap"):
+        with card("stat_grid"):
             s1, s2 = st.columns(2)
             with s1:
                 with card("stat_total"):
@@ -351,9 +354,9 @@ if page == "Overview":
                                 f'<div class="stat-label">Shill bidding rate</div>', unsafe_allow_html=True)
 
         with card("card_source"):
-            st.markdown("**Data source**")
+            st.markdown("**About the data**")
             st.markdown(
-                "UCI Shill Bidding Dataset with 6,321 bids across 807 online "
+                "UCI Shill Bidding Dataset — 6,321 bids across 807 online "
                 "auctions, 9 behavioural features per bid."
             )
 
