@@ -98,7 +98,7 @@ st.markdown(
         padding: 1.1rem 1rem;
         text-align: center;
         margin-bottom: 0.6rem;
-        height: 190px;          
+        height: 150px;          
         aspect-ratio: 1 / 1; 
         display: flex;
         flex-direction: column;
