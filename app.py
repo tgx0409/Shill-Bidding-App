@@ -378,14 +378,6 @@ if page == "Overview":
                 | Gradient Boosting | Tree ensemble (boosting) | Comparison |
                 """
             )
-        with card("card_models_note"):
-            st.markdown(
-                """
-                Random Forest and Gradient Boosting were hyperparameter-tuned with
-                `RandomizedSearchCV` (25 candidates, 5-fold stratified CV, scored on
-                PR-AUC because the target is imbalanced with only 10.7% shill bids).
-                """
-            )
 
     st.caption(
         "Source: UCI Shill Bidding Dataset with 6,321 bids across 807 online "
