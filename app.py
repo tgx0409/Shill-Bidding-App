@@ -100,7 +100,7 @@ st.markdown(
         background-color: {STAT_BG};
         border-radius: 22px;
         padding: 0.7rem 0.6rem;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1rem;
         min-height: 120px;
         display: flex;
         flex-direction: column;
