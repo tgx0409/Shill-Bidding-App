@@ -84,7 +84,7 @@ st.markdown(
         line-height: 1.15;
     }}
 
-    /* ---- the dropdown-as-banner on "Explore the Data" ---- */
+        /* ---- the dropdown-as-banner on "Explore the Data" ---- */
     div[class*="st-key-explore_banner"] {{
         background-color: {BANNER_BG};
         border-radius: 26px;
@@ -94,17 +94,21 @@ st.markdown(
     div[class*="st-key-explore_banner"] label {{
         display: none;
     }}
+    div[class*="st-key-explore_banner"] div[data-baseweb="select"],
+    div[class*="st-key-explore_banner"] div[data-baseweb="select"] > div,
+    div[class*="st-key-explore_banner"] div[data-baseweb="select"] * {{
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }}
     div[class*="st-key-explore_banner"] div[data-baseweb="select"] > div {{
-        background-color: transparent;
-        border: none;
-        box-shadow: none;
-        font-size: 2.1rem;
-        font-weight: 600;
-        color: {TEXT_DARK};
-        padding-left: 0;
+        font-size: 2.1rem !important;
+        font-weight: 600 !important;
+        color: {TEXT_DARK} !important;
+        padding-left: 0 !important;
     }}
     div[class*="st-key-explore_banner"] div[data-baseweb="select"] svg {{
-        color: {TEXT_DARK};
+        color: {TEXT_DARK} !important;
         width: 28px;
         height: 28px;
     }}
