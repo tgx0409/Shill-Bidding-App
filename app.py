@@ -97,13 +97,13 @@ st.markdown(
         border-radius: 22px;
         padding: 1.1rem 1rem;
         text-align: center;
-        margin-bottom: 1.2rem;
-        min-height: 148px;
+        margin-bottom: 0.6rem;
+        height: 148px;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }}
-    div[class*="st-key-stat_grid"] [data-testid="stHorizontalBlock"] {{
+    div[class*="st-key-stats_wrap"] [data-testid="stHorizontalBlock"] {{
         gap: 0.6rem;
     }}
     div[class*="st-key-stat_"] {{
@@ -333,7 +333,7 @@ if page == "Overview":
     left, mid, right = st.columns([1.1, 1.6, 1.6])
 
     with left:
-        with card("stat_grid"):
+        with card("stats_wrap"):
             s1, s2 = st.columns(2)
             with s1:
                 with card("stat_total"):
