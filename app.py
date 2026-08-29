@@ -98,7 +98,8 @@ st.markdown(
         padding: 1.1rem 1rem;
         text-align: center;
         margin-bottom: 0.6rem;
-        height: 148px;
+        height: 190px;          
+        aspect-ratio: 1 / 1; 
         display: flex;
         flex-direction: column;
         justify-content: center;
