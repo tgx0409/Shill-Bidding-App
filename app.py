@@ -99,26 +99,30 @@ st.markdown(
     div[class*="st-key-stat_"] {{
         background-color: {STAT_BG};
         border-radius: 22px;
-        padding: 1.1rem 1rem;
-        text-align: center;
+        padding: 0.7rem 0.6rem;
         margin-bottom: 1.2rem;
-        min-height: 148px;
+        min-height: 100px;
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
     }}
+    div[class*="st-key-stat_"] [data-testid="stMarkdownContainer"] {{
+        text-align: center !important;
+        width: 100%;
+    }}
     .stat-number {{
-        font-size: 1.5rem;
+        font-size: 2.1rem;
         font-weight: 700;
         color: {TEXT_DARK};
         line-height: 1.05;
+        text-align: center !important;
     }}
     .stat-label {{
-        font-size: 0.8rem;
+        font-size: 0.95rem;
         color: {TEXT_DARK};
         opacity: 0.75;
         margin-top: 0.15rem;
+        text-align: center !important;
     }}
 
     /* top nav underline colour tweak */
