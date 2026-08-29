@@ -348,6 +348,13 @@ if page == "Overview":
                 st.markdown(f'<div class="stat-number">{shill_rate:.1f}%</div>'
                             f'<div class="stat-label">Shill bidding rate</div>', unsafe_allow_html=True)
 
+        with card("card_source"):
+            st.markdown("**About the data**")
+            st.markdown(
+                "UCI Shill Bidding Dataset — 6,321 bids across 807 online "
+                "auctions, 9 behavioural features per bid."
+            )
+
     with mid:
         with card("card_business_problem"):
             st.subheader("Business problem")
@@ -383,11 +390,6 @@ if page == "Overview":
                 | Gradient Boosting | Tree ensemble (boosting) | Comparison |
                 """
             )
-
-    st.caption(
-        "Source: UCI Shill Bidding Dataset with 6,321 bids across 807 online "
-        "auctions, 9 behavioural features per bid."
-    )
 
 # ----------------------------------------------------------------------------
 # PAGE: Explore the data
