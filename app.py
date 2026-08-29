@@ -493,55 +493,54 @@ elif page == "Explore the data":
 elif page == "Risk predictor":
     banner("banner_predictor", "Shill Bidding Risk", "Risk Predictor")
 
-    with card("card_model_choice"):
-        model_name = st.selectbox("Model to use", list(MODELS.keys()))
-
-    st.markdown("##### Bid features")
-    c1, c2, c3 = st.columns(3)
-    cols_per_col = [FEATURES[0:3], FEATURES[3:6], FEATURES[6:9]]
     values = {}
+    left, right = st.columns([1.5, 1])
 
-    for i, (col_container, feats) in enumerate(zip([c1, c2, c3], cols_per_col)):
-        with col_container:
-            with card(f"card_feats_{i}"):
-                for feat in feats:
-                    r = RANGES[feat]
-                    if feat == "Auction_Duration":
-                        values[feat] = st.slider(
-                            feat.replace("_", " "), int(r["min"]), int(r["max"]), int(round(r["median"])),
-                            help=FEATURE_HELP.get(feat),
-                        )
-                    elif feat == "Successive_Outbidding":
-                        values[feat] = st.select_slider(
-                            feat.replace("_", " "), options=[0.0, 0.5, 1.0], value=0.0,
-                            help=FEATURE_HELP.get(feat),
-                        )
-                    else:
-                        values[feat] = st.slider(
-                            feat.replace("_", " "), float(r["min"]), float(r["max"]), float(r["median"]),
-                            help=FEATURE_HELP.get(feat),
-                        )
-                    st.caption(FEATURE_SUMMARY.get(feat, ""))
-                    st.write("")
+    with left:
+        with card("card_model_choice"):
+            model_name = st.selectbox("Model to use", list(MODELS.keys()))
 
-    predict_clicked = st.button("Predict risk", type="primary")
+        with card("card_sliders"):
+            st.markdown("##### Bid features")
+            fc1, fc2 = st.columns(2)
+            cols_per_col = [FEATURES[0:5], FEATURES[5:9]]
 
-    with card("card_gauge"):
-        if predict_clicked:
-            X_input = pd.DataFrame([values])[FEATURES]
-            model = MODELS[model_name]
-            if model_name in SCALED_MODELS:
-                X_input = pd.DataFrame(SCALER.transform(X_input), columns=FEATURES)
-            prob = float(model.predict_proba(X_input)[0, 1])
-            st.session_state["last_prob"] = prob
+            for col_container, feats in zip([fc1, fc2], cols_per_col):
+                with col_container:
+                    for feat in feats:
+                        r = RANGES[feat]
+                        if feat == "Auction_Duration":
+                            values[feat] = st.slider(
+                                feat.replace("_", " "), int(r["min"]), int(r["max"]), int(round(r["median"])),
+                                help=FEATURE_HELP.get(feat),
+                            )
+                        elif feat == "Successive_Outbidding":
+                            values[feat] = st.select_slider(
+                                feat.replace("_", " "), options=[0.0, 0.5, 1.0], value=0.0,
+                                help=FEATURE_HELP.get(feat),
+                            )
+                        else:
+                            values[feat] = st.slider(
+                                feat.replace("_", " "), float(r["min"]), float(r["max"]), float(r["median"]),
+                                help=FEATURE_HELP.get(feat),
+                            )
 
-        prob = st.session_state.get("last_prob", 0.0)
-        label = "Likely shill bidder" if prob >= 0.5 else "Likely normal bidder"
+            predict_clicked = st.button("Predict risk", type="primary")
 
-        g1, g2 = st.columns([1.4, 1])
-        with g1:
+    with right:
+        with card("card_gauge"):
+            if predict_clicked:
+                X_input = pd.DataFrame([values])[FEATURES]
+                model = MODELS[model_name]
+                if model_name in SCALED_MODELS:
+                    X_input = pd.DataFrame(SCALER.transform(X_input), columns=FEATURES)
+                prob = float(model.predict_proba(X_input)[0, 1])
+                st.session_state["last_prob"] = prob
+
+            prob = st.session_state.get("last_prob", 0.0)
+            label = "Likely shill bidder" if prob >= 0.5 else "Likely normal bidder"
+
             render_gauge(prob)
-        with g2:
             st.metric("Predicted shill-bidding probability", f"{prob * 100:.1f}%")
             st.markdown(f"**Model prediction:** {label}")
             st.caption(
