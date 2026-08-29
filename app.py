@@ -3,6 +3,10 @@ Shill Bidding Risk Dashboard
 Streamlit app: Overview, Explore the Data, Risk Predictor, Model Evaluation.
 Built on the assignment notebook's pipeline; models are pre-trained
 artifacts, so the app starts instantly and never retrains anything.
+
+Layout follows the supplied concept: a white top nav bar, a light-grey page
+background, a solid taupe "banner" for each page's title, and soft cream /
+peach rounded cards holding the actual content.
 """
 
 import json
@@ -103,25 +107,17 @@ st.markdown(
         flex-direction: column;
         justify-content: center;
     }}
-    div[class*="st-key-stat_grid"] [data-testid="stHorizontalBlock"] {{
-        gap: 0.6rem;
-    }}
-    div[class*="st-key-stat_"] {{
-        margin-bottom: 0.6rem;
-    }}
     .stat-number {{
         font-size: 2.1rem;
         font-weight: 700;
         color: {TEXT_DARK};
         line-height: 1.05;
-        text-align: center;
     }}
     .stat-label {{
         font-size: 0.95rem;
         color: {TEXT_DARK};
         opacity: 0.75;
         margin-top: 0.15rem;
-        text-align: center;
     }}
 
     /* top nav underline colour tweak */
@@ -333,25 +329,24 @@ if page == "Overview":
     left, mid, right = st.columns([1.1, 1.6, 1.6])
 
     with left:
-        with card("stat_grid"):
-            s1, s2 = st.columns(2)
-            with s1:
-                with card("stat_total"):
-                    st.markdown(f'<div class="stat-number">{total_bids:,}</div>'
-                                f'<div class="stat-label">Total bids</div>', unsafe_allow_html=True)
-            with s2:
-                with card("stat_normal"):
-                    st.markdown(f'<div class="stat-number">{normal_bids:,}</div>'
-                                f'<div class="stat-label">Normal bids</div>', unsafe_allow_html=True)
-            s3, s4 = st.columns(2)
-            with s3:
-                with card("stat_shill"):
-                    st.markdown(f'<div class="stat-number">{shill_bids:,}</div>'
-                                f'<div class="stat-label">Shill bids</div>', unsafe_allow_html=True)
-            with s4:
-                with card("stat_rate"):
-                    st.markdown(f'<div class="stat-number">{shill_rate:.1f}%</div>'
-                                f'<div class="stat-label">Shill bidding rate</div>', unsafe_allow_html=True)
+        s1, s2 = st.columns(2)
+        with s1:
+            with card("stat_total"):
+                st.markdown(f'<div class="stat-number">{total_bids:,}</div>'
+                            f'<div class="stat-label">Total bids</div>', unsafe_allow_html=True)
+        with s2:
+            with card("stat_normal"):
+                st.markdown(f'<div class="stat-number">{normal_bids:,}</div>'
+                            f'<div class="stat-label">Normal bids</div>', unsafe_allow_html=True)
+        s3, s4 = st.columns(2)
+        with s3:
+            with card("stat_shill"):
+                st.markdown(f'<div class="stat-number">{shill_bids:,}</div>'
+                            f'<div class="stat-label">Shill bids</div>', unsafe_allow_html=True)
+        with s4:
+            with card("stat_rate"):
+                st.markdown(f'<div class="stat-number">{shill_rate:.1f}%</div>'
+                            f'<div class="stat-label">Shill bidding rate</div>', unsafe_allow_html=True)
 
         with card("card_source"):
             st.markdown("**About the data**")
