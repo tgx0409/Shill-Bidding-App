@@ -353,15 +353,20 @@ if page == "Overview":
             st.subheader("Business problem")
             st.markdown(
                 """
-                A shill bidder is someone artificially inflating the price on the seller's behalf.
-                Shill bidding erodes trust in online auction platforms by artificially
-                raising prices for genuine bidders. Flagging suspicious bids lets a
-                platform investigate or intervene before an auction closes.
+                A shill bidder is someone who places bids on their
+                own listing with no intent to buy, purely to push genuine buyers into
+                paying more. It's one of the hardest forms of auction fraud to catch,
+                because a shill bidder tries to behave like an ordinary one.
 
-                The dataset's 9 features capture bidding **behaviour** such as
-                timing, repetition, ratios of bids to auction activity, and
-                historical win rate, for a shill bidder's *pattern* is more
-                detectable than any single bid.
+                However, there are certain patterns that still give it away, such as
+                bidding repeatedly on the same seller's auctions, jumping in right after 
+                being outbid, bidding early to draw attention to a listing, and rarely 
+                winning the auctions they enter, since winning would mean actually paying.
+
+                Here, we turn those patterns into a screening tool by flagging
+                bids that are likely to be shill bids so a platform's trust & safety team can
+                prioritise which ones to review, rather than relying on buyer complaints
+                or manual checks after the fact.
                 """
             )
 
