@@ -83,36 +83,7 @@ st.markdown(
         color: {TEXT_DARK};
         line-height: 1.15;
     }}
-
-        /* ---- the dropdown-as-banner on "Explore the Data" ---- */
-    div[class*="st-key-explore_banner"] {{
-        background-color: {BANNER_BG};
-        border-radius: 26px;
-        padding: 0.55rem 1.6rem;
-        margin-bottom: 1.4rem;
-    }}
-    div[class*="st-key-explore_banner"] label {{
-        display: none;
-    }}
-    div[class*="st-key-explore_banner"] div[data-baseweb="select"],
-    div[class*="st-key-explore_banner"] div[data-baseweb="select"] > div,
-    div[class*="st-key-explore_banner"] div[data-baseweb="select"] * {{
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-    }}
-    div[class*="st-key-explore_banner"] div[data-baseweb="select"] > div {{
-        font-size: 2.1rem !important;
-        font-weight: 600 !important;
-        color: {TEXT_DARK} !important;
-        padding-left: 0 !important;
-    }}
-    div[class*="st-key-explore_banner"] div[data-baseweb="select"] svg {{
-        color: {TEXT_DARK} !important;
-        width: 28px;
-        height: 28px;
-    }}
-
+    
     /* ---- generic cream card ---- */
     div[class*="st-key-card_"] {{
         background-color: {CARD_BG};
@@ -425,90 +396,84 @@ if page == "Overview":
 # PAGE: Explore the data
 # ----------------------------------------------------------------------------
 elif page == "Explore the data":
+    banner("banner_explore", "Shill Bidding Risk", "Explore the Data")
     df = load_clean_data()
 
-    with card("explore_banner"):
-        view = st.selectbox(
-            "view",
-            ["Target Imbalance", "Feature Distributions", "Correlations"],
-            label_visibility="collapsed",
-        )
-
-    if view == "Target Imbalance":
-        col1, col2 = st.columns([1, 2])
-        with col1:
-            with card("card_class_balance"):
-                st.markdown("**Class distribution**")
-                fig, ax = plt.subplots(figsize=(4, 4))
-                df["Class"].value_counts().sort_index().plot(
-                    kind="bar", ax=ax, color=["#FBDA0C", "#0057AD"]
-                )
-                ax.set_xticklabels(["Normal (0)", "Shill (1)"], rotation=0)
-                ax.set_ylabel("Count")
-                fig.patch.set_alpha(0)
-                st.pyplot(fig)
-        with col2:
-            with card("card_class_balance_why"):
-                st.markdown("**Why this matters**")
-                st.markdown(
-                    """
-                    Only 10.7% of bids are shill bids, which means that accuracy alone can be misleading,
-                    for a model that rarely catches the minority class can still score high.
-                    That's why every model below was trained with `class_weight="balanced"`
-                    (or equivalent sample weighting for Gradient Boosting), and why
-                    **PR-AUC**, not plain accuracy, was used to select hyperparameters.
-                    """
-                )
-
-    elif view == "Feature Distributions":
-        with card("card_feature_select"):
-            feature = st.selectbox(
-                "Choose a feature", FEATURES,
-                format_func=lambda x: x.replace("_", " ")
+    st.markdown("##### Target Imbalance")
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        with card("card_class_balance"):
+            st.markdown("**Class distribution**")
+            fig, ax = plt.subplots(figsize=(4, 4))
+            df["Class"].value_counts().sort_index().plot(
+                kind="bar", ax=ax, color=["#FBDA0C", "#0057AD"]
             )
-            st.caption(FEATURE_HELP.get(feature, ""))
-
-        col1, col2 = st.columns(2)
-        with col1:
-            with card("card_feature_hist"):
-                fig, ax = plt.subplots(figsize=(5.2, 4))
-                sns.histplot(data=df, x=feature, hue="Class", kde=True, ax=ax,
-                             palette=["#FBDA0C", "#0057AD"], multiple="layer", alpha=0.5)
-                ax.set_title(f"{feature.replace('_', ' ')} distribution by class")
-                ax.set_xlabel(feature.replace("_", " "))
-                fig.patch.set_alpha(0)
-                plt.tight_layout()
-                st.pyplot(fig)
-        with col2:
-            with card("card_feature_box"):
-                fig, ax = plt.subplots(figsize=(5.2, 4))
-                sns.boxplot(data=df, x="Class", y=feature, hue="Class", ax=ax,
-                            palette=["#FBDA0C", "#0057AD"], legend=False)
-                ax.set_xticklabels(["Normal", "Shill"])
-                ax.set_title(f"{feature.replace('_', ' ')} by class")
-                ax.set_ylabel(feature.replace("_", " "))
-                fig.patch.set_alpha(0)
-                plt.tight_layout()
-                st.pyplot(fig)
-
-    elif view == "Correlations":
-        with card("card_correlations"):
-            st.markdown("**Correlation matrix (all features + target)**")
-            corr = df.corr()
-            corr_display = corr.rename(
-                index=lambda x: x.replace("_", " "),
-                columns=lambda x: x.replace("_", " "),
-            )
-            fig, ax = plt.subplots(figsize=(9, 7))
-            sns.heatmap(corr_display, annot=True, fmt=".2f", cmap="coolwarm", center=0,
-                        annot_kws={"size": 8}, ax=ax)
+            ax.set_xticklabels(["Normal (0)", "Shill (1)"], rotation=0)
+            ax.set_ylabel("Count")
             fig.patch.set_alpha(0)
             st.pyplot(fig)
-            st.caption(
-                "`Successive_Outbidding` shows the strongest correlation with `Class` "
-                "by a wide margin. This is confirmed by every model's feature "
-                "importance ranking on the Model Evaluation page."
+    with col2:
+        with card("card_class_balance_why"):
+            st.markdown("**Why this matters**")
+            st.markdown(
+                """
+                Only 10.7% of bids are shill bids, which means that accuracy alone can be misleading,
+                for a model that rarely catches the minority class can still score high.
+                That's why every model below was trained with `class_weight="balanced"`
+                (or equivalent sample weighting for Gradient Boosting), and why
+                **PR-AUC**, not plain accuracy, was used to select hyperparameters.
+                """
             )
+
+    st.markdown("##### Feature Distributions")
+    with card("card_feature_select"):
+        feature = st.selectbox(
+            "Choose a feature", FEATURES,
+            format_func=lambda x: x.replace("_", " ")
+        )
+        st.caption(FEATURE_HELP.get(feature, ""))
+
+    col1, col2 = st.columns(2)
+    with col1:
+        with card("card_feature_hist"):
+            fig, ax = plt.subplots(figsize=(5.2, 4))
+            sns.histplot(data=df, x=feature, hue="Class", kde=True, ax=ax,
+                         palette=["#FBDA0C", "#0057AD"], multiple="layer", alpha=0.5)
+            ax.set_title(f"{feature.replace('_', ' ')} distribution by class")
+            ax.set_xlabel(feature.replace("_", " "))
+            fig.patch.set_alpha(0)
+            plt.tight_layout()
+            st.pyplot(fig)
+    with col2:
+        with card("card_feature_box"):
+            fig, ax = plt.subplots(figsize=(5.2, 4))
+            sns.boxplot(data=df, x="Class", y=feature, hue="Class", ax=ax,
+                        palette=["#FBDA0C", "#0057AD"], legend=False)
+            ax.set_xticklabels(["Normal", "Shill"])
+            ax.set_title(f"{feature.replace('_', ' ')} by class")
+            ax.set_ylabel(feature.replace("_", " "))
+            fig.patch.set_alpha(0)
+            plt.tight_layout()
+            st.pyplot(fig)
+
+    st.markdown("##### Correlations")
+    with card("card_correlations"):
+        st.markdown("**Correlation matrix (all features + target)**")
+        corr = df.corr()
+        corr_display = corr.rename(
+            index=lambda x: x.replace("_", " "),
+            columns=lambda x: x.replace("_", " "),
+        )
+        fig, ax = plt.subplots(figsize=(9, 7))
+        sns.heatmap(corr_display, annot=True, fmt=".2f", cmap="coolwarm", center=0,
+                    annot_kws={"size": 8}, ax=ax)
+        fig.patch.set_alpha(0)
+        st.pyplot(fig)
+        st.caption(
+            "`Successive_Outbidding` shows the strongest correlation with `Class` "
+            "by a wide margin. This is confirmed by every model's feature "
+            "importance ranking on the Model Evaluation page."
+        )
 
 # ----------------------------------------------------------------------------
 # PAGE: Risk predictor
