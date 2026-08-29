@@ -83,7 +83,7 @@ st.markdown(
         color: {TEXT_DARK};
         line-height: 1.15;
     }}
-    
+
     /* ---- generic cream card ---- */
     div[class*="st-key-card_"] {{
         background-color: {CARD_BG};
@@ -100,8 +100,8 @@ st.markdown(
         background-color: {STAT_BG};
         border-radius: 22px;
         padding: 0.7rem 0.6rem;
-        margin-bottom: 1rem;
-        min-height: 120px;
+        margin-bottom: 0.6rem;
+        min-height: 150px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -123,6 +123,13 @@ st.markdown(
         opacity: 0.75;
         margin-top: 0.15rem;
         text-align: center !important;
+    }}
+
+    /* Scoped (NOT global) — tightens the gap between the two squares in
+       each stat row, only inside the "stats_wrap" container. Everywhere
+       else in the app, Streamlit's default column spacing is untouched. */
+    div[class*="st-key-stats_wrap"] div[data-testid="stColumn"] {{
+        padding: 0 0.3rem;
     }}
 
     /* top nav underline colour tweak */
@@ -334,24 +341,25 @@ if page == "Overview":
     left, mid, right = st.columns([1.1, 1.6, 1.6])
 
     with left:
-        s1, s2 = st.columns(2)
-        with s1:
-            with card("stat_total"):
-                st.markdown(f'<div class="stat-number">{total_bids:,}</div>'
-                            f'<div class="stat-label">Total bids</div>', unsafe_allow_html=True)
-        with s2:
-            with card("stat_normal"):
-                st.markdown(f'<div class="stat-number">{normal_bids:,}</div>'
-                            f'<div class="stat-label">Normal bids</div>', unsafe_allow_html=True)
-        s3, s4 = st.columns(2)
-        with s3:
-            with card("stat_shill"):
-                st.markdown(f'<div class="stat-number">{shill_bids:,}</div>'
-                            f'<div class="stat-label">Shill bids</div>', unsafe_allow_html=True)
-        with s4:
-            with card("stat_rate"):
-                st.markdown(f'<div class="stat-number">{shill_rate:.1f}%</div>'
-                            f'<div class="stat-label">Shill bidding rate</div>', unsafe_allow_html=True)
+        with card("stats_wrap"):
+            s1, s2 = st.columns(2)
+            with s1:
+                with card("stat_total"):
+                    st.markdown(f'<div class="stat-number">{total_bids:,}</div>'
+                                f'<div class="stat-label">Total bids</div>', unsafe_allow_html=True)
+            with s2:
+                with card("stat_normal"):
+                    st.markdown(f'<div class="stat-number">{normal_bids:,}</div>'
+                                f'<div class="stat-label">Normal bids</div>', unsafe_allow_html=True)
+            s3, s4 = st.columns(2)
+            with s3:
+                with card("stat_shill"):
+                    st.markdown(f'<div class="stat-number">{shill_bids:,}</div>'
+                                f'<div class="stat-label">Shill bids</div>', unsafe_allow_html=True)
+            with s4:
+                with card("stat_rate"):
+                    st.markdown(f'<div class="stat-number">{shill_rate:.1f}%</div>'
+                                f'<div class="stat-label">Shill bidding rate</div>', unsafe_allow_html=True)
 
         with card("card_source"):
             st.markdown("**About the data**")
