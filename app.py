@@ -103,7 +103,7 @@ st.markdown(
         flex-direction: column;
         justify-content: center;
     }}
-    [data-testid="stHorizontalBlock"] {{
+    div[class*="st-key-stat_grid"] [data-testid="stHorizontalBlock"] {{
         gap: 0.6rem;
     }}
     div[class*="st-key-stat_"] {{
@@ -333,29 +333,30 @@ if page == "Overview":
     left, mid, right = st.columns([1.1, 1.6, 1.6])
 
     with left:
-        s1, s2 = st.columns(2)
-        with s1:
-            with card("stat_total"):
-                st.markdown(f'<div class="stat-number">{total_bids:,}</div>'
-                            f'<div class="stat-label">Total bids</div>', unsafe_allow_html=True)
-        with s2:
-            with card("stat_normal"):
-                st.markdown(f'<div class="stat-number">{normal_bids:,}</div>'
-                            f'<div class="stat-label">Normal bids</div>', unsafe_allow_html=True)
-        s3, s4 = st.columns(2)
-        with s3:
-            with card("stat_shill"):
-                st.markdown(f'<div class="stat-number">{shill_bids:,}</div>'
-                            f'<div class="stat-label">Shill bids</div>', unsafe_allow_html=True)
-        with s4:
-            with card("stat_rate"):
-                st.markdown(f'<div class="stat-number">{shill_rate:.1f}%</div>'
-                            f'<div class="stat-label">Shill bidding rate</div>', unsafe_allow_html=True)
+        with card("stat_grid"):
+            s1, s2 = st.columns(2)
+            with s1:
+                with card("stat_total"):
+                    st.markdown(f'<div class="stat-number">{total_bids:,}</div>'
+                                f'<div class="stat-label">Total bids</div>', unsafe_allow_html=True)
+            with s2:
+                with card("stat_normal"):
+                    st.markdown(f'<div class="stat-number">{normal_bids:,}</div>'
+                                f'<div class="stat-label">Normal bids</div>', unsafe_allow_html=True)
+            s3, s4 = st.columns(2)
+            with s3:
+                with card("stat_shill"):
+                    st.markdown(f'<div class="stat-number">{shill_bids:,}</div>'
+                                f'<div class="stat-label">Shill bids</div>', unsafe_allow_html=True)
+            with s4:
+                with card("stat_rate"):
+                    st.markdown(f'<div class="stat-number">{shill_rate:.1f}%</div>'
+                                f'<div class="stat-label">Shill bidding rate</div>', unsafe_allow_html=True)
 
         with card("card_source"):
-            st.markdown("**Data source**")
+            st.markdown("**About the data**")
             st.markdown(
-                "UCI Shill Bidding Dataset with 6,321 bids across 807 online "
+                "UCI Shill Bidding Dataset — 6,321 bids across 807 online "
                 "auctions, 9 behavioural features per bid."
             )
 
