@@ -3,10 +3,6 @@ Shill Bidding Risk Dashboard
 Streamlit app: Overview, Explore the Data, Risk Predictor, Model Evaluation.
 Built on the assignment notebook's pipeline; models are pre-trained
 artifacts, so the app starts instantly and never retrains anything.
-
-Layout follows the supplied concept: a white top nav bar, a light-grey page
-background, a solid taupe "banner" for each page's title, and soft cream /
-peach rounded cards holding the actual content.
 """
 
 import json
@@ -107,17 +103,25 @@ st.markdown(
         flex-direction: column;
         justify-content: center;
     }}
+    [data-testid="stHorizontalBlock"] {{
+        gap: 0.6rem;
+    }}
+    div[class*="st-key-stat_"] {{
+        margin-bottom: 0.6rem;
+    }}
     .stat-number {{
         font-size: 2.1rem;
         font-weight: 700;
         color: {TEXT_DARK};
         line-height: 1.05;
+        text-align: center;
     }}
     .stat-label {{
         font-size: 0.95rem;
         color: {TEXT_DARK};
         opacity: 0.75;
         margin-top: 0.15rem;
+        text-align: center;
     }}
 
     /* top nav underline colour tweak */
@@ -349,9 +353,9 @@ if page == "Overview":
                             f'<div class="stat-label">Shill bidding rate</div>', unsafe_allow_html=True)
 
         with card("card_source"):
-            st.markdown("**About the data**")
+            st.markdown("**Data source**")
             st.markdown(
-                "UCI Shill Bidding Dataset — 6,321 bids across 807 online "
+                "UCI Shill Bidding Dataset with 6,321 bids across 807 online "
                 "auctions, 9 behavioural features per bid."
             )
 
