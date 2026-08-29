@@ -98,16 +98,13 @@ st.markdown(
         padding: 1.1rem 1rem;
         text-align: center;
         margin-bottom: 0.6rem;
-        height: 10px;      
+        height: 190px;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }}
     div[class*="st-key-stats_wrap"] [data-testid="stHorizontalBlock"] {{
         gap: 0.6rem;
-    }}
-    div[class*="st-key-stat_"] {{
-        margin-bottom: 0.6rem;
     }}
     .stat-number {{
         font-size: 2.1rem;
