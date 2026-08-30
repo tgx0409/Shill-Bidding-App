@@ -132,6 +132,7 @@ st.markdown(
         border-radius: 16px;
         padding: 1.1rem 1.3rem;
         height: 100%;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.25);
     }}
 
     /* ---- small gold-gradient stat squares (Overview) ---- */
