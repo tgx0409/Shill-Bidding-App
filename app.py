@@ -91,6 +91,11 @@ st.markdown(
         margin-top: 0;
     }}
 
+    /* ---- class distribution card sizing ---- */
+    div[class*="st-key-card_class_balance"] {{
+        min-height: 480px;   /* tweak this number until it matches the right side */
+    }}
+
     /* ---- outer tinted panel (wraps Problem / Remedies) ---- */
     div[class*="st-key-outer_"] {{
         background-color: {STAT_BG};
