@@ -96,7 +96,7 @@ st.markdown(
         background-color: {STAT_BG};
         border-radius: 22px;
         padding: 1.5rem 1.6rem 1.7rem 1.6rem;
-        margin-bottom: 0.9rem;
+        margin-bottom: 0rem;
     }}
     div[class*="st-key-outer_"] h3, div[class*="st-key-outer_"] h4, div[class*="st-key-outer_"] h5 {{
         margin-top: 0;
