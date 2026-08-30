@@ -61,7 +61,7 @@ st.markdown(
     .block-container {{
         padding-top: 1.5rem;
         padding-bottom: 3rem;
-        max-width: none;
+        max-width: 1500px;
     }}
 
     /* ---- banner (page title) ---- */
