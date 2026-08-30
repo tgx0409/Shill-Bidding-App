@@ -42,16 +42,11 @@ APP_BG = get_base64_image("assets/shill_bidding_bg.jpg")
 # ----------------------------------------------------------------------------
 # Palette (sampled from the concept mock-ups)
 # ----------------------------------------------------------------------------
-#PAGE_BG = "#D9D9D9"
-#BANNER_BG = "#B5ABA1"
-#CARD_BG = "#F6F7F1"
-#STAT_BG = "#F1EBDF"
-#TEXT_DARK = "#1F1F1F"
-PAGE_BG = "#E8E6E1"       
-BANNER_BG = "#3B2E27"
-CARD_BG = "#FAF7F0"     
-STAT_BG = "#F0E6C8"  
-TEXT_DARK = "#2A211B"
+PAGE_BG = "#D9D9D9"
+BANNER_BG = "#B5ABA1"
+CARD_BG = "#F6F7F1"
+STAT_BG = "#F1EBDF"
+TEXT_DARK = "#1F1F1F"
 
 ACCENT_GREEN = "#6EBE44"
 ACCENT_ORANGE = "#F2A93B"
