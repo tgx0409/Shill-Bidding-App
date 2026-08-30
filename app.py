@@ -152,16 +152,24 @@ st.markdown(
     .stat-number {{
         font-size: 2.1rem;
         font-weight: 700;
-        color: #FFFFFF;
         line-height: 1.05;
         text-align: center !important;
+        background: linear-gradient(180deg, #FFFFFF, #C9C9C9);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
     }}
     .stat-label {{
         font-size: 0.95rem;
-        color: #FFFFFF;
         opacity: 0.9;
         margin-top: 0.15rem;
         text-align: center !important;
+        background: linear-gradient(180deg, #FFFFFF, #C9C9C9);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
     }}
 
     /* ---- best-model highlight card ---- */
@@ -375,7 +383,11 @@ st.markdown(
     .section-banner-title {{
         font-size: 1.5rem;
         font-weight: 600;
-        color: #FFFFFF;
+        background: linear-gradient(180deg, #FFFFFF, #C9C9C9);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
     }}
     div[class*="st-key-section_"] [data-testid="stMarkdownContainer"] {{
         margin: 0 !important;
