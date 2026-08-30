@@ -337,8 +337,10 @@ st.markdown(
     div[class*="st-key-section_"] {{
         background-color: {BANNER_BG};
         border-radius: 14px;
-        padding: 2rem 1.3rem;
+        padding: 1.7rem 1.3rem;
         margin: 0.4rem 0 1rem 0;
+        min-height: 50px;
+        display: flex;
     }}
     .section-banner-title {{
         font-size: 1.2rem;
