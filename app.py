@@ -81,7 +81,7 @@ st.markdown(
     div[class*="st-key-banner_"] {{
         background-image: url("data:image/jpeg;base64,{SHILL_BIDDING_BG}");
         background-size: cover;
-        background-position: center;
+        background-position: bottom;
         border-radius: 26px;
         padding: 1.6rem 2.2rem 1.8rem 2.2rem;
         margin-bottom: 1.4rem;
