@@ -1,33 +1,3 @@
-Only 10.7% of bids are shill bids, which means that accuracy alone can be misleading, for a model that rarely catches the minority class can still score high. That's why every model below was trained with class_weight="balanced" (or equivalent sample weighting for Gradient Boosting), and why PR-AUC, not plain accuracy, was used to select hyperparameters. The imbalance also shaped how the train/test split and evaluation were handled. The split was stratified on Class so the 89.32%/10.68% ratio is preserved in both the training and test sets, rather than risking a test set with even fewer shill examples by chance. For the same reason, ROC-AUC was treated with caution alongside PR-AUC: because normal bids dominate the data, a model can rack up a high true-negative rate and still look strong on ROC-AUC while missing many actual shill bids, whereas PR-AUC is driven entirely by how well the model ranks the minority (shill) class, making it the more honest metric for a screening task like this. Precision, recall, and F1 were reported alongside accuracy for the same reason — accuracy alone can't distinguish a model that genuinely detects shill bidders from one that just predicts "normal" almost every time. Finally, the default 0.5 classification threshold isn't necessarily appropriate under this imbalance, since the cost of missing a true shill bidder (false negative) is arguably higher than a false alarm; a precision-recall threshold scan was used to identify the threshold that maximises F1 on the test set as a documented reference point, rather than assuming 0.5 is optimal by default. 
-
-Imbalance: Only ~10.7% of bids are shill bids — so a model could just guess "normal" every time and still look ~89% accurate without learning anything.
-Fix #1 — class weighting: Every model was trained with class_weight="balanced" (or sample weighting for Gradient Boosting), so the minority class isn't ignored during training.
-Fix #2 — stratified split: Train/test split kept the same 89/11 ratio in both sets, so we're not accidentally testing on even fewer shill examples.
-Fix #3 — right metric for tuning: Used PR-AUC instead of accuracy to tune hyperparameters, and preferred it over ROC-AUC too — ROC-AUC can look great while still missing lots of shill bids, because normal bids dominate it.
-Fix #4 — threshold tuning: Didn't just default to a 0.5 cutoff — scanned thresholds to find the one that best balances catching shill bidders vs. false alarms, since missing one is the costlier mistake.
-
-
-
-Overview part - Random Forest and Gradient Boosting were hyperparameter-tuned with RandomizedSearchCV (25 candidates, 5-fold stratified CV, scored on PR-AUC because the target is imbalanced with only 10.7% shill bids).
-
-Imbalance: 
-Problem
-Only ~10.7% of bids are shill bids. A model could just guess "normal" every time and still look ~89% accurate without learning anything.
-Remedies
-Class weighting
-Every model was trained with class_weight="balanced" (or sample weighting for Gradient Boosting)
-Stratified split
-Train/test split kept the same 89.32%/10.68% ratio in both sets
-Metric tuning
-Used PR-AUC instead of accuracy or ROC-AUC to tune hyperparameters
-
-
-Fix #1 — class weighting: Every model was trained with class_weight="balanced" (or sample weighting for Gradient Boosting), so the minority class isn't ignored during training.
-Fix #2 — stratified split: Train/test split kept the same 89/11 ratio in both sets, so we're not accidentally testing on even fewer shill examples.
-Fix #3 — right metric for tuning: Used PR-AUC instead of accuracy to tune hyperparameters, and preferred it over ROC-AUC too — ROC-AUC can look great while still missing lots of shill bids, because normal bids dominate it.
-Fix #4 — threshold tuning: Didn't just default to a 0.5 cutoff — scanned thresholds to find the one that best balances catching shill bidders vs. false alarms, since missing one is the costlier mistake.
-
-backup
 """
 Shill Bidding Risk Dashboard
 Streamlit app: Overview, Explore the Data, Risk Predictor, Model Evaluation.
