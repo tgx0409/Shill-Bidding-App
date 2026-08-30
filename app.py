@@ -157,11 +157,11 @@ st.markdown(
     div[class*="st-key-card_best_model"] {{
         border-left: 6px solid {ACCENT_GREEN};
         min-height: 260px;
-        padding-bottom: 2.1rem;
+        padding-bottom: 2rem;
         background-image: url("data:image/png;base64,{TROPHY_BG}");
         background-repeat: no-repeat;
         background-position: center;
-        background-size: 700px auto;
+        background-size: 800px auto;
     }}
     .best-model-badge {{
         display: inline-block;
