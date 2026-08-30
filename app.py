@@ -341,6 +341,7 @@ st.markdown(
         margin: 0.4rem 0 1rem 0;
         min-height: 50px;
         display: flex;
+        align-items: center;
     }}
     .section-banner-title {{
         font-size: 1.2rem;
