@@ -954,7 +954,6 @@ elif page == "Model Evaluation":
     with row2b:
         with card("card_confusion"):
             st.markdown("##### Confusion matrix")
-            st.markdown("###### Select model")
             cm_model_name = st.selectbox(
                 "Model", list(MODELS.keys()), key="cm_model",
                 label_visibility="collapsed",
