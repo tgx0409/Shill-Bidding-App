@@ -275,7 +275,10 @@ st.markdown(
         height: 100%;
     }}
     div[class*="st-key-card_gauge"] div[data-testid="stVerticalBlock"] {{
-        gap: 0.5rem !important;
+        gap: 0.3rem !important;
+    }}
+    div[class*="st-key-card_gauge"] div[data-testid="stElementContainer"] {{
+        margin-bottom: 0 !important;
     }}
 
     /* ---- bigger font for all selectbox dropdowns app-wide (closed state) ---- */
