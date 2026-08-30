@@ -191,6 +191,11 @@ st.markdown(
         opacity: 0.7;
     }}
 
+    /* ---- tighten gap under metrics table only ---- */
+    div[class*="st-key-card_metrics_table"] {{
+        margin-bottom: 0.4rem;
+    }}
+
     /* Scoped (NOT global) — tightens the gap between the two squares in
        each stat row, only inside the "stats_wrap" container. Everywhere
        else in the app, Streamlit's default column spacing is untouched. */
