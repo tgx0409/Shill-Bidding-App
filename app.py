@@ -91,6 +91,25 @@ st.markdown(
         margin-top: 0;
     }}
 
+    /* ---- outer tinted panel (wraps Problem / Remedies) ---- */
+    div[class*="st-key-outer_"] {{
+        background-color: {STAT_BG};
+        border-radius: 22px;
+        padding: 1.5rem 1.6rem 1.7rem 1.6rem;
+        margin-bottom: 1.2rem;
+    }}
+    div[class*="st-key-outer_"] h3, div[class*="st-key-outer_"] h4, div[class*="st-key-outer_"] h5 {{
+        margin-top: 0;
+    }}
+
+    /* ---- white inner box inside an outer panel ---- */
+    div[class*="st-key-inner_"] {{
+        background-color: #FFFFFF;
+        border-radius: 16px;
+        padding: 1.1rem 1.3rem;
+        height: 100%;
+    }}
+
     /* ---- small peach stat squares (Overview) ---- */
     div[class*="st-key-stat_"] {{
         background-color: {STAT_BG};
@@ -422,37 +441,38 @@ elif page == "Explore the data":
             st.pyplot(fig)
 
     with col2:
-        with card("card_class_balance_why"):
+        with st.container(key="outer_problem"):
             st.markdown("**Problem**")
-            st.markdown(
-                """
-                Only ~10.7% of bids are shill bids. A model could just guess "normal" 
-                every time and still look ~89% accurate without learning anything.
+            with st.container(key="inner_problem"):
+                st.markdown(
+                    """
+                    Only ~10.7% of bids are shill bids. A model could just guess "normal" 
+                    every time and still look ~89% accurate without learning anything.
+                    """
+                )
 
-                """
-            )
-
-        st.markdown("##### Remedies")
-        r1, r2, r3 = st.columns(3)
-        with r1:
-            with card("card_remedy_weighting"):
-                st.markdown("**1. Class weighting**")
-                st.markdown(
-                    "Every model was trained with `class_weight=\"balanced\"` "
-                    "(or sample weighting for Gradient Boosting)."
-                )
-        with r2:
-            with card("card_remedy_split"):
-                st.markdown("**2. Stratified split**")
-                st.markdown(
-                    "Train/test split kept the same 89.32% / 10.68% ratio in both sets."
-                )
-        with r3:
-            with card("card_remedy_metric"):
-                st.markdown("**3. Metric tuning**")
-                st.markdown(
-                    "Used PR-AUC instead of accuracy or ROC-AUC to tune hyperparameters."
-                )
+        with st.container(key="outer_remedies"):
+            st.markdown("##### Remedies")
+            r1, r2, r3 = st.columns(3)
+            with r1:
+                with st.container(key="inner_remedy1"):
+                    st.markdown("**1. Class weighting**")
+                    st.markdown(
+                        "Every model was trained with `class_weight=\"balanced\"` "
+                        "(or sample weighting for Gradient Boosting)."
+                    )
+            with r2:
+                with st.container(key="inner_remedy2"):
+                    st.markdown("**2. Stratified split**")
+                    st.markdown(
+                        "Train/test split kept the same 89.32% / 10.68% ratio in both sets."
+                    )
+            with r3:
+                with st.container(key="inner_remedy3"):
+                    st.markdown("**3. Metric tuning**")
+                    st.markdown(
+                        "Used PR-AUC instead of accuracy or ROC-AUC to tune hyperparameters."
+                    )
 
     st.markdown("##### Feature Distributions")
     with card("card_feature_select"):
