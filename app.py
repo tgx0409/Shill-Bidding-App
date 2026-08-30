@@ -37,7 +37,8 @@ def get_base64_image(path):
         return base64.b64encode(f.read()).decode()
 
 TROPHY_BG = get_base64_image("assets/trophy_bg.png")
-APP_BG = get_base64_image("assets/shill_bidding_bg.jpg")
+WOOD_BG = get_base64_image("assets/wooden_bg.jpg")
+GOLD_BANNER_BG = get_base64_image("assets/golden_banner_bg.jpg")
 
 # ----------------------------------------------------------------------------
 # Palette (sampled from the concept mock-ups)
@@ -61,7 +62,7 @@ st.markdown(
     f"""
     <style>
     [data-testid="stAppViewContainer"] {{
-        background-image: url("data:image/jpeg;base64,{APP_BG}");
+        background-image: url("data:image/jpeg;base64,{WOOD_BG}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -78,10 +79,12 @@ st.markdown(
 
     /* ---- banner (page title) ---- */
     div[class*="st-key-banner_"] {{
-        background-color: {BANNER_BG};
+        background-image: url("data:image/jpeg;base64,{GOLD_BANNER_BG}");
+        background-size: cover;
+        background-position: center;
         border-radius: 26px;
         padding: 1.6rem 2.2rem 1.8rem 2.2rem;
-        margin-bottom: 0.4rem;
+        margin-bottom: 1.4rem;
     }}
     .banner-eyebrow {{
         font-size: 0.95rem;
