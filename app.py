@@ -893,7 +893,7 @@ elif page == "Model Evaluation":
     row1a, row1b = st.columns([1.3, 1])
     with row1a:
         with card("card_metrics_table"):
-            st.markdown("##### Model performance")
+            st.markdown("##### Metrics Table")
             st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"),
                          width="stretch")
         with card("card_best_model"):
