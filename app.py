@@ -277,7 +277,7 @@ st.markdown(
     div[class*="st-key-card_limitation1"],
     div[class*="st-key-card_limitation2"],
     div[class*="st-key-card_limitation3"] {{
-        height: 100%;
+        min-height: 30px;
     }}
     div[class*="st-key-card_gauge"] div[data-testid="stVerticalBlock"] {{
         gap: 0.3rem !important;
