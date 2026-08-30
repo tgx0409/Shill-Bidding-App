@@ -605,6 +605,13 @@ elif page == "Model Evaluation":
             st.markdown("**Metrics on the held-out test set**")
             st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"),
                          width="stretch")
+        with card("card_best_model"):
+            st.markdown("**Best overall: Random Forest**")
+            st.markdown(
+                "Highest accuracy (0.9968) and F1 (0.9852) on the held-out set, "
+                "with PR-AUC of 0.9988 — the more reliable metric given the "
+                "10.7% class imbalance."
+            )
     with row1b:
         with card("card_metric_bar"):
             st.markdown("**Compare models on a metric**")
