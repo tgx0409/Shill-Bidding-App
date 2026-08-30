@@ -383,7 +383,7 @@ st.markdown(
     .section-banner-title {{
         font-size: 1.5rem;
         font-weight: 600;
-        background: linear-gradient(180deg, #FFFFFF, #C9C9C9);
+        background: linear-gradient(to left, #FFFFFF, #C9C9C9);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
