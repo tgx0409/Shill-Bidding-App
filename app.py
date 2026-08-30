@@ -145,6 +145,52 @@ st.markdown(
         text-align: center !important;
     }}
 
+    /* ---- best-model highlight card ---- */
+    div[class*="st-key-card_best_model"] {{
+        border-left: 6px solid {ACCENT_GREEN};
+        min-height: 260px;
+    }}
+    .best-model-badge {{
+        display: inline-block;
+        background-color: {ACCENT_GREEN};
+        color: #FFFFFF;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        margin-bottom: 0.6rem;
+    }}
+    .best-model-title {{
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: {TEXT_DARK};
+        margin-bottom: 0.4rem;
+    }}
+    .best-model-chips {{
+        display: flex;
+        gap: 0.6rem;
+        margin-top: 1rem;
+    }}
+    .best-model-chip {{
+        background-color: {STAT_BG};
+        border-radius: 14px;
+        padding: 0.6rem 0.9rem;
+        text-align: center;
+        flex: 1;
+    }}
+    .best-model-chip .chip-number {{
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: {TEXT_DARK};
+        display: block;
+    }}
+    .best-model-chip .chip-label {{
+        font-size: 0.78rem;
+        color: {TEXT_DARK};
+        opacity: 0.7;
+    }}
+
     /* Scoped (NOT global) — tightens the gap between the two squares in
        each stat row, only inside the "stats_wrap" container. Everywhere
        else in the app, Streamlit's default column spacing is untouched. */
@@ -606,11 +652,35 @@ elif page == "Model Evaluation":
             st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"),
                          width="stretch")
         with card("card_best_model"):
-            st.markdown("**Best overall: Random Forest**")
             st.markdown(
-                "Highest accuracy (0.9968) and F1 (0.9852) on the held-out set, "
-                "with PR-AUC of 0.9988 — the more reliable metric given the "
-                "10.7% class imbalance."
+                """
+                <div class="best-model-badge">TOP PERFORMER</div>
+                <div class="best-model-title">🏆 Random Forest</div>
+                """,
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                "The strongest all-round model on the held-out test set, "
+                "balancing raw accuracy with reliability under class imbalance."
+            )
+            st.markdown(
+                """
+                <div class="best-model-chips">
+                    <div class="best-model-chip">
+                        <span class="chip-number">0.9968</span>
+                        <span class="chip-label">Accuracy</span>
+                    </div>
+                    <div class="best-model-chip">
+                        <span class="chip-number">0.9852</span>
+                        <span class="chip-label">F1 Score</span>
+                    </div>
+                    <div class="best-model-chip">
+                        <span class="chip-number">0.9988</span>
+                        <span class="chip-label">PR-AUC</span>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
             )
     with row1b:
         with card("card_metric_bar"):
