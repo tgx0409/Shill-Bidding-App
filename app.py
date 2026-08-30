@@ -422,10 +422,9 @@ elif page == "Explore the data":
             st.pyplot(fig)
     with col2:
         with card("card_class_balance_why"):
-            st.markdown("**Why this matters**")
+            st.markdown("**Problem**")
             st.markdown(
                 """
-                Problem
                 Only ~10.7% of bids are shill bids. A model could just guess "normal" 
                 every time and still look ~89% accurate without learning anything.
 
