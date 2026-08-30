@@ -161,6 +161,7 @@ st.markdown(
         background-clip: text;
         -webkit-text-fill-color: transparent;
         color: transparent;
+        filter: drop-shadow(0 1px 1px rgba(0,0,0,0.4));
     }}
     .stat-label {{
         font-size: 0.95rem;
@@ -172,6 +173,7 @@ st.markdown(
         background-clip: text;
         -webkit-text-fill-color: transparent;
         color: transparent;
+        filter: drop-shadow(0 1px 1px rgba(0,0,0,0.4));
     }}
 
     /* ---- best-model highlight card ---- */
@@ -390,6 +392,7 @@ st.markdown(
         background-clip: text;
         -webkit-text-fill-color: transparent;
         color: transparent;
+        filter: drop-shadow(0 1px 1px rgba(0,0,0,0.4));
     }}
     div[class*="st-key-section_"] [data-testid="stMarkdownContainer"] {{
         margin: 0 !important;
