@@ -276,12 +276,21 @@ st.markdown(
         font-size: 1.3rem !important;
     }}
 
-    /* ---- bigger font for dropdown menu options when open (broad catch-all) ---- */
-    div[data-baseweb="popover"] * ,
-    div[data-baseweb="menu"] *,
-    ul[role="listbox"] *,
+    /* ---- bigger font for dropdown menu options when open (wide catch-all) ---- */
+    div[data-baseweb="popover"] li,
+    div[data-baseweb="popover"] li *,
+    div[data-baseweb="popover"] div,
+    div[data-baseweb="menu"] li,
+    div[data-baseweb="menu"] li *,
+    ul[role="listbox"] li,
+    ul[role="listbox"] li *,
     li[role="option"],
-    li[data-baseweb="menu-item"] {{
+    li[role="option"] *,
+    li[data-baseweb="menu-item"],
+    li[data-baseweb="menu-item"] *,
+    [data-testid="stSelectboxVirtualDropdown"] *,
+    [class*="option"],
+    [class*="Option"] {{
         font-size: 1.3rem !important;
     }}
 
