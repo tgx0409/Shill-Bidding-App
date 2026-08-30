@@ -259,6 +259,8 @@ st.markdown(
         display: flex;
         justify-content: flex-end;
         margin-right: 2rem;
+        margin-top: 1.5rem;
+    }}
     }}
 
     /* top nav underline colour tweak */
