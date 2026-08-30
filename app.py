@@ -3,6 +3,10 @@ Shill Bidding Risk Dashboard
 Streamlit app: Overview, Explore the Data, Risk Predictor, Model Evaluation.
 Built on the assignment notebook's pipeline; models are pre-trained
 artifacts, so the app starts instantly and never retrains anything.
+
+Layout follows the supplied concept: a white top nav bar, a light-grey page
+background, a solid taupe "banner" for each page's title, and soft cream /
+peach rounded cards holding the actual content.
 """
 
 import json
@@ -576,8 +580,6 @@ elif page == "Model Evaluation":
             plt.tight_layout()
             st.pyplot(fig)
 
-    m3, m4 = st.columns(2)
-
     with m3:
         with card("card_roc"):
             st.markdown("**ROC curves**")
@@ -596,7 +598,7 @@ elif page == "Model Evaluation":
             plt.tight_layout()
             st.pyplot(fig)
 
-    with m4:
+    with card("card_confusion"):
         st.subheader("Confusion matrix")
         cm_model_name = st.selectbox("Model", list(MODELS.keys()), key="cm_model")
         model = MODELS[cm_model_name]
