@@ -154,7 +154,7 @@ st.markdown(
         display: inline-block;
         background-color: {ACCENT_GREEN};
         color: #FFFFFF;
-        font-size: 0.75rem;
+        font-size: 1rem;
         font-weight: 700;
         letter-spacing: 0.04em;
         padding: 0.25rem 0.7rem;
@@ -186,7 +186,7 @@ st.markdown(
         display: block;
     }}
     .best-model-chip .chip-label {{
-        font-size: 1.2rem;
+        font-size: 1rem;
         color: {TEXT_DARK};
         opacity: 0.7;
     }}
