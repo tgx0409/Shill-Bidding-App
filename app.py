@@ -325,7 +325,7 @@ st.markdown(
         justify-content: center;
         gap: 2.4rem;
         margin-top: 0.1rem;
-        margin-bottom: 0.6rem;
+        margin-bottom: 0.7rem;
     }}
     .risk-legend-item {{
         display: flex;
