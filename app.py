@@ -341,7 +341,7 @@ st.markdown(
     }}
     div[class*="st-key-card_gauge"] h3 {{
         text-align: center;
-        min-height: 780px;
+        min-height: 400px;
     }}
 
     /* ---- section banner ---- */
