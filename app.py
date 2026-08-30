@@ -209,6 +209,11 @@ st.markdown(
         margin-bottom: 0.4rem;
     }}
 
+    div[class*="st-key-card_roc"],
+    div[class*="st-key-card_confusion"] {{
+        min-height: 620px;
+    }}
+
     /* Scoped (NOT global) — tightens the gap between the two squares in
        each stat row, only inside the "stats_wrap" container. Everywhere
        else in the app, Streamlit's default column spacing is untouched. */
@@ -711,7 +716,7 @@ elif page == "Model Evaluation":
             plt.tight_layout()
             st.pyplot(fig)
 
-    # ---- row 2: ROC curve (wider) + confusion matrix (narrower) ----
+    # ---- row 2: ROC curve + confusion matrix ----
     row2a, row2b = st.columns([1.4, 1])
     with row2a:
         with card("card_roc"):
