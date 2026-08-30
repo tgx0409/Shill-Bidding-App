@@ -271,13 +271,15 @@ st.markdown(
 
     /* ---- risk prediction pill + legend ---- */
     .risk-pill {{
-        display: inline-block;
-        font-size: 1.3rem;
+        display: block;
+        width: fit-content;
+        margin: 0.8rem auto 1.2rem auto;
+        font-size: 1.15rem;
         font-weight: 700;
         color: #FFFFFF;
-        padding: 0.6rem 1.6rem;
+        padding: 0.55rem 1.6rem;
         border-radius: 999px;
-        margin: 0.8rem 0 1.2rem 0;
+        text-align: center;
     }}
     .risk-legend {{
         display: flex;
@@ -764,10 +766,6 @@ elif page == "Risk predictor":
                                 feat.replace("_", " "), float(r["min"]), float(r["max"]), float(r["median"]),
                                 help=FEATURE_HELP.get(feat),
                             )
-                            if values[feat] < r["median"] * 0.66:
-                                st.caption("→ Low")
-                            elif values[feat] > r["median"] * 1.33:
-                                st.caption("→ High")
                     if col_container is fc2:
                         predict_clicked = st.button("Predict risk", type="primary")
     with right:
