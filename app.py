@@ -1,8 +1,6 @@
 """
 Shill Bidding Risk Dashboard
 Streamlit app: Overview, Explore the Data, Risk Predictor, Model Evaluation.
-Built on the assignment notebook's pipeline; models are pre-trained
-artifacts, so the app starts instantly and never retrains anything.
 """
 
 import json
@@ -41,7 +39,7 @@ BLACK_GOLD_BG = get_base64_image("assets/black_gold_bg.jpg")
 SHILL_BIDDING_BG = get_base64_image("assets/shill_bidding_bg.jpg")
 
 # ----------------------------------------------------------------------------
-# Palette (sampled from the concept mock-ups)
+# Palette
 # ----------------------------------------------------------------------------
 PAGE_BG = "#D9D9D9"
 BANNER_BG = "#B5ABA1"
@@ -53,10 +51,8 @@ ACCENT_GREEN = "#6EBE44"
 ACCENT_ORANGE = "#F2A93B"
 ACCENT_RED = "#E8495C"
 
-
-
 # ----------------------------------------------------------------------------
-# Global CSS — page background, top nav, banners, cards, stat squares
+# Global CSS
 # ----------------------------------------------------------------------------
 st.markdown(
     f"""
@@ -99,7 +95,7 @@ st.markdown(
         line-height: 1.15;
     }}
 
-    /* ---- generic cream card ---- */
+    /* ---- generic card ---- */
     div[class*="st-key-card_"] {{
         background-color: {CARD_BG};
         border-radius: 22px;
@@ -115,7 +111,7 @@ st.markdown(
         min-height: 425px;
     }}
 
-    /* ---- outer tinted panel (wraps Problem / Remedies) ---- */
+    /* ---- outer tinted panel (wraps Problem and Remedies) ---- */
     div[class*="st-key-outer_"] {{
         background-color: #FFFFFF;
         border-radius: 22px;
@@ -135,7 +131,7 @@ st.markdown(
         box-shadow: 0 3px 8px rgba(0,0,0,0.25);
     }}
 
-    /* ---- small gold-gradient stat squares (Overview) ---- */
+    /* ---- small stat squares (Overview) ---- */
     div[class*="st-key-stat_"] {{
         background: linear-gradient(275deg, #8A5A1E, #D4A017, #F0C550);
         border-radius: 22px;
@@ -227,7 +223,7 @@ st.markdown(
         opacity: 0.7;
     }}
 
-    /* ---- tighten gap under metrics table only ---- */
+    /* ---- tighten gap under metrics table ---- */
     div[class*="st-key-card_metrics_table"] {{
         margin-bottom: 0.4rem;
     }}
@@ -237,14 +233,11 @@ st.markdown(
         min-height: 620px;
     }}
 
-    /* Scoped (NOT global) — tightens the gap between the two squares in
-       each stat row, only inside the "stats_wrap" container. Everywhere
-       else in the app, Streamlit's default column spacing is untouched. */
     div[class*="st-key-stats_wrap"] div[data-testid="stColumn"] {{
         padding: 0 0.3rem;
     }}
 
-    /* ---- bigger fonts on Risk Predictor page ---- */
+    /* ---- bigger fonts ---- */
     div[class*="st-key-card_sliders"] label,
     div[class*="st-key-card_gauge"] label,
     div[class*="st-key-card_model_choice"] label {{
@@ -307,7 +300,7 @@ st.markdown(
         min-height: 165px !important;
     }}
 
-    /* ---- bigger font for all selectbox dropdowns app-wide (closed state) ---- */
+    /* ---- bigger font for all selectbox dropdowns app-wide ---- */
     div[data-testid="stSelectbox"] * {{
         font-size: 1.3rem !important;
     }}
@@ -315,7 +308,7 @@ st.markdown(
         font-size: 1.3rem !important;
     }}
 
-    /* ---- bigger font for dropdown menu options when open (wide catch-all) ---- */
+    /* ---- bigger font for dropdown menu options when open ---- */
     div[data-baseweb="popover"] li,
     div[data-baseweb="popover"] li *,
     div[data-baseweb="popover"] div,
@@ -411,7 +404,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
 def banner(key: str, eyebrow: str, title: str):
     """Solid taupe title banner, matching the concept mock-up."""
     with st.container(key=key):
@@ -427,15 +419,12 @@ def card(key: str):
     """Returns a cream rounded container to use as `with card("x"):`."""
     return st.container(key=key)
 
-
 # ----------------------------------------------------------------------------
-# Animated risk gauge (custom SVG + CSS transition, embedded as an HTML
-# component so the needle actually sweeps into place on every prediction)
+# Animated risk gauge
 # ----------------------------------------------------------------------------
 def _polar(cx, cy, r, angle_deg):
     a = math.radians(angle_deg)
     return cx + r * math.cos(a), cy - r * math.sin(a)
-
 
 def _band_path(cx, cy, r_outer, r_inner, a_start, a_end):
     x1, y1 = _polar(cx, cy, r_outer, a_start)
@@ -448,7 +437,6 @@ def _band_path(cx, cy, r_outer, r_inner, a_start, a_end):
         f"L {x3:.2f} {y3:.2f} "
         f"A {r_inner} {r_inner} 0 0 0 {x4:.2f} {y4:.2f} Z"
     )
-
 
 def render_gauge(prob: float, height: int = 260):
     """Semicircular risk gauge: green (low) -> orange (mid) -> red (high),
@@ -485,7 +473,6 @@ def render_gauge(prob: float, height: int = 260):
     </script>
     """
     st.iframe(html, height=height + 20)
-
 
 # ----------------------------------------------------------------------------
 # Cached loaders
