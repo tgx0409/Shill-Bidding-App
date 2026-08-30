@@ -269,14 +269,21 @@ st.markdown(
     }}
 
     /* ---- bigger font for all selectbox dropdowns app-wide ---- */
-    div[data-baseweb="select"] {{
-        font-size: 1.15rem !important;
+    div[data-testid="stSelectbox"] {{
+        font-size: 1.2rem !important;
     }}
-    div[data-baseweb="select"] * {{
-        font-size: 1.15rem !important;
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] div {{
+        font-size: 1.2rem !important;
     }}
-    ul[data-testid="stSelectboxVirtualDropdown"] li {{
-        font-size: 1.15rem !important;
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] span {{
+        font-size: 1.2rem !important;
+    }}
+    div[data-testid="stSelectbox"] label p {{
+        font-size: 1.2rem !important;
+    }}
+    div[role="listbox"] li,
+    ul[data-testid="stSelectboxVirtualDropdown"] li div {{
+        font-size: 1.2rem !important;
     }}
 
     /* ---- risk prediction pill + legend ---- */
