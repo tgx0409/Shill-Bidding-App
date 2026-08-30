@@ -459,7 +459,6 @@ elif page == "Explore the data":
                     st.markdown("**1. Class weighting**")
                     st.markdown(
                         "Every model was trained with `class_weight=\"balanced\"` "
-                        "(or sample weighting for Gradient Boosting)."
                     )
             with r2:
                 with st.container(key="inner_remedy2"):
