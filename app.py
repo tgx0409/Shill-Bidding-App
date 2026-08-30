@@ -170,7 +170,7 @@ st.markdown(
     .best-model-chips {{
         display: flex;
         gap: 0.6rem;
-        margin-top: 1rem;
+        margin-top: 0.4rem;
     }}
     .best-model-chip {{
         background-color: {STAT_BG};
