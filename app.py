@@ -42,14 +42,22 @@ APP_BG = get_base64_image("assets/shill_bidding_bg.jpg")
 # ----------------------------------------------------------------------------
 # Palette (sampled from the concept mock-ups)
 # ----------------------------------------------------------------------------
-PAGE_BG = "#D9D9D9"
-BANNER_BG = "#B5ABA1"
-CARD_BG = "#F6F7F1"
-STAT_BG = "#F1EBDF"
-TEXT_DARK = "#1F1F1F"
+#PAGE_BG = "#D9D9D9"
+#BANNER_BG = "#B5ABA1"
+#CARD_BG = "#F6F7F1"
+#STAT_BG = "#F1EBDF"
+#TEXT_DARK = "#1F1F1F"
+PAGE_BG = "#E8E6E1"        /* soft warm gray, like the image's backdrop */
+BANNER_BG = "#3B2E27"      /* deep espresso brown, from the gavel */
+CARD_BG = "#FAF7F0"        /* warm ivory (close to your current CARD_BG, slightly warmer) */
+STAT_BG = "#F0E6C8"        /* pale gold/champagne, echoing the coins */
+TEXT_DARK = "#2A211B"
+
 ACCENT_GREEN = "#6EBE44"
 ACCENT_ORANGE = "#F2A93B"
 ACCENT_RED = "#E8495C"
+
+
 
 # ----------------------------------------------------------------------------
 # Global CSS — page background, top nav, banners, cards, stat squares
