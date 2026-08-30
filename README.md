@@ -87,6 +87,6 @@ confirm everything loads before you deploy.
 
 `Random Forest` and `Gradient Boosting` post the strongest PR-AUC (0.9988 /
 0.9992) on the held-out test set, but `Successive_Outbidding` alone drives
-most of that separation — see the "Limitations" section on the Model
+most of that separation. see the "Limitations" section on the Model
 Evaluation page for the full discussion (this is intentionally kept in the
 app rather than duplicated in the written report).
