@@ -442,7 +442,7 @@ elif page == "Explore the data":
 
     with col2:
         with st.container(key="outer_problem"):
-            st.markdown("###### Problem")
+            st.markdown("##### Problem")
             with st.container(key="inner_problem"):
                 st.markdown(
                     """
@@ -452,7 +452,7 @@ elif page == "Explore the data":
                 )
 
         with st.container(key="outer_remedies"):
-            st.markdown("###### Remedies")
+            st.markdown("##### Remedies")
             r1, r2, r3 = st.columns(3)
             with r1:
                 with st.container(key="inner_remedy1"):
