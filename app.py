@@ -221,6 +221,33 @@ st.markdown(
         padding: 0 0.3rem;
     }}
 
+    /* ---- bigger fonts on Risk Predictor page ---- */
+    div[class*="st-key-card_sliders"] label,
+    div[class*="st-key-card_gauge"] label,
+    div[class*="st-key-card_model_choice"] label {{
+        font-size: 1.15rem !important;
+    }}
+    div[class*="st-key-card_sliders"] [data-testid="stMarkdownContainer"] p,
+    div[class*="st-key-card_gauge"] [data-testid="stMarkdownContainer"] p,
+    div[class*="st-key-card_model_choice"] [data-testid="stMarkdownContainer"] p {{
+        font-size: 1.15rem !important;
+    }}
+    div[class*="st-key-card_sliders"] .stCaption,
+    div[class*="st-key-card_gauge"] .stCaption,
+    div[class*="st-key-card_sliders"] [data-testid="stCaptionContainer"] p {{
+        font-size: 1rem !important;
+    }}
+    div[class*="st-key-card_sliders"] [data-baseweb="radio"] span,
+    div[class*="st-key-card_gauge"] [data-baseweb="radio"] span {{
+        font-size: 1.1rem !important;
+    }}
+    div[class*="st-key-card_gauge"] [data-testid="stMetricValue"] {{
+        font-size: 2.2rem !important;
+    }}
+    div[class*="st-key-card_gauge"] [data-testid="stMetricLabel"] {{
+        font-size: 1.1rem !important;
+    }}
+
     /* top nav underline colour tweak */
     .nav-link-selected {{
         border-bottom: 3px solid {BANNER_BG} !important;
@@ -619,9 +646,6 @@ elif page == "Risk predictor":
     left, right = st.columns([1.5, 1])
 
     with left:
-        with card("card_model_choice"):
-            model_name = st.selectbox("Model to use", list(MODELS.keys()))
-
         with card("card_sliders"):
             st.markdown("##### Bid features")
             fc1, fc2 = st.columns(2)
@@ -667,14 +691,17 @@ elif page == "Risk predictor":
                                 feat.replace("_", " "), float(r["min"]), float(r["max"]), float(r["median"]),
                                 help=FEATURE_HELP.get(feat),
                             )
-                            level = "Low" if values[feat] < r["median"] * 0.66 else (
-                                     "High" if values[feat] > r["median"] * 1.33 else "Typical")
-                            st.caption(f"→ {level}")
+                            if values[feat] < r["median"] * 0.66:
+                                st.caption("→ Low")
+                            elif values[feat] > r["median"] * 1.33:
+                                st.caption("→ High")
 
             predict_clicked = st.button("Predict risk", type="primary")
 
     with right:
         with card("card_gauge"):
+            model_name = st.selectbox("Model to use", list(MODELS.keys()))
+
             if predict_clicked:
                 X_input = pd.DataFrame([values])[FEATURES]
                 model = MODELS[model_name]
