@@ -117,7 +117,7 @@ st.markdown(
 
     /* ---- outer tinted panel (wraps Problem / Remedies) ---- */
     div[class*="st-key-outer_"] {{
-        background-color: #F5EFDF;
+        background-color: #FFFFFF;
         border-radius: 22px;
         padding: 1.5rem 1.6rem 1.7rem 1.6rem;
         margin-bottom: 0rem;
@@ -128,7 +128,7 @@ st.markdown(
 
     /* ---- white inner box inside an outer panel ---- */
     div[class*="st-key-inner_"] {{
-        background-color: #FFFFFF;
+        background-color: #F5EFDF;
         border-radius: 16px;
         padding: 1.1rem 1.3rem;
         height: 100%;
