@@ -430,7 +430,7 @@ elif page == "Explore the data":
     col1, col2 = st.columns([1, 2.6])
     with col1:
         with card("card_class_balance"):
-            st.markdown("#### Class distribution")
+            st.markdown("### Class distribution")
             fig, ax = plt.subplots(figsize=(4, 4))
             df["Class"].value_counts().sort_index().plot(
                 kind="bar", ax=ax, color=["#FBDA0C", "#0057AD"]
@@ -442,7 +442,7 @@ elif page == "Explore the data":
 
     with col2:
         with st.container(key="outer_problem"):
-            st.markdown("#### Problem")
+            st.markdown("### Problem")
             with st.container(key="inner_problem"):
                 st.markdown(
                     """
@@ -452,7 +452,7 @@ elif page == "Explore the data":
                 )
 
         with st.container(key="outer_remedies"):
-            st.markdown("#### Remedies")
+            st.markdown("### Remedies")
             r1, r2, r3 = st.columns(3)
             with r1:
                 with st.container(key="inner_remedy1"):
