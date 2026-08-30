@@ -485,7 +485,7 @@ SCALED_MODELS = {"Logistic Regression (baseline)", "SVM (Poly kernel)"}
 FEATURE_HELP = {
     "Bidder_Tendency": (
         "How often this bidder shows up across many auctions from the *same* seller.\n\n"
-        "0.0: spread out across different sellers, like a normal shopper.\n"
+        "0.0: spread out across different sellers, like a normal shopper.\n\n"
         "~0.5: bids on a mix of repeat and new sellers.\n"
         "1.0: keeps returning to one seller's auctions — a classic shill pattern, since a "
         "shill account is usually planted by one seller to bid up their own listings."
@@ -743,9 +743,8 @@ elif page == "Explore the data":
             plt.tight_layout()
             st.pyplot(fig)
 
-    section_banner("section_correlations", "Correlations")
+    section_banner("section_correlations", "Correlations Matrix")
     with card("card_correlations"):
-        st.markdown("**Correlation matrix (all features + target)**")
         corr = df.corr()
         corr_display = corr.rename(
             index=lambda x: x.replace("_", " "),
