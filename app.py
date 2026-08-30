@@ -333,6 +333,19 @@ st.markdown(
         text-align: center;
     }}
 
+    /* ---- section banner (sub-headers as styled separators) ---- */
+    div[class*="st-key-section_"] {{
+        background-color: {BANNER_BG};
+        border-radius: 14px;
+        padding: 0.7rem 1.3rem;
+        margin: 0.4rem 0 1rem 0;
+    }}
+    .section-banner-title {{
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: {TEXT_DARK};
+    }}
+
     /* top nav underline colour tweak */
     .nav-link-selected {{
         border-bottom: 3px solid {BANNER_BG} !important;
@@ -349,6 +362,10 @@ def banner(key: str, eyebrow: str, title: str):
         st.markdown(f'<div class="banner-eyebrow">{eyebrow}</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="banner-title">{title}</div>', unsafe_allow_html=True)
 
+def section_banner(key: str, title: str):
+    """Slim taupe separator banner for sub-section titles."""
+    with st.container(key=key):
+        st.markdown(f'<div class="section-banner-title">{title}</div>', unsafe_allow_html=True)
 
 def card(key: str):
     """Returns a cream rounded container to use as `with card("x"):`."""
@@ -643,7 +660,7 @@ elif page == "Explore the data":
     banner("banner_explore", "Shill Bidding Risk", "Explore the Data")
     df = load_clean_data()
 
-    st.markdown("##### Target Imbalance")
+    section_banner("section_target_imbalance", "Target Imbalance")
     col1, col2 = st.columns([1, 2.6])
     with col1:
         with card("card_class_balance"):
@@ -690,7 +707,7 @@ elif page == "Explore the data":
                         "Used PR-AUC instead of accuracy or ROC-AUC to tune hyperparameters."
                     )
 
-    st.markdown("##### Feature Distributions")
+    section_banner("section_feature_distributions", "Feature Distributions")
     with card("card_feature_select"):
         feature = st.selectbox(
             "Choose a feature", FEATURES,
@@ -720,7 +737,7 @@ elif page == "Explore the data":
             plt.tight_layout()
             st.pyplot(fig)
 
-    st.markdown("##### Correlations")
+    section_banner("section_correlations", "Correlations")
     with card("card_correlations"):
         st.markdown("**Correlation matrix (all features + target)**")
         corr = df.corr()
@@ -845,6 +862,7 @@ elif page == "Model Evaluation":
     X_test, X_test_scaled, y_test = load_test_set()
     results_precomputed = load_results_table()
 
+    section_banner("section_model_performance", "Model Performance")
     # ---- row 1: metrics table + metric comparison bar ----
     row1a, row1b = st.columns([1.3, 1])
     with row1a:
@@ -894,6 +912,7 @@ elif page == "Model Evaluation":
             plt.tight_layout()
             st.pyplot(fig)
 
+    section_banner("section_roc_confusion", "ROC Curve & Confusion Matrix")
     # ---- row 2: ROC curve + confusion matrix ----
     row2a, row2b = st.columns([1.4, 1])
     with row2a:
@@ -931,7 +950,7 @@ elif page == "Model Evaluation":
 
     # ---- row 3: feature importance, grouped under one outer panel ----
     with st.container(key="outer_feat_importance"):
-        st.markdown("##### Feature importance")
+        section_banner("section_feature_importance", "Feature Importance")
         fi1, fi2 = st.columns(2)
         with fi1:
             with st.container(key="inner_fi_rf"):
@@ -958,7 +977,7 @@ elif page == "Model Evaluation":
 
     # ---- row 4: limitations, matching outer/inner panel style ----
     with st.container(key="outer_limitations"):
-        st.markdown("##### Limitations")
+        section_banner("section_limitations", "Limitations")
         with st.container(key="inner_limitations"):
             st.markdown(
                 """
