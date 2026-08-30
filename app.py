@@ -174,12 +174,6 @@ st.markdown(
         filter: drop-shadow(0 1px 1px rgba(0,0,0,0.4));
     }}
 
-    /* ---- feature importance cards: distinct tint ---- */
-    div[class*="st-key-card_fi_rf"],
-    div[class*="st-key-card_fi_gb"] {{
-        background-color: #F5EFDF;
-    }}
-
     /* ---- best-model highlight card ---- */
     div[class*="st-key-card_best_model"] {{
         border-left: 6px solid {ACCENT_GREEN};
@@ -542,14 +536,13 @@ FEATURE_HELP = {
         "How often this bidder shows up across many auctions from the *same* seller.\n\n"
         "- **0.0:** spread out across different sellers, like a normal shopper.\n"
         "- **~0.5:** bids on a mix of repeat and new sellers.\n"
-        "- **1.0:** keeps returning to one seller's auctions — a classic shill pattern, since a "
-        "shill account is usually planted by one seller to bid up their own listings.\n"
+        "- **1.0:** keeps returning to one seller's auctions.\n"
     ),
     "Bidding_Ratio": (
         "The share of all bids in this auction that came from this one bidder.\n\n"
         "- **0.0:** barely participated in the auction.\n"
         "- **~0.5:** placed roughly half of all the bids.\n"
-        "- **1.0:** placed almost every single bid — unusual for a genuine buyer, and often signals "
+        "- **1.0:** placed almost every single bid. This is unusual for a genuine buyer, and often signals "
         "someone bidding against themselves.\n"
     ),
     "Successive_Outbidding": (
@@ -557,7 +550,7 @@ FEATURE_HELP = {
         "being outbid.\n\n"
         "- **Never:** no back-to-back self-outbidding detected.\n"
         "- **Once:** happened a single time in this auction.\n"
-        "- **Repeatedly:** happened multiple times — the single strongest signal in the whole model, "
+        "- **Repeatedly:** happened multiple times. This is the single strongest signal in the whole model, "
         "since shill accounts do this to keep the price climbing without ever intending to win and pay.\n"
     ),
     "Last_Bidding": (
@@ -569,9 +562,9 @@ FEATURE_HELP = {
     ),
     "Auction_Bids": (
         "The total number of bids the auction attracted overall, normalised to a 0-1 scale.\n\n"
-        "- **Near 0.0:** very few bids overall — a quiet auction.\n"
+        "- **Near 0.0:** very few bids overall, perhaps a quiet auction.\n"
         "- **~0.5:** a moderate, typical number of bids.\n"
-        "- **Near 1.0:** a high bid count — can mean genuine buyer interest, but can also mean a "
+        "- **Near 1.0:** a high bid count. This can mean genuine buyer interest, but can also mean a "
         "shill account repeatedly bidding to inflate the count and make the listing look popular.\n"
     ),
     "Starting_Price_Average": (
@@ -579,19 +572,19 @@ FEATURE_HELP = {
         "auctions.\n\n"
         "- **Below average:** started noticeably cheaper than similar auctions.\n"
         "- **About average:** started right at the typical price (ratio of 1.0).\n"
-        "- **Above average:** started noticeably higher — either can signal a seller manipulating the "
+        "- **Above average:** started noticeably higher, either can signal a seller manipulating the "
         "opening price to attract or discourage bidders.\n"
     ),
     "Early_Bidding": (
         "How close to the auction's *opening* this bidder's first bid landed.\n\n"
-        "- **Near 0.0:** jumped in immediately when the auction opened — something shill accounts "
+        "- **Near 0.0:** jumped in immediately when the auction opened, something shill accounts "
         "often do deliberately, to set an artificial floor price before real buyers arrive.\n"
         "- **~0.5:** joined partway through.\n"
         "- **Near 1.0:** joined very late, close to closing time.\n"
     ),
     "Winning_Ratio": (
         "The share of past auctions this bidder has actually gone on to win.\n\n"
-        "- **Near 0.0:** rarely wins despite bidding — a red flag, since shill accounts bid a lot but "
+        "- **Near 0.0:** rarely wins despite bidding. This is a red flag, as shill accounts bid a lot but "
         "avoid winning because winning would mean actually paying for something they never intended to buy.\n"
         "- **~0.5:** wins about half of the auctions they enter.\n"
         "- **Near 1.0:** wins almost every auction they bid in, typical of a genuine, decisive buyer.\n"
