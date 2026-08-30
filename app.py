@@ -1003,7 +1003,6 @@ elif page == "Model Evaluation":
     # ---- row 4: limitations ----
     section_banner("section_limitations", "Limitations")
     with st.container(key="outer_limitations"):
-        st.markdown("##### Limitations")
         l1, l2, l3 = st.columns(3)
         with l1:
             with st.container(key="inner_limitation1"):
@@ -1025,6 +1024,5 @@ elif page == "Model Evaluation":
                 st.markdown(
                     "Class imbalance (10.7% positive) means small changes in the "
                     "classification threshold noticeably shift precision/recall "
-                    "trade-offs"
+                    "trade-offs."
                 )
-
