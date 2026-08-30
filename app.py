@@ -255,6 +255,10 @@ st.markdown(
     div[class*="st-key-card_sliders"] div[data-testid="stColumn"] {{
         padding: 0 1rem;
     }}
+    div[class*="st-key-card_sliders"] .stButton {{
+        display: flex;
+        justify-content: flex-end;
+    }}
 
     /* top nav underline colour tweak */
     .nav-link-selected {{
@@ -723,10 +727,7 @@ elif page == "Risk predictor":
                             elif values[feat] > r["median"] * 1.33:
                                 st.caption("→ High")
                     if col_container is fc2:
-                        spacer, btn_col = st.columns([4, 4])
-                        with btn_col:
-                            predict_clicked = st.button("Predict risk", type="primary")
-
+                        predict_clicked = st.button("Predict risk", type="primary")
     with right:
         with card("card_gauge"):
             model_name = st.selectbox("Model to use", list(MODELS.keys()))
