@@ -270,15 +270,16 @@ st.markdown(
     }}
 
     /* ---- risk prediction pill + legend ---- */
-    .risk-pill {{
-        display: block;
-        width: fit-content;
-        margin: 0.8rem auto 1.2rem auto;
-        font-size: 1.15rem;
+    div[class*="st-key-risk_pill_wrap"] {{
+        border-radius: 16px;
+        padding: 0.9rem 1.2rem;
+        margin: 0.8rem 0 1.2rem 0;
+        text-align: center;
+    }}
+    .risk-pill-text {{
+        font-size: 1.25rem;
         font-weight: 700;
         color: #FFFFFF;
-        padding: 0.55rem 1.6rem;
-        border-radius: 999px;
         text-align: center;
     }}
     .risk-legend {{
@@ -301,6 +302,9 @@ st.markdown(
         display: inline-block;
     }}
     div[class*="st-key-card_gauge"] {{
+        text-align: center;
+    }}
+    div[class*="st-key-card_gauge"] h3 {{
         text-align: center;
     }}
 
@@ -789,13 +793,18 @@ elif page == "Risk predictor":
             else:
                 label, pill_color = "Likely shill bidder", ACCENT_RED
 
-            st.markdown("### Predicted shill-bidding probability")
-            render_gauge(prob)
-
             st.markdown(
-                f'<div class="risk-pill" style="background-color:{pill_color};">{label}</div>',
+                '<h3 style="text-align:center;">Predicted shill-bidding probability</h3>',
                 unsafe_allow_html=True,
             )
+            render_gauge(prob)
+
+            with st.container(key="risk_pill_wrap"):
+                st.markdown(
+                    f'<div class="risk-pill-text" style="background-color:{pill_color}; '
+                    f'border-radius:12px; padding:0.5rem;">{label}</div>',
+                    unsafe_allow_html=True,
+                )
 
             st.markdown(
                 f"""
