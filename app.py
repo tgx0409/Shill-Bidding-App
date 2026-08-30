@@ -283,7 +283,7 @@ st.markdown(
     }}
     div[role="listbox"] li,
     ul[data-testid="stSelectboxVirtualDropdown"] li div {{
-        font-size: 1.2rem !important;
+        font-size: 1.5rem !important;
     }}
 
     /* ---- bigger font for dropdown menu options when open ---- */
@@ -291,7 +291,7 @@ st.markdown(
     ul[data-testid="stSelectboxVirtualDropdown"] li *,
     div[role="listbox"] li,
     div[role="listbox"] li * {{
-        font-size: 1.2rem !important;
+        font-size: 1.5rem !important;
     }}
 
     /* ---- risk prediction pill + legend ---- */
