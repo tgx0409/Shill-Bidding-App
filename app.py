@@ -270,6 +270,13 @@ st.markdown(
     div[class*="st-key-card_feature_select"] {{
         margin-bottom: 0.4rem;
     }}
+    div[class*="st-key-card_sliders"],
+    div[class*="st-key-card_gauge"] {
+        height: 100%;
+    }
+    div[class*="st-key-card_gauge"] div[data-testid="stVerticalBlock"] {
+        gap: 0.5rem !important;
+    }
 
     /* ---- bigger font for all selectbox dropdowns app-wide (closed state) ---- */
     div[data-testid="stSelectbox"] * {{
@@ -310,25 +317,18 @@ st.markdown(
         color: #FFFFFF;
         text-align: center;
     }}
-    .risk-legend {{
-        display: flex;
-        justify-content: center;
-        gap: 1.8rem;
-        margin-top: 0.4rem;
-    }}
-    .risk-legend-item {{
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        font-size: 0.95rem;
-        color: {TEXT_DARK};
-    }}
-    .risk-legend-dot {{
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        display: inline-block;
-    }}
+    .risk-legend {
+        gap: 2.4rem;
+        margin-top: 0.8rem;
+    }
+    .risk-legend-item {
+        font-size: 1.15rem;
+        gap: 0.5rem;
+    }
+    .risk-legend-dot {
+        width: 18px;
+        height: 18px;
+    }
     div[class*="st-key-card_gauge"] {{
         text-align: center;
     }}
