@@ -36,7 +36,7 @@ def get_base64_image(path):
     with open(path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
-TROPHY_BG = get_base64_image("assets/trophy_bg.png")  # save your uploaded image here
+TROPHY_BG = get_base64_image("assets/trophy_bg.png")
 
 # ----------------------------------------------------------------------------
 # Palette (sampled from the concept mock-ups)
