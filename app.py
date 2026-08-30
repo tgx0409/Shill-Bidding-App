@@ -364,7 +364,7 @@ st.markdown(
 
     /* ---- section banner ---- */
     div[class*="st-key-section_"] {{
-        background: linear-gradient(to right, #8A5A1E, #D4A017, #F0C550);
+        background: linear-gradient(to left, #8A5A1E, #D4A017, #F0C550);
         border-radius: 14px;
         padding: 0.6rem 2.2rem;
         margin: 0 0 0.6rem 0;
