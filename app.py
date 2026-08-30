@@ -1002,27 +1002,27 @@ elif page == "Model Evaluation":
 
     # ---- row 4: limitations ----
     section_banner("section_limitations", "Limitations")
-    with st.container(key="outer_limitations"):
-        l1, l2, l3 = st.columns(3)
-        with l1:
-            with st.container(key="inner_limitation1"):
-                st.markdown("**1. Feature dominance**")
-                st.markdown(
-                    "`Successive_Outbidding` alone accounts for roughly 55-68% of "
-                    "impurity-based importance and 70%+ of permutation importance in "
-                    "both tree models."
-                )
-        with l2:
-            with st.container(key="inner_limitation2"):
-                st.markdown("**2. No external validation**")
-                st.markdown(
-                    "No validation set from a separate auction platform was available. "
-                )
-        with l3:
-            with st.container(key="inner_limitation3"):
-                st.markdown("**3. Threshold sensitivity**")
-                st.markdown(
-                    "Class imbalance (10.7% positive) means small changes in the "
-                    "classification threshold noticeably shift precision/recall "
-                    "trade-offs."
-                )
+    l1, l2, l3 = st.columns(3)
+    with l1:
+        with card("card_limitation1"):
+            st.markdown("**1. Feature dominance**")
+            st.markdown(
+                "`Successive_Outbidding` alone accounts for roughly 55-68% of "
+                "impurity-based importance and 70%+ of permutation importance in "
+                "both tree models."
+            )
+    with l2:
+        with card("card_limitation2"):
+            st.markdown("**2. No external validation**")
+            st.markdown(
+                "No validation set from a separate auction platform was available. "
+            )
+    with l3:
+        with card("card_limitation3"):
+            st.markdown("**3. Threshold sensitivity**")
+            st.markdown(
+                "Class imbalance (10.7% positive) means small changes in the "
+                "classification threshold noticeably shift precision/recall "
+                "trade-offs."
+            )
+   
