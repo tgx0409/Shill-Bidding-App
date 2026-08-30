@@ -262,6 +262,11 @@ st.markdown(
         margin-right: 1rem;
         margin-top: 1.5rem;
     }}
+    div[class*="st-key-card_sliders"] .stButton > button {{
+        width: auto;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }}
     }}
 
     /* top nav underline colour tweak */
