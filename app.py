@@ -186,7 +186,7 @@ st.markdown(
         display: block;
     }}
     .best-model-chip .chip-label {{
-        font-size: 0.78rem;
+        font-size: 1.2rem;
         color: {TEXT_DARK};
         opacity: 0.7;
     }}
