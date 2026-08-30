@@ -37,7 +37,7 @@ def get_base64_image(path):
         return base64.b64encode(f.read()).decode()
 
 TROPHY_BG = get_base64_image("assets/trophy_bg.png")
-WOOD_BG = get_base64_image("assets/wooden_bg.jpg")
+BLACK_GOLD_BG = get_base64_image("assets/black_gold_bg.jpg")
 SHILL_BIDDING_BG = get_base64_image("assets/shill_bidding_bg.jpg")
 
 # ----------------------------------------------------------------------------
@@ -62,7 +62,7 @@ st.markdown(
     f"""
     <style>
     [data-testid="stAppViewContainer"] {{
-        background-image: url("data:image/jpeg;base64,{WOOD_BG}");
+        background-image: url("data:image/jpeg;base64,{BLACK_GOLD_BG}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
