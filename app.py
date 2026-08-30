@@ -280,7 +280,7 @@ st.markdown(
 
     /* ---- bigger font for all selectbox dropdowns app-wide (closed state) ---- */
     div[data-testid="stSelectbox"] * {{
-        font-size: 1.5rem !important;
+        font-size: 1.3rem !important;
     }}
     div[data-baseweb="select"] * {{
         font-size: 1.3rem !important;
