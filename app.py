@@ -485,67 +485,67 @@ SCALED_MODELS = {"Logistic Regression (baseline)", "SVM (Poly kernel)"}
 FEATURE_HELP = {
     "Bidder_Tendency": (
         "How often this bidder shows up across many auctions from the *same* seller.\n\n"
-        "0.0: spread out across different sellers, like a normal shopper.\n\n"
-        "~0.5: bids on a mix of repeat and new sellers.\n"
-        "1.0: keeps returning to one seller's auctions — a classic shill pattern, since a "
-        "shill account is usually planted by one seller to bid up their own listings."
+        "- **0.0:** spread out across different sellers, like a normal shopper.\n"
+        "- **~0.5:** bids on a mix of repeat and new sellers.\n"
+        "- **1.0:** keeps returning to one seller's auctions — a classic shill pattern, since a "
+        "shill account is usually planted by one seller to bid up their own listings.\n"
     ),
     "Bidding_Ratio": (
         "The share of all bids in this auction that came from this one bidder.\n\n"
-        "0.0: barely participated in the auction.\n"
-        "~0.5: placed roughly half of all the bids.\n"
-        "1.0: placed almost every single bid — unusual for a genuine buyer, and often signals "
-        "someone bidding against themselves."
+        "- **0.0:** barely participated in the auction.\n"
+        "- **~0.5:** placed roughly half of all the bids.\n"
+        "- **1.0:** placed almost every single bid — unusual for a genuine buyer, and often signals "
+        "someone bidding against themselves.\n"
     ),
     "Successive_Outbidding": (
         "Whether this bidder outbid themself or a partner account back-to-back, right after "
         "being outbid.\n\n"
-        "Never: no back-to-back self-outbidding detected.\n"
-        "Once: happened a single time in this auction.\n"
-        "Repeatedly: happened multiple times — the single strongest signal in the whole model, "
-        "since shill accounts do this to keep the price climbing without ever intending to win and pay."
+        "- **Never:** no back-to-back self-outbidding detected.\n"
+        "- **Once:** happened a single time in this auction.\n"
+        "- **Repeatedly:** happened multiple times — the single strongest signal in the whole model, "
+        "since shill accounts do this to keep the price climbing without ever intending to win and pay.\n"
     ),
     "Last_Bidding": (
         "How close to the auction's closing time this bidder's *last* bid landed.\n\n"
-        "Near 0.0: last bid was placed early, well before the auction closed.\n"
-        "~0.5: last bid landed roughly midway through the auction.\n"
-        "Near 1.0: bid right at the very end, which can be used to push the price up late "
-        "with no time left for genuine buyers to respond."
+        "- **Near 0.0:** last bid was placed early, well before the auction closed.\n"
+        "- **~0.5:** last bid landed roughly midway through the auction.\n"
+        "- **Near 1.0:** bid right at the very end, which can be used to push the price up late "
+        "with no time left for genuine buyers to respond.\n"
     ),
     "Auction_Bids": (
         "The total number of bids the auction attracted overall, normalised to a 0-1 scale.\n\n"
-        "Near 0.0: very few bids overall — a quiet auction.\n"
-        "~0.5: a moderate, typical number of bids.\n"
-        "Near 1.0: a high bid count — can mean genuine buyer interest, but can also mean a "
-        "shill account repeatedly bidding to inflate the count and make the listing look popular."
+        "- **Near 0.0:** very few bids overall — a quiet auction.\n"
+        "- **~0.5:** a moderate, typical number of bids.\n"
+        "- **Near 1.0:** a high bid count — can mean genuine buyer interest, but can also mean a "
+        "shill account repeatedly bidding to inflate the count and make the listing look popular.\n"
     ),
     "Starting_Price_Average": (
         "How this auction's starting price compares to the average starting price for similar "
         "auctions.\n\n"
-        "Below average: started noticeably cheaper than similar auctions.\n"
-        "About average: started right at the typical price (ratio of 1.0).\n"
-        "Above average: started noticeably higher — either can signal a seller manipulating the "
-        "opening price to attract or discourage bidders."
+        "- **Below average:** started noticeably cheaper than similar auctions.\n"
+        "- **About average:** started right at the typical price (ratio of 1.0).\n"
+        "- **Above average:** started noticeably higher — either can signal a seller manipulating the "
+        "opening price to attract or discourage bidders.\n"
     ),
     "Early_Bidding": (
         "How close to the auction's *opening* this bidder's first bid landed.\n\n"
-        "Near 0.0: jumped in immediately when the auction opened — something shill accounts "
+        "- **Near 0.0:** jumped in immediately when the auction opened — something shill accounts "
         "often do deliberately, to set an artificial floor price before real buyers arrive.\n"
-        "~0.5: joined partway through.\n"
-        "Near 1.0: joined very late, close to closing time."
+        "- **~0.5:** joined partway through.\n"
+        "- **Near 1.0:** joined very late, close to closing time.\n"
     ),
     "Winning_Ratio": (
         "The share of past auctions this bidder has actually gone on to win.\n\n"
-        "Near 0.0: rarely wins despite bidding — a red flag, since shill accounts bid a lot but "
+        "- **Near 0.0:** rarely wins despite bidding — a red flag, since shill accounts bid a lot but "
         "avoid winning because winning would mean actually paying for something they never intended to buy.\n"
-        "~0.5: wins about half of the auctions they enter.\n"
-        "Near 1.0: wins almost every auction they bid in, typical of a genuine, decisive buyer."
+        "- **~0.5:** wins about half of the auctions they enter.\n"
+        "- **Near 1.0:** wins almost every auction they bid in, typical of a genuine, decisive buyer.\n"
     ),
     "Auction_Duration": (
         "How many days the auction ran for.\n\n"
-        "1-3 days: short auctions, leaving little room for shill activity to play out.\n"
-        "5-7 days: a typical auction length.\n"
-        "10-14 days: unusually long, giving more opportunity for repeated manipulation over time."
+        "- **1-3 days:** short auctions, leaving little room for shill activity to play out.\n"
+        "- **5-7 days:** a typical auction length.\n"
+        "- **10-14 days:** unusually long, giving more opportunity for repeated manipulation over time.\n"
     ),
 }
 
