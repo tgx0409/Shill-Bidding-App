@@ -431,7 +431,7 @@ elif page == "Explore the data":
     with col1:
         with card("card_class_balance"):
             st.markdown("**Class distribution**")
-            fig, ax = plt.subplots(figsize=(10, 10))
+            fig, ax = plt.subplots(figsize=(4, 4))
             df["Class"].value_counts().sort_index().plot(
                 kind="bar", ax=ax, color=["#FBDA0C", "#0057AD"]
             )
