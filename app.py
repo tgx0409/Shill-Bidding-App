@@ -47,10 +47,10 @@ APP_BG = get_base64_image("assets/shill_bidding_bg.jpg")
 #CARD_BG = "#F6F7F1"
 #STAT_BG = "#F1EBDF"
 #TEXT_DARK = "#1F1F1F"
-PAGE_BG = "#E8E6E1"        /* soft warm gray, like the image's backdrop */
-BANNER_BG = "#3B2E27"      /* deep espresso brown, from the gavel */
-CARD_BG = "#FAF7F0"        /* warm ivory (close to your current CARD_BG, slightly warmer) */
-STAT_BG = "#F0E6C8"        /* pale gold/champagne, echoing the coins */
+PAGE_BG = "#E8E6E1"       
+BANNER_BG = "#3B2E27"
+CARD_BG = "#FAF7F0"     
+STAT_BG = "#F0E6C8"  
 TEXT_DARK = "#2A211B"
 
 ACCENT_GREEN = "#6EBE44"
