@@ -430,6 +430,27 @@ elif page == "Explore the data":
 
                 """
             )
+        st.markdown("##### Remedies")
+    r1, r2, r3 = st.columns(3)
+    with r1:
+        with card("card_remedy_weighting"):
+            st.markdown("**1. Class weighting**")
+            st.markdown(
+                "Every model was trained with `class_weight=\"balanced\"` "
+                "(or sample weighting for Gradient Boosting)."
+            )
+    with r2:
+        with card("card_remedy_split"):
+            st.markdown("**2. Stratified split**")
+            st.markdown(
+                "Train/test split kept the same 89.32% / 10.68% ratio in both sets."
+            )
+    with r3:
+        with card("card_remedy_metric"):
+            st.markdown("**3. Metric tuning**")
+            st.markdown(
+                "Used PR-AUC instead of accuracy or ROC-AUC to tune hyperparameters."
+            )
 
     st.markdown("##### Feature Distributions")
     with card("card_feature_select"):
@@ -551,15 +572,15 @@ elif page == "Model Evaluation":
     X_test, X_test_scaled, y_test = load_test_set()
     results_precomputed = load_results_table()
 
-    m1, m2, m3 = st.columns(3)
+    row1a, row1b = st.columns(2)
 
-    with m1:
+    with row1a:
         with card("card_metrics_table"):
             st.markdown("**Metrics on the held-out test set**")
             st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"),
                          width="stretch")
 
-    with m2:
+    with row1b:
         with card("card_metric_bar"):
             st.markdown("**Compare models on a metric**")
             metric_choice = st.selectbox(
@@ -574,7 +595,9 @@ elif page == "Model Evaluation":
             plt.tight_layout()
             st.pyplot(fig)
 
-    with m3:
+    row2a, row2b = st.columns(2)
+
+    with row2a:
         with card("card_roc"):
             st.markdown("**ROC curves**")
             fig, ax = plt.subplots(figsize=(5, 4))
@@ -592,20 +615,21 @@ elif page == "Model Evaluation":
             plt.tight_layout()
             st.pyplot(fig)
 
-    with card("card_confusion"):
-        st.subheader("Confusion matrix")
-        cm_model_name = st.selectbox("Model", list(MODELS.keys()), key="cm_model")
-        model = MODELS[cm_model_name]
-        X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
-        y_pred = model.predict(X_te)
-        cm = confusion_matrix(y_test, y_pred)
-        fig, ax = plt.subplots(figsize=(4, 3.5))
-        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=ax,
-                    xticklabels=["Normal", "Shill"], yticklabels=["Normal", "Shill"])
-        ax.set_xlabel("Predicted")
-        ax.set_ylabel("Actual")
-        fig.patch.set_alpha(0)
-        st.pyplot(fig)
+    with row2b:
+        with card("card_confusion"):
+            st.subheader("Confusion matrix")
+            cm_model_name = st.selectbox("Model", list(MODELS.keys()), key="cm_model")
+            model = MODELS[cm_model_name]
+            X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
+            y_pred = model.predict(X_te)
+            cm = confusion_matrix(y_test, y_pred)
+            fig, ax = plt.subplots(figsize=(4, 3.5))
+            sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=ax,
+                        xticklabels=["Normal", "Shill"], yticklabels=["Normal", "Shill"])
+            ax.set_xlabel("Predicted")
+            ax.set_ylabel("Actual")
+            fig.patch.set_alpha(0)
+            st.pyplot(fig)
 
     fi1, fi2 = st.columns(2)
     with fi1:
