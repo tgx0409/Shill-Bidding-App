@@ -149,6 +149,7 @@ st.markdown(
     div[class*="st-key-card_best_model"] {{
         border-left: 6px solid {ACCENT_GREEN};
         min-height: 230px;
+        padding-bottom: 2.2rem;
     }}
     .best-model-badge {{
         display: inline-block;
