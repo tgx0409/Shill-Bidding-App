@@ -156,6 +156,14 @@ st.markdown(
     .nav-link-selected {{
         border-bottom: 3px solid {BANNER_BG} !important;
     }}
+
+    div[class*="st-key-eval_slide_wrap"] {{
+        animation: fadeIn 0.35s ease-in;
+    }}
+    @keyframes fadeIn {{
+        from {{ opacity: 0; }}
+        to {{ opacity: 1; }}
+    }}
     </style>
     """,
     unsafe_allow_html=True,
@@ -598,105 +606,138 @@ elif page == "Model Evaluation":
     X_test, X_test_scaled, y_test = load_test_set()
     results_precomputed = load_results_table()
 
-    row1a, row1b = st.columns(2)
+    # ---- define each "slide" as a function so nothing renders until called ----
+    def slide_metrics():
+        c1, c2 = st.columns(2)
+        with c1:
+            with card("card_metrics_table"):
+                st.markdown("**Metrics on the held-out test set**")
+                st.dataframe(
+                    results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"),
+                    width="stretch",
+                )
+        with c2:
+            with card("card_metric_bar"):
+                st.markdown("**Compare models on a metric**")
+                metric_choice = st.selectbox(
+                    "metric_choice",
+                    ["Accuracy", "Precision", "Recall", "F1 Score", "ROC-AUC", "PR-AUC"],
+                    label_visibility="collapsed",
+                )
+                fig, ax = plt.subplots(figsize=(5, 4))
+                results_precomputed[metric_choice].sort_values().plot(kind="barh", ax=ax, color="#FBDA0C")
+                ax.set_xlabel(metric_choice)
+                fig.patch.set_alpha(0)
+                plt.tight_layout()
+                st.pyplot(fig)
 
-    with row1a:
-        with card("card_metrics_table"):
-            st.markdown("**Metrics on the held-out test set**")
-            st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"),
-                         width="stretch")
+    def slide_roc_confusion():
+        c1, c2 = st.columns(2)
+        with c1:
+            with card("card_roc"):
+                st.markdown("**ROC curves**")
+                fig, ax = plt.subplots(figsize=(5, 4))
+                for name, model in MODELS.items():
+                    X_te = X_test_scaled if name in SCALED_MODELS else X_test
+                    prob = model.predict_proba(X_te)[:, 1]
+                    fpr, tpr, _ = roc_curve(y_test, prob)
+                    auc_val = roc_auc_score(y_test, prob)
+                    ax.plot(fpr, tpr, label=f"{name.split(' ')[0]} ({auc_val:.2f})")
+                ax.plot([0, 1], [0, 1], linestyle="--", color="gray")
+                ax.set_xlabel("False Positive Rate")
+                ax.set_ylabel("True Positive Rate")
+                ax.legend(fontsize=6)
+                fig.patch.set_alpha(0)
+                plt.tight_layout()
+                st.pyplot(fig)
+        with c2:
+            with card("card_confusion"):
+                st.subheader("Confusion matrix")
+                cm_model_name = st.selectbox("Model", list(MODELS.keys()), key="cm_model")
+                model = MODELS[cm_model_name]
+                X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
+                y_pred = model.predict(X_te)
+                cm = confusion_matrix(y_test, y_pred)
+                fig, ax = plt.subplots(figsize=(4, 3.5))
+                sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=ax,
+                            xticklabels=["Normal", "Shill"], yticklabels=["Normal", "Shill"])
+                ax.set_xlabel("Predicted")
+                ax.set_ylabel("Actual")
+                fig.patch.set_alpha(0)
+                st.pyplot(fig)
 
-    with row1b:
-        with card("card_metric_bar"):
-            st.markdown("**Compare models on a metric**")
-            metric_choice = st.selectbox(
-                "metric_choice",
-                ["Accuracy", "Precision", "Recall", "F1 Score", "ROC-AUC", "PR-AUC"],
-                label_visibility="collapsed",
+    def slide_feature_importance():
+        c1, c2 = st.columns(2)
+        with c1:
+            with card("card_fi_rf"):
+                st.markdown("**Feature importance — Random Forest**")
+                rf_imp = pd.Series(
+                    MODELS["Random Forest"].feature_importances_,
+                    index=[f.replace("_", " ") for f in FEATURES]
+                ).sort_values()
+                fig, ax = plt.subplots(figsize=(5, 4))
+                rf_imp.plot(kind="barh", ax=ax, color="#55A868")
+                fig.patch.set_alpha(0)
+                st.pyplot(fig)
+        with c2:
+            with card("card_fi_gb"):
+                st.markdown("**Feature importance — Gradient Boosting**")
+                gb_imp = pd.Series(
+                    MODELS["Gradient Boosting"].feature_importances_,
+                    index=[f.replace("_", " ") for f in FEATURES]
+                ).sort_values()
+                fig, ax = plt.subplots(figsize=(5, 4))
+                gb_imp.plot(kind="barh", ax=ax, color="#0057AD")
+                fig.patch.set_alpha(0)
+                st.pyplot(fig)
+
+    def slide_limitations():
+        with card("card_limitations"):
+            st.subheader("Limitations")
+            st.markdown(
+                """
+                - **`Successive_Outbidding` dominates every model.** It alone accounts for
+                  roughly 55-68% of impurity-based importance and 70%+ of permutation
+                  importance in both tree models. The dataset is close to linearly
+                  separable on this one feature, so the ensembles' large accuracy gains
+                  over the baseline are modest in absolute terms even though they look
+                  large in relative terms.
+                - No external validation set from a separate auction platform was
+                  available. All evaluation is on a held-out split of the same source
+                  dataset, so generalisation to a different platform's bidding patterns
+                  is untested.
+                - Class imbalance (10.7% positive) means small changes in the
+                  classification threshold noticeably shift precision/recall trade-offs;
+                  the notebook explores this via precision-recall threshold scanning.
+                """
             )
-            fig, ax = plt.subplots(figsize=(5, 4))
-            results_precomputed[metric_choice].sort_values().plot(kind="barh", ax=ax, color="#FBDA0C")
-            ax.set_xlabel(metric_choice)
-            fig.patch.set_alpha(0)
-            plt.tight_layout()
-            st.pyplot(fig)
 
-    row2a, row2b = st.columns(2)
+    slides = [
+        ("Metrics & comparison", slide_metrics),
+        ("ROC & confusion matrix", slide_roc_confusion),
+        ("Feature importance", slide_feature_importance),
+        ("Limitations", slide_limitations),
+    ]
 
-    with row2a:
-        with card("card_roc"):
-            st.markdown("**ROC curves**")
-            fig, ax = plt.subplots(figsize=(5, 4))
-            for name, model in MODELS.items():
-                X_te = X_test_scaled if name in SCALED_MODELS else X_test
-                prob = model.predict_proba(X_te)[:, 1]
-                fpr, tpr, _ = roc_curve(y_test, prob)
-                auc_val = roc_auc_score(y_test, prob)
-                ax.plot(fpr, tpr, label=f"{name.split(' ')[0]} ({auc_val:.2f})")
-            ax.plot([0, 1], [0, 1], linestyle="--", color="gray")
-            ax.set_xlabel("False Positive Rate")
-            ax.set_ylabel("True Positive Rate")
-            ax.legend(fontsize=6)
-            fig.patch.set_alpha(0)
-            plt.tight_layout()
-            st.pyplot(fig)
+    if "eval_slide" not in st.session_state:
+        st.session_state.eval_slide = 0
 
-    with row2b:
-        with card("card_confusion"):
-            st.subheader("Confusion matrix")
-            cm_model_name = st.selectbox("Model", list(MODELS.keys()), key="cm_model")
-            model = MODELS[cm_model_name]
-            X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
-            y_pred = model.predict(X_te)
-            cm = confusion_matrix(y_test, y_pred)
-            fig, ax = plt.subplots(figsize=(4, 3.5))
-            sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=ax,
-                        xticklabels=["Normal", "Shill"], yticklabels=["Normal", "Shill"])
-            ax.set_xlabel("Predicted")
-            ax.set_ylabel("Actual")
-            fig.patch.set_alpha(0)
-            st.pyplot(fig)
-
-    fi1, fi2 = st.columns(2)
-    with fi1:
-        with card("card_fi_rf"):
-            st.markdown("**Feature importance — Random Forest**")
-            rf_imp = pd.Series(
-                MODELS["Random Forest"].feature_importances_,
-                index=[f.replace("_", " ") for f in FEATURES]
-            ).sort_values()
-            fig, ax = plt.subplots(figsize=(5, 4))
-            rf_imp.plot(kind="barh", ax=ax, color="#55A868")
-            fig.patch.set_alpha(0)
-            st.pyplot(fig)
-    with fi2:
-        with card("card_fi_gb"):
-            st.markdown("**Feature importance — Gradient Boosting**")
-            gb_imp = pd.Series(
-                MODELS["Gradient Boosting"].feature_importances_,
-                index=[f.replace("_", " ") for f in FEATURES]
-            ).sort_values()
-            fig, ax = plt.subplots(figsize=(5, 4))
-            gb_imp.plot(kind="barh", ax=ax, color="#0057AD")
-            fig.patch.set_alpha(0)
-            st.pyplot(fig)
-
-    with card("card_limitations"):
-        st.subheader("Limitations")
+    nav_l, nav_mid, nav_r = st.columns([1, 4, 1])
+    with nav_l:
+        if st.button("← Prev", disabled=st.session_state.eval_slide == 0):
+            st.session_state.eval_slide -= 1
+            st.rerun()
+    with nav_mid:
+        title, _ = slides[st.session_state.eval_slide]
         st.markdown(
-            """
-            - **`Successive_Outbidding` dominates every model.** It alone accounts for
-              roughly 55-68% of impurity-based importance and 70%+ of permutation
-              importance in both tree models. The dataset is close to linearly
-              separable on this one feature, so the ensembles' large accuracy gains
-              over the baseline are modest in absolute terms even though they look
-              large in relative terms.
-            - No external validation set from a separate auction platform was
-              available. All evaluation is on a held-out split of the same source
-              dataset, so generalisation to a different platform's bidding patterns
-              is untested.
-            - Class imbalance (10.7% positive) means small changes in the
-              classification threshold noticeably shift precision/recall trade-offs;
-              the notebook explores this via precision-recall threshold scanning.
-            """
+            f"<div style='text-align:center; font-weight:600;'>"
+            f"{title} &nbsp;·&nbsp; {st.session_state.eval_slide + 1} / {len(slides)}</div>",
+            unsafe_allow_html=True,
         )
+    with nav_r:
+        if st.button("Next →", disabled=st.session_state.eval_slide == len(slides) - 1):
+            st.session_state.eval_slide += 1
+            st.rerun()
+
+    with st.container(key="eval_slide_wrap"):
+        slides[st.session_state.eval_slide][1]()
