@@ -358,9 +358,9 @@ if page == "Overview":
                                 f'<div class="stat-label">Shill bidding rate</div>', unsafe_allow_html=True)
 
         with card("card_source"):
-            st.markdown("**About the data**")
+            st.markdown("**Data source**")
             st.markdown(
-                "UCI Shill Bidding Dataset — 6,321 bids across 807 online "
+                "UCI Shill Bidding Dataset with 6,321 bids across 807 online "
                 "auctions, 9 behavioural features per bid."
             )
 
