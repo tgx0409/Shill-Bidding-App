@@ -117,7 +117,7 @@ st.markdown(
 
     /* ---- outer tinted panel (wraps Problem / Remedies) ---- */
     div[class*="st-key-outer_"] {{
-        background-color: #FFFFFF;
+        background-color: #F5EFDF;
         border-radius: 22px;
         padding: 1.5rem 1.6rem 1.7rem 1.6rem;
         margin-bottom: 0rem;
@@ -172,6 +172,12 @@ st.markdown(
         -webkit-text-fill-color: transparent;
         color: transparent;
         filter: drop-shadow(0 1px 1px rgba(0,0,0,0.4));
+    }}
+
+    /* ---- feature importance cards: distinct tint ---- */
+    div[class*="st-key-card_fi_rf"],
+    div[class*="st-key-card_fi_gb"] {{
+        background-color: #F5EFDF;
     }}
 
     /* ---- best-model highlight card ---- */
@@ -401,7 +407,8 @@ st.markdown(
 
     /* top nav underline colour tweak */
     .nav-link-selected {{
-        border-bottom: 3px solid {BANNER_BG} !important;
+        border-bottom: 3px solid #D4A017 !important;
+        color: #D4A017 !important;
     }}
     </style>
     """,
@@ -621,9 +628,9 @@ page = option_menu(
         },
         "nav-link-selected": {
             "background-color": "transparent",
-            "color": "#1f1f1f",
+            "color": "#D4A017",
             "font-weight": "600",
-            "border-bottom": f"3px solid {BANNER_BG}",
+            "border-bottom": "3px solid #D4A017",
         },
     },
 )
