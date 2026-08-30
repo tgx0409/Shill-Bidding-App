@@ -134,9 +134,9 @@ st.markdown(
         height: 100%;
     }}
 
-    /* ---- small peach stat squares (Overview) ---- */
+    /* ---- small gold-gradient stat squares (Overview) ---- */
     div[class*="st-key-stat_"] {{
-        background-color: {STAT_BG};
+        background: linear-gradient(135deg, #8A5A1E, #D4A017, #F0C550);
         border-radius: 22px;
         padding: 0.7rem 0.6rem;
         margin-bottom: 0.6rem;
@@ -152,14 +152,14 @@ st.markdown(
     .stat-number {{
         font-size: 2.1rem;
         font-weight: 700;
-        color: {TEXT_DARK};
+        color: #FFFFFF;
         line-height: 1.05;
         text-align: center !important;
     }}
     .stat-label {{
         font-size: 0.95rem;
-        color: {TEXT_DARK};
-        opacity: 0.75;
+        color: #FFFFFF;
+        opacity: 0.9;
         margin-top: 0.15rem;
         text-align: center !important;
     }}
@@ -364,7 +364,7 @@ st.markdown(
 
     /* ---- section banner ---- */
     div[class*="st-key-section_"] {{
-        background-color: {BANNER_BG};
+        background: linear-gradient(to right, #8A5A1E, #D4A017, #F0C550);
         border-radius: 14px;
         padding: 0.6rem 2.2rem;
         margin: 0 0 0.6rem 0;
@@ -375,7 +375,7 @@ st.markdown(
     .section-banner-title {{
         font-size: 1.5rem;
         font-weight: 600;
-        color: {TEXT_DARK};
+        color: #FFFFFF;
     }}
     div[class*="st-key-section_"] [data-testid="stMarkdownContainer"] {{
         margin: 0 !important;
