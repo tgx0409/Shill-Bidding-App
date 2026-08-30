@@ -43,15 +43,17 @@ SHILL_BIDDING_BG = get_base64_image("assets/shill_bidding_bg.jpg")
 # ----------------------------------------------------------------------------
 # Palette (sampled from the concept mock-ups)
 # ----------------------------------------------------------------------------
-PAGE_BG = "#E8E0D0"        # warm parchment (used sparingly now, wood shows through)
-BANNER_BG = "#8B5E3C"      # warm caramel-brown, echoes the wood grain
-CARD_BG = "#FBF6EC"        # warm ivory, softer than stark white
-STAT_BG = "#F0DDB8"        # pale gold/champagne, echoes the coins
-TEXT_DARK = "#2E211A"      # deep espresso brown, warmer than pure black
+PAGE_BG = "#D9D9D9"
+BANNER_BG = "#B5ABA1"
+CARD_BG = "#F6F7F1"
+STAT_BG = "#F1EBDF"
+TEXT_DARK = "#1F1F1F"
 
-ACCENT_GREEN = "#6E9B5C"   # muted sage green
-ACCENT_ORANGE = "#D4922E"  # warm amber-gold
-ACCENT_RED = "#B5473A"     # deep brick red
+ACCENT_GREEN = "#6EBE44"
+ACCENT_ORANGE = "#F2A93B"
+ACCENT_RED = "#E8495C"
+
+
 
 # ----------------------------------------------------------------------------
 # Global CSS — page background, top nav, banners, cards, stat squares
@@ -60,9 +62,7 @@ st.markdown(
     f"""
     <style>
     [data-testid="stAppViewContainer"] {{
-        background-image: 
-            linear-gradient(rgba(20,12,6,0.55), rgba(20,12,6,0.55)),
-            url("data:image/jpeg;base64,{WOOD_BG}");
+        background-image: url("data:image/jpeg;base64,{WOOD_BG}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
