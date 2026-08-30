@@ -128,7 +128,7 @@ st.markdown(
 
     /* ---- white inner box inside an outer panel ---- */
     div[class*="st-key-inner_"] {{
-        background-color: {STAT_BG};
+        background-color: #FFFFFF;
         border-radius: 16px;
         padding: 1.1rem 1.3rem;
         height: 100%;
@@ -218,6 +218,7 @@ st.markdown(
         padding: 0.6rem 0.9rem;
         text-align: center;
         flex: 1;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.25);
     }}
     .best-model-chip .chip-number {{
         font-size: 2rem;
