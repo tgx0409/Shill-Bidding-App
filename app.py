@@ -276,11 +276,12 @@ st.markdown(
         font-size: 1.3rem !important;
     }}
 
-    /* ---- bigger font for dropdown menu options when open ---- */
-    ul[data-testid="stSelectboxVirtualDropdown"] li,
-    ul[data-testid="stSelectboxVirtualDropdown"] li *,
-    div[role="listbox"] li,
-    div[role="listbox"] li * {{
+    /* ---- bigger font for dropdown menu options when open (broad catch-all) ---- */
+    div[data-baseweb="popover"] * ,
+    div[data-baseweb="menu"] *,
+    ul[role="listbox"] *,
+    li[role="option"],
+    li[data-baseweb="menu-item"] {{
         font-size: 1.3rem !important;
     }}
 
