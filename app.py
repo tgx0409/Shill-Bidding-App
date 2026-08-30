@@ -723,9 +723,11 @@ elif page == "Explore the data":
 
     section_banner("section_feature_distributions", "Feature Distributions")
     with card("card_feature_select"):
+        st.markdown("##### Choose a feature")
         feature = st.selectbox(
             "Choose a feature", FEATURES,
-            format_func=lambda x: x.replace("_", " ")
+            format_func=lambda x: x.replace("_", " "),
+            label_visibility="collapsed",
         )
 
     col1, col2 = st.columns(2)
@@ -823,7 +825,11 @@ elif page == "Risk predictor":
                         predict_clicked = st.button("Predict risk", type="primary")
     with right:
         with card("card_gauge"):
-            model_name = st.selectbox("Model to use", list(MODELS.keys()))
+            st.markdown("##### Model to use")
+            model_name = st.selectbox(
+                "Model to use", list(MODELS.keys()),
+                label_visibility="collapsed",
+            )
 
             if predict_clicked:
                 X_input = pd.DataFrame([values])[FEATURES]
@@ -948,7 +954,11 @@ elif page == "Model Evaluation":
     with row2b:
         with card("card_confusion"):
             st.markdown("##### Confusion matrix")
-            cm_model_name = st.selectbox("Model", list(MODELS.keys()), key="cm_model")
+            st.markdown("###### Select model")
+            cm_model_name = st.selectbox(
+                "Model", list(MODELS.keys()), key="cm_model",
+                label_visibility="collapsed",
+            )
             model = MODELS[cm_model_name]
             X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
             y_pred = model.predict(X_te)
