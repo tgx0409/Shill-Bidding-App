@@ -269,6 +269,17 @@ st.markdown(
     }}
     }}
 
+    /* ---- bigger font for all selectbox dropdowns app-wide ---- */
+    div[data-baseweb="select"] {{
+        font-size: 1.15rem !important;
+    }}
+    div[data-baseweb="select"] * {{
+        font-size: 1.15rem !important;
+    }}
+    ul[data-testid="stSelectboxVirtualDropdown"] li {{
+        font-size: 1.15rem !important;
+    }}
+
     /* ---- risk prediction pill + legend ---- */
     div[class*="st-key-risk_pill_wrap"] {{
         border-radius: 16px;
