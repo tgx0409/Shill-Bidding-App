@@ -666,7 +666,7 @@ elif page == "Model Evaluation":
     row1a, row1b = st.columns([1.3, 1])
     with row1a:
         with card("card_metrics_table"):
-            st.markdown("**Metrics on the held-out test set**")
+            st.markdown("##### Model performance")
             st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"),
                          width="stretch")
         with card("card_best_model"):
@@ -698,7 +698,7 @@ elif page == "Model Evaluation":
             )
     with row1b:
         with card("card_metric_bar"):
-            st.markdown("**Compare models on a metric**")
+            st.markdown("##### Compare models on a metric")
             metric_choice = st.selectbox(
                 "metric_choice",
                 ["Accuracy", "Precision", "Recall", "F1 Score", "ROC-AUC", "PR-AUC"],
@@ -715,7 +715,7 @@ elif page == "Model Evaluation":
     row2a, row2b = st.columns([1.4, 1])
     with row2a:
         with card("card_roc"):
-            st.markdown("**ROC curves**")
+            st.markdown("##### ROC curves")
             fig, ax = plt.subplots(figsize=(5.5, 4))
             for name, model in MODELS.items():
                 X_te = X_test_scaled if name in SCALED_MODELS else X_test
@@ -732,7 +732,7 @@ elif page == "Model Evaluation":
             st.pyplot(fig)
     with row2b:
         with card("card_confusion"):
-            st.markdown("**Confusion matrix**")
+            st.markdown("##### Confusion matrix")
             cm_model_name = st.selectbox("Model", list(MODELS.keys()), key="cm_model")
             model = MODELS[cm_model_name]
             X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
