@@ -148,7 +148,7 @@ st.markdown(
     /* ---- best-model highlight card ---- */
     div[class*="st-key-card_best_model"] {{
         border-left: 6px solid {ACCENT_GREEN};
-        min-height: 260px;
+        min-height: 230px;
     }}
     .best-model-badge {{
         display: inline-block;
