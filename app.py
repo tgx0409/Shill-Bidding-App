@@ -1011,19 +1011,13 @@ elif page == "Model Evaluation":
                 st.markdown(
                     "`Successive_Outbidding` alone accounts for roughly 55-68% of "
                     "impurity-based importance and 70%+ of permutation importance in "
-                    "both tree models. The dataset is close to linearly separable on "
-                    "this one feature, so the ensembles' large accuracy gains over the "
-                    "baseline are modest in absolute terms even though they look large "
-                    "in relative terms."
+                    "both tree models."
                 )
         with l2:
             with st.container(key="inner_limitation2"):
                 st.markdown("**2. No external validation**")
                 st.markdown(
                     "No validation set from a separate auction platform was available. "
-                    "All evaluation is on a held-out split of the same source dataset, "
-                    "so generalisation to a different platform's bidding patterns is "
-                    "untested."
                 )
         with l3:
             with st.container(key="inner_limitation3"):
@@ -1031,7 +1025,6 @@ elif page == "Model Evaluation":
                 st.markdown(
                     "Class imbalance (10.7% positive) means small changes in the "
                     "classification threshold noticeably shift precision/recall "
-                    "trade-offs; the notebook explores this via precision-recall "
-                    "threshold scanning."
+                    "trade-offs"
                 )
 
