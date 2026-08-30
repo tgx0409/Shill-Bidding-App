@@ -106,7 +106,7 @@ st.markdown(
 
     /* ---- outer tinted panel (wraps Problem / Remedies) ---- */
     div[class*="st-key-outer_"] {{
-        background-color: {STAT_BG};
+        background-color: #FFFFFF;
         border-radius: 22px;
         padding: 1.5rem 1.6rem 1.7rem 1.6rem;
         margin-bottom: 0rem;
@@ -117,7 +117,7 @@ st.markdown(
 
     /* ---- white inner box inside an outer panel ---- */
     div[class*="st-key-inner_"] {{
-        background-color: #FFFFFF;
+        background-color: {STAT_BG};
         border-radius: 16px;
         padding: 1.1rem 1.3rem;
         height: 100%;
@@ -1002,22 +1002,36 @@ elif page == "Model Evaluation":
 
     # ---- row 4: limitations ----
     section_banner("section_limitations", "Limitations")
-    with card("card_limitations"):
-        st.markdown(
-            """
-            - **`Successive_Outbidding` dominates every model.** It alone accounts for
-              roughly 55-68% of impurity-based importance and 70%+ of permutation
-              importance in both tree models. The dataset is close to linearly
-              separable on this one feature, so the ensembles' large accuracy gains
-              over the baseline are modest in absolute terms even though they look
-              large in relative terms.
-            - No external validation set from a separate auction platform was
-              available. All evaluation is on a held-out split of the same source
-              dataset, so generalisation to a different platform's bidding patterns
-              is untested.
-            - Class imbalance (10.7% positive) means small changes in the
-              classification threshold noticeably shift precision/recall trade-offs;
-              the notebook explores this via precision-recall threshold scanning.
-            """
-        )
+    with st.container(key="outer_limitations"):
+        st.markdown("##### Limitations")
+        l1, l2, l3 = st.columns(3)
+        with l1:
+            with st.container(key="inner_limitation1"):
+                st.markdown("**1. Feature dominance**")
+                st.markdown(
+                    "`Successive_Outbidding` alone accounts for roughly 55-68% of "
+                    "impurity-based importance and 70%+ of permutation importance in "
+                    "both tree models. The dataset is close to linearly separable on "
+                    "this one feature, so the ensembles' large accuracy gains over the "
+                    "baseline are modest in absolute terms even though they look large "
+                    "in relative terms."
+                )
+        with l2:
+            with st.container(key="inner_limitation2"):
+                st.markdown("**2. No external validation**")
+                st.markdown(
+                    "No validation set from a separate auction platform was available. "
+                    "All evaluation is on a held-out split of the same source dataset, "
+                    "so generalisation to a different platform's bidding patterns is "
+                    "untested."
+                )
+        with l3:
+            with st.container(key="inner_limitation3"):
+                st.markdown("**3. Threshold sensitivity**")
+                st.markdown(
+                    "Class imbalance (10.7% positive) means small changes in the "
+                    "classification threshold noticeably shift precision/recall "
+                    "trade-offs; the notebook explores this via precision-recall "
+                    "threshold scanning."
+                )
 
