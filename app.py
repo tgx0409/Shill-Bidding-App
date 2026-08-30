@@ -733,12 +733,7 @@ elif page == "Explore the data":
                     annot_kws={"size": 8}, ax=ax)
         fig.patch.set_alpha(0)
         st.pyplot(fig)
-        st.caption(
-            "`Successive_Outbidding` shows the strongest correlation with `Class` "
-            "by a wide margin. This is confirmed by every model's feature "
-            "importance ranking on the Model Evaluation page."
-        )
-
+    
 # ----------------------------------------------------------------------------
 # PAGE: Risk predictor
 # ----------------------------------------------------------------------------
