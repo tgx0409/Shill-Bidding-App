@@ -162,7 +162,7 @@ st.markdown(
         margin-bottom: 0.6rem;
     }}
     .best-model-title {{
-        font-size: 1.3rem;
+        font-size: 2rem;
         font-weight: 700;
         color: {TEXT_DARK};
         margin-bottom: 0.4rem;
@@ -660,7 +660,7 @@ elif page == "Model Evaluation":
             st.markdown(
                 """
                 <div class="best-model-badge">BEST OVERALL MODEL</div>
-                <div class="best-model-title">🏆 Random Forest</div>
+                <div class="best-model-title">Random Forest</div>
                 """,
                 unsafe_allow_html=True,
             )
