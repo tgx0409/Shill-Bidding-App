@@ -654,14 +654,10 @@ elif page == "Model Evaluation":
         with card("card_best_model"):
             st.markdown(
                 """
-                <div class="best-model-badge">TOP PERFORMER</div>
+                <div class="best-model-badge">BEST OVERALL MODEL</div>
                 <div class="best-model-title">🏆 Random Forest</div>
                 """,
                 unsafe_allow_html=True,
-            )
-            st.markdown(
-                "The strongest all-round model on the held-out test set, "
-                "balancing raw accuracy with reliability under class imbalance."
             )
             st.markdown(
                 """
