@@ -982,7 +982,7 @@ elif page == "Model Evaluation":
     fi1, fi2 = st.columns(2)
     with fi1:
         with card("card_fi_rf"):
-            st.markdown("**Random Forest**")
+            st.markdown("##### Random Forest")
             rf_imp = pd.Series(
                 MODELS["Random Forest"].feature_importances_,
                 index=[f.replace("_", " ") for f in FEATURES]
@@ -993,7 +993,7 @@ elif page == "Model Evaluation":
             st.pyplot(fig)
     with fi2:
         with card("card_fi_gb"):
-            st.markdown("**Gradient Boosting**")
+            st.markdown("##### Gradient Boosting")
             gb_imp = pd.Series(
                 MODELS["Gradient Boosting"].feature_importances_,
                 index=[f.replace("_", " ") for f in FEATURES]
