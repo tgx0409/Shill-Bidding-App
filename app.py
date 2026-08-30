@@ -366,6 +366,12 @@ st.markdown(
         font-weight: 600;
         color: {TEXT_DARK};
     }}
+    div[class*="st-key-section_"] [data-testid="stMarkdownContainer"] {{
+        margin: 0 !important;
+    }}
+    div[class*="st-key-section_"] [data-testid="stMarkdownContainer"] p {{
+        margin: 0 !important;
+    }}
 
     /* top nav underline colour tweak */
     .nav-link-selected {{
