@@ -43,15 +43,17 @@ SHILL_BIDDING_BG = get_base64_image("assets/shill_bidding_bg.jpg")
 # ----------------------------------------------------------------------------
 # Palette (sampled from the concept mock-ups)
 # ----------------------------------------------------------------------------
-PAGE_BG = "#E9DBBD"        # light gold/cream backdrop
-BANNER_BG = "#A08C5B"      # mid gold (used for nav underline)
-CARD_BG = "#F5EFE0"        # soft cream, lighter than PAGE_BG
-STAT_BG = "#CBB682"        # warm gold
-TEXT_DARK = "#181510"      # near-black, from the palette
+PAGE_BG = "#D9D9D9"
+BANNER_BG = "#B5ABA1"
+CARD_BG = "#F6F7F1"
+STAT_BG = "#F1EBDF"
+TEXT_DARK = "#1F1F1F"
 
 ACCENT_GREEN = "#6EBE44"
 ACCENT_ORANGE = "#F2A93B"
 ACCENT_RED = "#E8495C"
+
+
 
 # ----------------------------------------------------------------------------
 # Global CSS — page background, top nav, banners, cards, stat squares
@@ -60,7 +62,11 @@ st.markdown(
     f"""
     <style>
     [data-testid="stAppViewContainer"] {{
-        background-color: {PAGE_BG};
+        background-image: url("data:image/jpeg;base64,{WOOD_BG}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }}
     [data-testid="stHeader"] {{
         background-color: #FFFFFF;
@@ -358,7 +364,7 @@ st.markdown(
 
     /* ---- section banner ---- */
     div[class*="st-key-section_"] {{
-        background: linear-gradient(to right, #785F37, #CBB682);
+        background-color: {BANNER_BG};
         border-radius: 14px;
         padding: 0.6rem 2.2rem;
         margin: 0 0 0.6rem 0;
@@ -369,7 +375,7 @@ st.markdown(
     .section-banner-title {{
         font-size: 1.5rem;
         font-weight: 600;
-        color: #FFFFFF;
+        color: {TEXT_DARK};
     }}
     div[class*="st-key-section_"] [data-testid="stMarkdownContainer"] {{
         margin: 0 !important;
