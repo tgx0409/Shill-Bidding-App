@@ -156,7 +156,7 @@ st.markdown(
     /* ---- best-model highlight card ---- */
     div[class*="st-key-card_best_model"] {{
         border-left: 6px solid {ACCENT_GREEN};
-        min-height: 250px;
+        min-height: 255px;
         padding-bottom: 0rem;
         background-image: url("data:image/png;base64,{TROPHY_BG}");
         background-repeat: no-repeat;
