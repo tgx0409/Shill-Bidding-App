@@ -274,10 +274,10 @@ st.markdown(
     div[class*="st-key-card_gauge"] {{
         height: 100%;
     }}
-    div[class*="st-key-card_limitation1"],
-    div[class*="st-key-card_limitation2"],
-    div[class*="st-key-card_limitation3"] {{
-        min-height: 30px;
+    div[data-testid="stVerticalBlockBorderWrapper"]:has(div[class*="st-key-card_limitation1"]),
+    div[data-testid="stVerticalBlockBorderWrapper"]:has(div[class*="st-key-card_limitation2"]),
+    div[data-testid="stVerticalBlockBorderWrapper"]:has(div[class*="st-key-card_limitation3"]) {{
+        min-height: 180px !important;
     }}
     div[class*="st-key-card_gauge"] div[data-testid="stVerticalBlock"] {{
         gap: 0.3rem !important;
