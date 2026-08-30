@@ -622,7 +622,7 @@ elif page == "Risk predictor":
         with card("card_model_choice"):
             model_name = st.selectbox("Model to use", list(MODELS.keys()))
 
-                with card("card_sliders"):
+        with card("card_sliders"):
             st.markdown("##### Bid features")
             fc1, fc2 = st.columns(2)
             cols_per_col = [FEATURES[0:5], FEATURES[5:9]]
