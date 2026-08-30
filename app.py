@@ -280,6 +280,9 @@ st.markdown(
     div[class*="st-key-card_gauge"] div[data-testid="stElementContainer"] {{
         margin-bottom: 0 !important;
     }}
+    div[class*="st-key-card_limitation2"] {{
+        min-height: 200px !important;
+    }}
 
     /* ---- bigger font for all selectbox dropdowns app-wide (closed state) ---- */
     div[data-testid="stSelectbox"] * {{
