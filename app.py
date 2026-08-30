@@ -161,7 +161,7 @@ st.markdown(
         background-image: url("data:image/png;base64,{TROPHY_BG}");
         background-repeat: no-repeat;
         background-position: center;
-        background-size: 900px auto;
+        background-size: 850px auto;
     }}
     .best-model-badge {{
         display: inline-block;
