@@ -102,7 +102,7 @@ st.markdown(
     /* ---- generic cream card ---- */
     div[class*="st-key-card_"] {{
         background-color: {CARD_BG};
-        background-image: radial-gradient(circle at bottom right, rgba(0,0,0,0.06), transparent 60%);
+        background-image: radial-gradient(circle at bottom right, rgba(0,0,0,0.06), transparent 90%);
         border-radius: 22px;
         padding: 1.5rem 1.7rem;
         margin-bottom: 1.2rem;
@@ -119,7 +119,7 @@ st.markdown(
     /* ---- outer tinted panel (wraps Problem / Remedies) ---- */
     div[class*="st-key-outer_"] {{
         background-color: #FFFFFF;
-        background-image: radial-gradient(circle at bottom right, rgba(0,0,0,0.06), transparent 60%);
+        background-image: radial-gradient(circle at bottom right, rgba(0,0,0,0.06), transparent 90%);
         border-radius: 22px;
         padding: 1.5rem 1.6rem 1.7rem 1.6rem;
         margin-bottom: 0rem;
