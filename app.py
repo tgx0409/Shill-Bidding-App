@@ -37,6 +37,7 @@ def get_base64_image(path):
         return base64.b64encode(f.read()).decode()
 
 TROPHY_BG = get_base64_image("assets/trophy_bg.png")
+APP_BG = get_base64_image("assets/shill_bidding_bg.jpg")
 
 # ----------------------------------------------------------------------------
 # Palette (sampled from the concept mock-ups)
@@ -57,7 +58,11 @@ st.markdown(
     f"""
     <style>
     [data-testid="stAppViewContainer"] {{
-        background-color: {PAGE_BG};
+        background-image: url("data:image/jpeg;base64,{APP_BG}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }}
     [data-testid="stHeader"] {{
         background-color: #FFFFFF;
