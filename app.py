@@ -286,6 +286,14 @@ st.markdown(
         font-size: 1.2rem !important;
     }}
 
+    /* ---- bigger font for dropdown menu options when open ---- */
+    ul[data-testid="stSelectboxVirtualDropdown"] li,
+    ul[data-testid="stSelectboxVirtualDropdown"] li *,
+    div[role="listbox"] li,
+    div[role="listbox"] li * {{
+        font-size: 1.2rem !important;
+    }}
+
     /* ---- risk prediction pill + legend ---- */
     div[class*="st-key-risk_pill_wrap"] {{
         border-radius: 16px;
