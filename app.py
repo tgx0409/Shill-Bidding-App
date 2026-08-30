@@ -247,6 +247,14 @@ st.markdown(
     div[class*="st-key-card_gauge"] [data-testid="stMetricLabel"] {{
         font-size: 1.1rem !important;
     }}
+    div[class*="st-key-card_sliders"] .stSlider,
+    div[class*="st-key-card_sliders"] .stRadio,
+    div[class*="st-key-card_sliders"] .stSelectSlider {{
+        margin-bottom: 1.4rem;
+    }}
+    div[class*="st-key-card_sliders"] div[data-testid="stColumn"] {{
+        padding: 0 1rem;
+    }}
 
     /* top nav underline colour tweak */
     .nav-link-selected {{
@@ -668,7 +676,6 @@ elif page == "Risk predictor":
                             choice = st.radio(
                                 feat.replace("_", " "),
                                 options=["Never", "Once", "Repeatedly"],
-                                horizontal=True,
                                 help=FEATURE_HELP.get(feat),
                             )
                             values[feat] = {"Never": 0.0, "Once": 0.5, "Repeatedly": 1.0}[choice]
@@ -677,7 +684,6 @@ elif page == "Risk predictor":
                             choice = st.radio(
                                 feat.replace("_", " "),
                                 options=["Below average", "About average", "Above average"],
-                                horizontal=True,
                                 help=FEATURE_HELP.get(feat),
                             )
                             values[feat] = {
