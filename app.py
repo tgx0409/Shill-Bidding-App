@@ -739,7 +739,7 @@ elif page == "Risk predictor":
                         predict_clicked = st.button("Predict risk", type="primary")
     with right:
         with card("card_gauge"):
-            model_name = st.selectbox("Model to use", list(MODELS.keys()))
+            model_name = st.selectbox("## Model to use", list(MODELS.keys()))
 
             if predict_clicked:
                 X_input = pd.DataFrame([values])[FEATURES]
