@@ -951,50 +951,50 @@ elif page == "Model Evaluation":
             fig.patch.set_alpha(0)
             st.pyplot(fig)
 
-    # ---- row 3: feature importance, grouped under one outer panel ----
-        section_banner("section_feature_importance", "Feature Importance")
-        fi1, fi2 = st.columns(2)
-        with fi1:
-            with st.container(key="inner_fi_rf"):
-                st.markdown("**Random Forest**")
-                rf_imp = pd.Series(
-                    MODELS["Random Forest"].feature_importances_,
-                    index=[f.replace("_", " ") for f in FEATURES]
-                ).sort_values()
-                fig, ax = plt.subplots(figsize=(5, 4))
-                rf_imp.plot(kind="barh", ax=ax, color="#55A868")
-                fig.patch.set_alpha(0)
-                st.pyplot(fig)
-        with fi2:
-            with st.container(key="inner_fi_gb"):
-                st.markdown("**Gradient Boosting**")
-                gb_imp = pd.Series(
-                    MODELS["Gradient Boosting"].feature_importances_,
-                    index=[f.replace("_", " ") for f in FEATURES]
-                ).sort_values()
-                fig, ax = plt.subplots(figsize=(5, 4))
-                gb_imp.plot(kind="barh", ax=ax, color="#0057AD")
-                fig.patch.set_alpha(0)
-                st.pyplot(fig)
+    # ---- row 3: feature importance ----
+    section_banner("section_feature_importance", "Feature Importance")
+    fi1, fi2 = st.columns(2)
+    with fi1:
+        with card("card_fi_rf"):
+            st.markdown("**Random Forest**")
+            rf_imp = pd.Series(
+                MODELS["Random Forest"].feature_importances_,
+                index=[f.replace("_", " ") for f in FEATURES]
+            ).sort_values()
+            fig, ax = plt.subplots(figsize=(5, 4))
+            rf_imp.plot(kind="barh", ax=ax, color="#55A868")
+            fig.patch.set_alpha(0)
+            st.pyplot(fig)
+    with fi2:
+        with card("card_fi_gb"):
+            st.markdown("**Gradient Boosting**")
+            gb_imp = pd.Series(
+                MODELS["Gradient Boosting"].feature_importances_,
+                index=[f.replace("_", " ") for f in FEATURES]
+            ).sort_values()
+            fig, ax = plt.subplots(figsize=(5, 4))
+            gb_imp.plot(kind="barh", ax=ax, color="#0057AD")
+            fig.patch.set_alpha(0)
+            st.pyplot(fig)
 
-    # ---- row 4: limitations, matching outer/inner panel style ----
-        section_banner("section_limitations", "Limitations")
-        with st.container(key="inner_limitations"):
-            st.markdown(
-                """
-                - **`Successive_Outbidding` dominates every model.** It alone accounts for
-                  roughly 55-68% of impurity-based importance and 70%+ of permutation
-                  importance in both tree models. The dataset is close to linearly
-                  separable on this one feature, so the ensembles' large accuracy gains
-                  over the baseline are modest in absolute terms even though they look
-                  large in relative terms.
-                - No external validation set from a separate auction platform was
-                  available. All evaluation is on a held-out split of the same source
-                  dataset, so generalisation to a different platform's bidding patterns
-                  is untested.
-                - Class imbalance (10.7% positive) means small changes in the
-                  classification threshold noticeably shift precision/recall trade-offs;
-                  the notebook explores this via precision-recall threshold scanning.
-                """
-            )
+    # ---- row 4: limitations ----
+    section_banner("section_limitations", "Limitations")
+    with card("card_limitations"):
+        st.markdown(
+            """
+            - **`Successive_Outbidding` dominates every model.** It alone accounts for
+              roughly 55-68% of impurity-based importance and 70%+ of permutation
+              importance in both tree models. The dataset is close to linearly
+              separable on this one feature, so the ensembles' large accuracy gains
+              over the baseline are modest in absolute terms even though they look
+              large in relative terms.
+            - No external validation set from a separate auction platform was
+              available. All evaluation is on a held-out split of the same source
+              dataset, so generalisation to a different platform's bidding patterns
+              is untested.
+            - Class imbalance (10.7% positive) means small changes in the
+              classification threshold noticeably shift precision/recall trade-offs;
+              the notebook explores this via precision-recall threshold scanning.
+            """
+        )
 
