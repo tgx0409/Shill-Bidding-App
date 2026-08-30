@@ -949,7 +949,6 @@ elif page == "Model Evaluation":
             st.pyplot(fig)
 
     # ---- row 3: feature importance, grouped under one outer panel ----
-    with st.container(key="outer_feat_importance"):
         section_banner("section_feature_importance", "Feature Importance")
         fi1, fi2 = st.columns(2)
         with fi1:
@@ -976,7 +975,6 @@ elif page == "Model Evaluation":
                 st.pyplot(fig)
 
     # ---- row 4: limitations, matching outer/inner panel style ----
-    with st.container(key="outer_limitations"):
         section_banner("section_limitations", "Limitations")
         with st.container(key="inner_limitations"):
             st.markdown(
