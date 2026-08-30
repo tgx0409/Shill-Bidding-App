@@ -408,7 +408,7 @@ elif page == "Explore the data":
     df = load_clean_data()
 
     st.markdown("##### Target Imbalance")
-    col1, col2 = st.columns([1, 2])
+    col1, col2, col3 = st.columns([1, 1.3, 1.3])
     with col1:
         with card("card_class_balance"):
             st.markdown("**Class distribution**")
@@ -420,6 +420,7 @@ elif page == "Explore the data":
             ax.set_ylabel("Count")
             fig.patch.set_alpha(0)
             st.pyplot(fig)
+
     with col2:
         with card("card_class_balance_why"):
             st.markdown("**Problem**")
@@ -431,6 +432,7 @@ elif page == "Explore the data":
                 """
             )
 
+    with col3:
         st.markdown("##### Remedies")
 
         with card("card_remedy_weighting"):
