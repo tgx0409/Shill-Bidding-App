@@ -598,14 +598,13 @@ elif page == "Model Evaluation":
     X_test, X_test_scaled, y_test = load_test_set()
     results_precomputed = load_results_table()
 
-    row1a, row1b = st.columns(2)
-
+    # ---- row 1: metrics table + metric comparison bar ----
+    row1a, row1b = st.columns([1.3, 1])
     with row1a:
         with card("card_metrics_table"):
             st.markdown("**Metrics on the held-out test set**")
             st.dataframe(results_precomputed.style.format("{:.4f}").highlight_max(axis=0, color="#FCEF9A"),
                          width="stretch")
-
     with row1b:
         with card("card_metric_bar"):
             st.markdown("**Compare models on a metric**")
@@ -621,12 +620,12 @@ elif page == "Model Evaluation":
             plt.tight_layout()
             st.pyplot(fig)
 
-    row2a, row2b = st.columns(2)
-
+    # ---- row 2: ROC curve (wider) + confusion matrix (narrower) ----
+    row2a, row2b = st.columns([1.4, 1])
     with row2a:
         with card("card_roc"):
             st.markdown("**ROC curves**")
-            fig, ax = plt.subplots(figsize=(5, 4))
+            fig, ax = plt.subplots(figsize=(5.5, 4))
             for name, model in MODELS.items():
                 X_te = X_test_scaled if name in SCALED_MODELS else X_test
                 prob = model.predict_proba(X_te)[:, 1]
@@ -640,10 +639,9 @@ elif page == "Model Evaluation":
             fig.patch.set_alpha(0)
             plt.tight_layout()
             st.pyplot(fig)
-
     with row2b:
         with card("card_confusion"):
-            st.subheader("Confusion matrix")
+            st.markdown("**Confusion matrix**")
             cm_model_name = st.selectbox("Model", list(MODELS.keys()), key="cm_model")
             model = MODELS[cm_model_name]
             X_te = X_test_scaled if cm_model_name in SCALED_MODELS else X_test
@@ -657,48 +655,52 @@ elif page == "Model Evaluation":
             fig.patch.set_alpha(0)
             st.pyplot(fig)
 
-    fi1, fi2 = st.columns(2)
-    with fi1:
-        with card("card_fi_rf"):
-            st.markdown("**Feature importance — Random Forest**")
-            rf_imp = pd.Series(
-                MODELS["Random Forest"].feature_importances_,
-                index=[f.replace("_", " ") for f in FEATURES]
-            ).sort_values()
-            fig, ax = plt.subplots(figsize=(5, 4))
-            rf_imp.plot(kind="barh", ax=ax, color="#55A868")
-            fig.patch.set_alpha(0)
-            st.pyplot(fig)
-    with fi2:
-        with card("card_fi_gb"):
-            st.markdown("**Feature importance — Gradient Boosting**")
-            gb_imp = pd.Series(
-                MODELS["Gradient Boosting"].feature_importances_,
-                index=[f.replace("_", " ") for f in FEATURES]
-            ).sort_values()
-            fig, ax = plt.subplots(figsize=(5, 4))
-            gb_imp.plot(kind="barh", ax=ax, color="#0057AD")
-            fig.patch.set_alpha(0)
-            st.pyplot(fig)
+    # ---- row 3: feature importance, grouped under one outer panel ----
+    with st.container(key="outer_feat_importance"):
+        st.markdown("##### Feature importance")
+        fi1, fi2 = st.columns(2)
+        with fi1:
+            with st.container(key="inner_fi_rf"):
+                st.markdown("**Random Forest**")
+                rf_imp = pd.Series(
+                    MODELS["Random Forest"].feature_importances_,
+                    index=[f.replace("_", " ") for f in FEATURES]
+                ).sort_values()
+                fig, ax = plt.subplots(figsize=(5, 4))
+                rf_imp.plot(kind="barh", ax=ax, color="#55A868")
+                fig.patch.set_alpha(0)
+                st.pyplot(fig)
+        with fi2:
+            with st.container(key="inner_fi_gb"):
+                st.markdown("**Gradient Boosting**")
+                gb_imp = pd.Series(
+                    MODELS["Gradient Boosting"].feature_importances_,
+                    index=[f.replace("_", " ") for f in FEATURES]
+                ).sort_values()
+                fig, ax = plt.subplots(figsize=(5, 4))
+                gb_imp.plot(kind="barh", ax=ax, color="#0057AD")
+                fig.patch.set_alpha(0)
+                st.pyplot(fig)
 
-    with card("card_limitations"):
-        st.subheader("Limitations")
-        st.markdown(
-            """
-            - **`Successive_Outbidding` dominates every model.** It alone accounts for
-              roughly 55-68% of impurity-based importance and 70%+ of permutation
-              importance in both tree models. The dataset is close to linearly
-              separable on this one feature, so the ensembles' large accuracy gains
-              over the baseline are modest in absolute terms even though they look
-              large in relative terms.
-            - No external validation set from a separate auction platform was
-              available. All evaluation is on a held-out split of the same source
-              dataset, so generalisation to a different platform's bidding patterns
-              is untested.
-            - Class imbalance (10.7% positive) means small changes in the
-              classification threshold noticeably shift precision/recall trade-offs;
-              the notebook explores this via precision-recall threshold scanning.
-            """
-        )
-
+    # ---- row 4: limitations, matching outer/inner panel style ----
+    with st.container(key="outer_limitations"):
+        st.markdown("##### Limitations")
+        with st.container(key="inner_limitations"):
+            st.markdown(
+                """
+                - **`Successive_Outbidding` dominates every model.** It alone accounts for
+                  roughly 55-68% of impurity-based importance and 70%+ of permutation
+                  importance in both tree models. The dataset is close to linearly
+                  separable on this one feature, so the ensembles' large accuracy gains
+                  over the baseline are modest in absolute terms even though they look
+                  large in relative terms.
+                - No external validation set from a separate auction platform was
+                  available. All evaluation is on a held-out split of the same source
+                  dataset, so generalisation to a different platform's bidding patterns
+                  is untested.
+                - Class imbalance (10.7% positive) means small changes in the
+                  classification threshold noticeably shift precision/recall trade-offs;
+                  the notebook explores this via precision-recall threshold scanning.
+                """
+            )
 
