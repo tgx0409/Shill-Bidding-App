@@ -723,7 +723,7 @@ elif page == "Risk predictor":
                             elif values[feat] > r["median"] * 1.33:
                                 st.caption("→ High")
                     if col_container is fc2:
-                        spacer, btn_col = st.columns([2, 1])
+                        spacer, btn_col = st.columns([1, 1])
                         with btn_col:
                             predict_clicked = st.button("Predict risk", type="primary")
 
