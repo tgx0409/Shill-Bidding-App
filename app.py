@@ -281,7 +281,7 @@ st.markdown(
         margin-bottom: 0 !important;
     }}
     div[class*="st-key-card_limitation2"] {{
-        min-height: 180px !important;
+        min-height: 170px !important;
     }}
 
     /* ---- bigger font for all selectbox dropdowns app-wide (closed state) ---- */
