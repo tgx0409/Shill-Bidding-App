@@ -267,7 +267,6 @@ st.markdown(
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }}
-    }}
 
     /* ---- bigger font for all selectbox dropdowns app-wide ---- */
     div[data-baseweb="select"] {{
