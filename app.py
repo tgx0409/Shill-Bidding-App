@@ -271,12 +271,12 @@ st.markdown(
         margin-bottom: 0.4rem;
     }}
     div[class*="st-key-card_sliders"],
-    div[class*="st-key-card_gauge"] {
+    div[class*="st-key-card_gauge"] {{
         height: 100%;
-    }
-    div[class*="st-key-card_gauge"] div[data-testid="stVerticalBlock"] {
+    }}
+    div[class*="st-key-card_gauge"] div[data-testid="stVerticalBlock"] {{
         gap: 0.5rem !important;
-    }
+    }}
 
     /* ---- bigger font for all selectbox dropdowns app-wide (closed state) ---- */
     div[data-testid="stSelectbox"] * {{
