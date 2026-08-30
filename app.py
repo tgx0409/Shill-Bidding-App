@@ -73,7 +73,7 @@ st.markdown(
         background-color: {BANNER_BG};
         border-radius: 26px;
         padding: 1.6rem 2.2rem 1.8rem 2.2rem;
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.5rem;
     }}
     .banner-eyebrow {{
         font-size: 0.95rem;
