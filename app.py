@@ -348,39 +348,51 @@ RANGES = RANGE_DATA["ranges"]
 SCALED_MODELS = {"Logistic Regression (baseline)", "SVM (Poly kernel)"}
 
 FEATURE_HELP = {
-    "Bidder_Tendency": "Normalised tendency of a bidder to participate in many auctions run by the same seller.",
-    "Bidding_Ratio": "Ratio of a bidder's bids to the total bids placed in the auction.",
-    "Successive_Outbidding": "Whether the bidder successively outbid themself / a partner (0, 0.5, or 1).",
-    "Last_Bidding": "Normalised time of the bidder's last bid before auction close.",
-    "Auction_Bids": "Normalised number of bids placed in the auction.",
-    "Starting_Price_Average": "Normalised ratio of the starting price to the average starting price.",
-    "Early_Bidding": "Normalised time of the bidder's first bid.",
-    "Winning_Ratio": "Ratio of auctions the bidder has won historically.",
-    "Auction_Duration": "Duration of the auction in days.",
-}
-
-# Plain-language summary shown *inside* the Risk Predictor cards, so a
-# non-technical reader can tell what they're dragging and why it matters.
-FEATURE_SUMMARY = {
-    "Bidder_Tendency": "How often this bidder shows up across many auctions from the *same* seller. "
-                        "0 = spread out across different sellers. 1 = keeps returning to one seller — "
-                        "a classic shill pattern.",
-    "Bidding_Ratio": "Share of all the bids in this auction that came from this one bidder. "
-                      "0 = barely bid. 1 = placed almost every bid in the auction (suspicious).",
-    "Successive_Outbidding": "Did this bidder outbid themself or a partner back-to-back? "
-                              "0 = never, 0.5 = once, 1 = repeatedly. The single strongest signal in the whole model.",
-    "Last_Bidding": "How close to the auction's close this bidder's *last* bid landed. "
-                     "Near 1 = bid right at the very end, which can be used to push the price up late.",
-    "Auction_Bids": "How many bids the auction attracted overall, normalised. "
-                     "Higher can mean genuine interest, or repeated shill activity inflating the count.",
-    "Starting_Price_Average": "How the auction's starting price compares to the average starting price "
-                               "for similar auctions. Far from 1 can signal manipulation of the opening price.",
-    "Early_Bidding": "How close to the auction's *opening* this bidder's first bid landed. "
-                      "Near 0 = jumped in immediately, which shill accounts often do to set a floor.",
-    "Winning_Ratio": "Share of past auctions this bidder has actually won. "
-                      "Shill accounts often bid a lot but rarely win (low ratio) since they aren't buying.",
-    "Auction_Duration": "How many days the auction ran for. Shorter or unusually long auctions can change "
-                         "how much room there is for shill behaviour.",
+    "Bidder_Tendency": (
+        "How often this bidder shows up across many auctions from the *same* seller. "
+        "0 means they're spread out across different sellers, like a normal shopper. "
+        "1 means they keep returning to one seller's auctions over and over — a classic shill pattern, "
+        "since a shill account is usually planted by one seller to bid up their own listings."
+    ),
+    "Bidding_Ratio": (
+        "The share of all bids in this auction that came from this one bidder. "
+        "0 means they barely participated. 1 means they placed almost every single bid in the auction, "
+        "which is unusual for a genuine buyer and often signals someone bidding against themselves."
+    ),
+    "Successive_Outbidding": (
+        "Whether this bidder outbid themself or a partner account back-to-back, right after being outbid. "
+        "This is the single strongest signal in the whole model — shill accounts do this to keep the "
+        "price climbing without ever intending to actually win and pay."
+    ),
+    "Last_Bidding": (
+        "How close to the auction's closing time this bidder's *last* bid landed, on a 0-1 scale. "
+        "Values near 1 mean they bid right at the very end, which can be used to push the price up late "
+        "with no time left for genuine buyers to respond."
+    ),
+    "Auction_Bids": (
+        "The total number of bids the auction attracted overall, normalised to a 0-1 scale. "
+        "A higher number can mean genuine buyer interest, but it can also mean a shill account is "
+        "repeatedly bidding to inflate the count and make the listing look more popular than it is."
+    ),
+    "Starting_Price_Average": (
+        "How this auction's starting price compares to the average starting price for similar auctions. "
+        "A value of 1.0 means it started right at the typical price. Values far from 1.0 (much higher or "
+        "much lower) can signal a seller manipulating the opening price to attract or discourage bidders."
+    ),
+    "Early_Bidding": (
+        "How close to the auction's *opening* this bidder's first bid landed, on a 0-1 scale. "
+        "Values near 0 mean they jumped in immediately when the auction opened — something shill accounts "
+        "often do deliberately, to set an artificial floor price before real buyers arrive."
+    ),
+    "Winning_Ratio": (
+        "The share of past auctions this bidder has actually gone on to win. "
+        "Shill accounts tend to bid a lot but rarely win, since winning would mean actually having to pay "
+        "for something they never intended to buy — so a low ratio despite heavy bidding is a red flag."
+    ),
+    "Auction_Duration": (
+        "How many days the auction ran for. Very short auctions leave little room for shill activity to "
+        "play out, while unusually long ones give more opportunity for repeated manipulation."
+    ),
 }
 
 # ----------------------------------------------------------------------------
@@ -610,7 +622,7 @@ elif page == "Risk predictor":
         with card("card_model_choice"):
             model_name = st.selectbox("Model to use", list(MODELS.keys()))
 
-        with card("card_sliders"):
+                with card("card_sliders"):
             st.markdown("##### Bid features")
             fc1, fc2 = st.columns(2)
             cols_per_col = [FEATURES[0:5], FEATURES[5:9]]
@@ -619,21 +631,45 @@ elif page == "Risk predictor":
                 with col_container:
                     for feat in feats:
                         r = RANGES[feat]
+
                         if feat == "Auction_Duration":
-                            values[feat] = st.slider(
-                                feat.replace("_", " "), int(r["min"]), int(r["max"]), int(round(r["median"])),
-                                help=FEATURE_HELP.get(feat),
-                            )
-                        elif feat == "Successive_Outbidding":
                             values[feat] = st.select_slider(
-                                feat.replace("_", " "), options=[0.0, 0.5, 1.0], value=0.0,
+                                feat.replace("_", " "),
+                                options=[1, 3, 5, 7, 10, 14],
+                                value=5,
                                 help=FEATURE_HELP.get(feat),
                             )
+
+                        elif feat == "Successive_Outbidding":
+                            choice = st.radio(
+                                feat.replace("_", " "),
+                                options=["Never", "Once", "Repeatedly"],
+                                horizontal=True,
+                                help=FEATURE_HELP.get(feat),
+                            )
+                            values[feat] = {"Never": 0.0, "Once": 0.5, "Repeatedly": 1.0}[choice]
+
+                        elif feat == "Starting_Price_Average":
+                            choice = st.radio(
+                                feat.replace("_", " "),
+                                options=["Below average", "About average", "Above average"],
+                                horizontal=True,
+                                help=FEATURE_HELP.get(feat),
+                            )
+                            values[feat] = {
+                                "Below average": r["min"] + (r["median"] - r["min"]) * 0.5,
+                                "About average": r["median"],
+                                "Above average": r["median"] + (r["max"] - r["median"]) * 0.5,
+                            }[choice]
+
                         else:
                             values[feat] = st.slider(
                                 feat.replace("_", " "), float(r["min"]), float(r["max"]), float(r["median"]),
                                 help=FEATURE_HELP.get(feat),
                             )
+                            level = "Low" if values[feat] < r["median"] * 0.66 else (
+                                     "High" if values[feat] > r["median"] * 1.33 else "Typical")
+                            st.caption(f"→ {level}")
 
             predict_clicked = st.button("Predict risk", type="primary")
 
