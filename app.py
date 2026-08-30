@@ -258,6 +258,7 @@ st.markdown(
     div[class*="st-key-card_sliders"] .stButton {{
         display: flex;
         justify-content: flex-end;
+        margin-right: 2rem;
     }}
 
     /* top nav underline colour tweak */
