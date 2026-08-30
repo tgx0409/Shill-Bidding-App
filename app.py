@@ -318,16 +318,23 @@ st.markdown(
         text-align: center;
     }}
     .risk-legend {{
+        display: flex;
+        justify-content: center;
         gap: 2.4rem;
         margin-top: 0.8rem;
     }}
     .risk-legend-item {{
-        font-size: 1.15rem;
+        display: flex;
+        align-items: center;
         gap: 0.5rem;
+        font-size: 1.15rem;
+        color: {TEXT_DARK};
     }}
     .risk-legend-dot {{
         width: 18px;
         height: 18px;
+        border-radius: 50%;
+        display: inline-block;
     }}
     div[class*="st-key-card_gauge"] {{
         text-align: center;
