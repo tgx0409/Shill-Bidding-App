@@ -269,6 +269,39 @@ st.markdown(
     }}
     }}
 
+    /* ---- risk prediction pill + legend ---- */
+    .risk-pill {{
+        display: inline-block;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #FFFFFF;
+        padding: 0.6rem 1.6rem;
+        border-radius: 999px;
+        margin: 0.8rem 0 1.2rem 0;
+    }}
+    .risk-legend {{
+        display: flex;
+        justify-content: center;
+        gap: 1.8rem;
+        margin-top: 0.4rem;
+    }}
+    .risk-legend-item {{
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.95rem;
+        color: {TEXT_DARK};
+    }}
+    .risk-legend-dot {{
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+    }}
+    div[class*="st-key-card_gauge"] {{
+        text-align: center;
+    }}
+
     /* top nav underline colour tweak */
     .nav-link-selected {{
         border-bottom: 3px solid {BANNER_BG} !important;
@@ -750,14 +783,31 @@ elif page == "Risk predictor":
                 st.session_state["last_prob"] = prob
 
             prob = st.session_state.get("last_prob", 0.0)
-            label = "Likely shill bidder" if prob >= 0.5 else "Likely normal bidder"
 
+            if prob < 0.33:
+                label, pill_color = "Likely normal bidder", ACCENT_GREEN
+            elif prob < 0.66:
+                label, pill_color = "Uncertain — needs review", ACCENT_ORANGE
+            else:
+                label, pill_color = "Likely shill bidder", ACCENT_RED
+
+            st.markdown("### Predicted shill-bidding probability")
             render_gauge(prob)
-            st.metric("Predicted shill-bidding probability", f"{prob * 100:.1f}%")
-            st.markdown(f"**Model prediction:** {label}")
-            st.caption(
-                "Gauge: green = low risk, orange = medium, red = high risk of shill bidding, "
-                "based on the selected model's predicted probability."
+
+            st.markdown(
+                f'<div class="risk-pill" style="background-color:{pill_color};">{label}</div>',
+                unsafe_allow_html=True,
+            )
+
+            st.markdown(
+                f"""
+                <div class="risk-legend">
+                    <div class="risk-legend-item"><span class="risk-legend-dot" style="background-color:{ACCENT_RED};"></span> High risk</div>
+                    <div class="risk-legend-item"><span class="risk-legend-dot" style="background-color:{ACCENT_ORANGE};"></span> Medium</div>
+                    <div class="risk-legend-item"><span class="risk-legend-dot" style="background-color:{ACCENT_GREEN};"></span> Low risk</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
             )
 
 # ----------------------------------------------------------------------------
