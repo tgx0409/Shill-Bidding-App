@@ -30,6 +30,14 @@ st.set_page_config(
 
 ART = "artifacts"
 
+import base64
+
+def get_base64_image(path):
+    with open(path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+TROPHY_BG = get_base64_image("assets/trophy_bg.png")  # save your uploaded image here
+
 # ----------------------------------------------------------------------------
 # Palette (sampled from the concept mock-ups)
 # ----------------------------------------------------------------------------
@@ -148,8 +156,12 @@ st.markdown(
     /* ---- best-model highlight card ---- */
     div[class*="st-key-card_best_model"] {{
         border-left: 6px solid {ACCENT_GREEN};
-        min-height: 230px;
-        padding-bottom: 2.9rem;
+        min-height: 260px;
+        padding-bottom: 2.2rem;
+        background-image: url("data:image/png;base64,{TROPHY_BG}");
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: 220px auto;
     }}
     .best-model-badge {{
         display: inline-block;
