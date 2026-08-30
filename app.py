@@ -259,7 +259,7 @@ st.markdown(
         display: flex;
         justify-content: flex-end;
         margin-left: 6rem;
-        margin-right: 1rem;
+        margin-right: 2rem;
         margin-top: 1.5rem;
     }}
     div[class*="st-key-card_sliders"] .stButton > button {{
