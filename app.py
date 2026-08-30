@@ -659,6 +659,8 @@ elif page == "Risk predictor":
             fc1, fc2 = st.columns(2)
             cols_per_col = [FEATURES[0:5], FEATURES[5:9]]
 
+            predict_clicked = False
+
             for col_container, feats in zip([fc1, fc2], cols_per_col):
                 with col_container:
                     for feat in feats:
@@ -702,7 +704,8 @@ elif page == "Risk predictor":
                             elif values[feat] > r["median"] * 1.33:
                                 st.caption("→ High")
 
-            predict_clicked = st.button("Predict risk", type="primary")
+                    if col_container is fc2:
+                        predict_clicked = st.button("Predict risk", type="primary")
 
     with right:
         with card("card_gauge"):
