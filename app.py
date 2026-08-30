@@ -432,26 +432,25 @@ elif page == "Explore the data":
             )
 
         st.markdown("##### Remedies")
-        r1, r2, r3 = st.columns(3)
-        with r1:
-            with card("card_remedy_weighting"):
-                st.markdown("**1. Class weighting**")
-                st.markdown(
-                    "Every model was trained with `class_weight=\"balanced\"` "
-                    "(or sample weighting for Gradient Boosting)."
-                )
-        with r2:
-            with card("card_remedy_split"):
-                st.markdown("**2. Stratified split**")
-                st.markdown(
-                    "Train/test split kept the same 89.32% / 10.68% ratio in both sets."
-                )
-        with r3:
-            with card("card_remedy_metric"):
-                st.markdown("**3. Metric tuning**")
-                st.markdown(
-                    "Used PR-AUC instead of accuracy or ROC-AUC to tune hyperparameters."
-                )
+
+        with card("card_remedy_weighting"):
+            st.markdown("**1. Class weighting**")
+            st.markdown(
+                "Every model was trained with `class_weight=\"balanced\"` "
+                "(or sample weighting for Gradient Boosting)."
+            )
+
+        with card("card_remedy_split"):
+            st.markdown("**2. Stratified split**")
+            st.markdown(
+                "Train/test split kept the same 89.32% / 10.68% ratio in both sets."
+            )
+
+        with card("card_remedy_metric"):
+            st.markdown("**3. Metric tuning**")
+            st.markdown(
+                "Used PR-AUC instead of accuracy or ROC-AUC to tune hyperparameters."
+            )
 
     st.markdown("##### Feature Distributions")
     with card("card_feature_select"):
