@@ -168,7 +168,7 @@ st.markdown(
         opacity: 0.9;
         margin-top: 0.15rem;
         text-align: center !important;
-        background: linear-gradient(135deg, #FFFFFF, #C9C9C9);
+        background: #FFFFFF;
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
