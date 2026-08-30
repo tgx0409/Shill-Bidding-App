@@ -38,7 +38,7 @@ def get_base64_image(path):
 
 TROPHY_BG = get_base64_image("assets/trophy_bg.png")
 WOOD_BG = get_base64_image("assets/wooden_bg.jpg")
-GOLD_BANNER_BG = get_base64_image("assets/golden_banner_bg.jpg")
+SHILL_BIDDING_BG = get_base64_image("assets/shill_bidding_bg.jpg")
 
 # ----------------------------------------------------------------------------
 # Palette (sampled from the concept mock-ups)
@@ -79,7 +79,7 @@ st.markdown(
 
     /* ---- banner (page title) ---- */
     div[class*="st-key-banner_"] {{
-        background-image: url("data:image/jpeg;base64,{GOLD_BANNER_BG}");
+        background-image: url("data:image/jpeg;base64,{SHILL_BIDDING_BG}");
         background-size: cover;
         background-position: center;
         border-radius: 26px;
