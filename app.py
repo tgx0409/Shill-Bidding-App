@@ -93,7 +93,7 @@ st.markdown(
 
     /* ---- class distribution card sizing ---- */
     div[class*="st-key-card_class_balance"] {{
-        min-height: 430px;
+        min-height: 425px;
     }}
 
     /* ---- outer tinted panel (wraps Problem / Remedies) ---- */
