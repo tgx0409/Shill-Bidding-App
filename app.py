@@ -267,6 +267,9 @@ st.markdown(
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }}
+    div[class*="st-key-card_feature_select"] {
+        margin-bottom: 0.4rem;   /* was 1.2rem via the generic card_ rule */
+    }
 
     /* ---- bigger font for all selectbox dropdowns app-wide (closed state) ---- */
     div[data-testid="stSelectbox"] * {{
@@ -344,7 +347,7 @@ st.markdown(
         align-items: center;
     }}
     .section-banner-title {{
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         font-weight: 600;
         color: {TEXT_DARK};
     }}
