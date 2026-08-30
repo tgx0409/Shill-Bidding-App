@@ -180,7 +180,7 @@ st.markdown(
         flex: 1;
     }}
     .best-model-chip .chip-number {{
-        font-size: 1.3rem;
+        font-size: 2rem;
         font-weight: 700;
         color: {TEXT_DARK};
         display: block;
