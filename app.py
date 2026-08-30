@@ -136,7 +136,7 @@ st.markdown(
 
     /* ---- small gold-gradient stat squares (Overview) ---- */
     div[class*="st-key-stat_"] {{
-        background: linear-gradient(135deg, #8A5A1E, #D4A017, #F0C550);
+        background: linear-gradient(275deg, #8A5A1E, #D4A017, #F0C550);
         border-radius: 22px;
         padding: 0.7rem 0.6rem;
         margin-bottom: 0.6rem;
