@@ -311,7 +311,7 @@ st.markdown(
     div[class*="st-key-risk_pill_wrap"] {{
         border-radius: 16px;
         padding: 0.9rem 1.2rem;
-        margin: 0.8rem 0 1.2rem 0;
+        margin: 0.8rem 0 0.4rem 0;
         text-align: center;
     }}
     .risk-pill-text {{
@@ -344,7 +344,7 @@ st.markdown(
     }}
     div[class*="st-key-card_gauge"] h3 {{
         text-align: center;
-        min-height: 115px;
+        min-height: 110px;
     }}
 
     /* ---- section banner ---- */
