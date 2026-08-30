@@ -3,10 +3,6 @@ Shill Bidding Risk Dashboard
 Streamlit app: Overview, Explore the Data, Risk Predictor, Model Evaluation.
 Built on the assignment notebook's pipeline; models are pre-trained
 artifacts, so the app starts instantly and never retrains anything.
-
-Layout follows the supplied concept: a white top nav bar, a light-grey page
-background, a solid taupe "banner" for each page's title, and soft cream /
-peach rounded cards holding the actual content.
 """
 
 import json
@@ -429,11 +425,10 @@ elif page == "Explore the data":
             st.markdown("**Why this matters**")
             st.markdown(
                 """
-                Only 10.7% of bids are shill bids, which means that accuracy alone can be misleading,
-                for a model that rarely catches the minority class can still score high.
-                That's why every model below was trained with `class_weight="balanced"`
-                (or equivalent sample weighting for Gradient Boosting), and why
-                **PR-AUC**, not plain accuracy, was used to select hyperparameters.
+                Problem
+                Only ~10.7% of bids are shill bids. A model could just guess "normal" 
+                every time and still look ~89% accurate without learning anything.
+
                 """
             )
 
